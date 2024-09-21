@@ -1,34 +1,50 @@
 # **Peer Review Application** 
-### **Genre:**
 
  **Function:**
 
-This web application is designed to allow students to give feedback on their teammates after a group assignment based on many factors including contribution, participation, communication, etc. Teachers and teacher assistants will also be given access to view the comments of the different groups in order to mark each student fairly. 
+This web application is designed to allow students to give feedback on their teammates after or during a group assignment based on many factors including contribution, participation, communication, etc. Teachers and teachers' assistants will also be given access to view the comments of the different groups in order to mark each student fairly. 
+
+Each students will be prompted to rate their peers anonymously based on the following factors:
+
+- **Cooperation**: Each member actively participates in meetings and communicates with the rest of the team often. They show their cooperation by offering their help and by volunteering for new tasks.
+- **Conceptual Contribution**: Actively participates in the completion of the project by researching technologies, exploring potential pathways and providing quality individual contribution.
+- **Practical Contribution**: In addition to the conceptual part, members also need to actively participate in the documentation of the project. Writing, reviewing and providing feedback to reports is a must when working on a group project.
+- **Work Ethics**: Students show respect towards their peers and the deadlines imposed.
+
+Each of these points are graded on a scale from 1 to 7. Teachers will receive each individual scores at the end of the review period. Students will also be able to see the reviews given to them anonymously for them to find ways to improve themselves.
+
+Instructors will be given access to a detailed dashboard allowing them to create and edit teams, view detailed peer assessments, and export the data to CVS files.
 
 ### **Design:**
 
 THe website will contain many pages including:
-- seperate log-in pages for students and teachers
-- a form including grading points that students fill.
-- a result page with graphs displaying the contribution of students.
+- Seperate log-in pages for students and teachers
+- A form including grading points that students fill.
+- A result page with graphs displaying the contribution of students.
+- An instructor reserved dashboard to manipulate teams and data.
   
 
 ## **Technologies:**
 
 ### **Front-end ** 
 
-
-HTML5 and CSS will be used to design the different pages. React is a JavaScript library for building dynamic user interfaces using reusable components. It efficiently updates web pages with a Virtual DOM and follows a unidirectional data flow for easier state management. 
+HTML5 and CSS will be used to design the different pages. React will also be used to easily update the web pages.
 
 
 ### **Back-end** 
 
-PHP will be used to host the website for public access. For the database, we will use SQL and JavaScript will handle the back-end logics.
+PHP will be used to host the website for public access, SQL for the database, and JavaScript will handle the back-end logics.
 
 ## **Team Member Roles**
 
-- François Martinez: Created the GitHub repository and project setup.
-- Jeremie Beaudoin: Took notes of meeting minutes and content of each one.
-- Haichuan Li + Jeffrey Khalife: Filled the README FILE.
-- Varun Rava: Created sprint planning.
+- François Martinez: Create the GitHub repository and project setup. create user stories for “Functionality for instructors to create teams and assign students to specific groups.”
+- Jeremie Beaudoin: Take notes on meeting minutes and content of each one. Create the task breakdown on github issues
+- Haichuan Li: Complete the README File. Create user stories for “Ensure teams are visible to both students and instructors.”
+- Jeffrey Khalife: Complete the README File. Create user stories for “Ensure teams are visible to both students and instructors.”
+- Varun Rava: Create table for sprint planning.
+-Ayman Mehdi: create user stories for “Functionality for instructors to create teams and assign students to specific groups.”
+
+Each member will create equivalent user stories for the task breakdown
+Each member will log their own activities in the document provided in the repository
+
 
