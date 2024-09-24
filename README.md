@@ -37,12 +37,15 @@ PHP will be used to host the website for public access, SQL for the database, an
 
 ## **Team Member Roles**
 
-- François Martinez: Create the GitHub repository and project setup. create user stories for “Functionality for instructors to create teams and assign students to specific groups.”
-- Jeremie Beaudoin: Take notes on meeting minutes and content of each one. Create the task breakdown on github issues
-- Haichuan Li: Complete the README File. Create user stories for “Ensure teams are visible to both students and instructors.”
-- Jeffrey Khalife: Complete the README File. Create user stories for “Ensure teams are visible to both students and instructors.”
-- Varun Rava: Create table for sprint planning.
--Ayman Mehdi: create user stories for “Functionality for instructors to create teams and assign students to specific groups.”
+Francois has been chosen as team lead.
+Francois will create the GitHub repository and invite other team members.
+Ayman has been chosen as lead backend developer.
+Haichuan has been chosen as lead frontend designer.
+Jeremie has been chosen as de facto meeting chair and secretary.
+Jeremie has been chosen as database specialist.
+Everyone will download VSCode as to have a common IDE for development. This is done with the help of Francois, especially for GitHub integration.
+Communication will be done through a discord group chat.
+
 
 Each member will create equivalent user stories for the task breakdown
 Each member will log their own activities in the document provided in the repository
