@@ -37,17 +37,19 @@ PHP will be used to host the website for public access, SQL for the database, an
 
 ## **Team Member Roles**
 
-Francois has been chosen as team lead.
-Francois will create the GitHub repository and invite other team members.
-Ayman has been chosen as lead backend developer.
-Haichuan has been chosen as lead frontend designer.
-Jeremie has been chosen as de facto meeting chair and secretary.
-Jeremie has been chosen as database specialist.
-Everyone will download VSCode as to have a common IDE for development. This is done with the help of Francois, especially for GitHub integration.
-Communication will be done through a discord group chat.
+Francois: Team lead.
 
+Ayman: Lead backend developer.
 
-Each member will create equivalent user stories for the task breakdown
-Each member will log their own activities in the document provided in the repository
+Haichuan: Lead frontend designer.
+
+Jeremie: Documentation and meeting secretary; backend developper.
+
+Varun: Backend developper
+
+Hoang Vu: Backend developper
+
+Jeffrey: Frontend developper
+
 
 
