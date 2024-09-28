@@ -71,21 +71,6 @@ function Login() {
                 </div>
             </div>
 
-            {/*<button onClick={() => {navigate('/')}}>home</button>*/}
-
-
-            {/*<button*/}
-            {/*    onClick={(e) => {*/}
-            {/*        e.preventDefault();*/}
-            {/*        dispatch({type: 'LOGOUT', payload: {name: 'test user'}});*/}
-            {/*    }*/}
-            {/*    }>*/}
-            {/*    Logout*/}
-            {/*</button>*/}
-
-            {/*{state.user ? <p>Logged in as: {state.user.name}</p> : <p>Please log in</p>}*/}
-
-
         </>
     )
 }
