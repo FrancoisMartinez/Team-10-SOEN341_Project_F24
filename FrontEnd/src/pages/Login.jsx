@@ -3,10 +3,17 @@ import styles from '/src/styles/Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Header from '../components/header';
+import React, {useContext} from 'react';
+import { GlobalContext } from "../GlobalStateProvider.jsx";
+import {useNavigate} from "react-router-dom";
+
 
 function Login() {
 
-    const [email, setEmail] = useState('');
+    const { state, dispatch } = useContext(GlobalContext);
+    const navigate = useNavigate();
+
+    console.log(state);
 
 
     return (
@@ -31,18 +38,40 @@ function Login() {
                             <img className={styles.passLogo} src="/password_logo.png" alt="password logo" width="30" height="30" />
                             <h2 className={styles.passTag}>Password</h2>
 
+            <button onClick={() => {navigate('/')}}>home</button>
+
                         </div>
                         <div className={styles.loginButton}>
                             <h2 className={styles.loginTag}>Login</h2>
                         </div>
 
                         <h4 className={styles.instructorLogin}>Intructor login</h4>
-                    
+
                         <h4 className={styles.createAccount}>Create your account</h4>
                     </div>
                 </div>
 
-            </div>
+            <button
+                onClick={(e) => {
+                    e.preventDefault();
+                    dispatch({type: 'LOGIN', payload: {name: 'test user'}});
+                }
+                }>
+                Login
+            </button>
+
+            <button
+                onClick={(e) => {
+                    e.preventDefault();
+                    dispatch({type: 'LOGOUT', payload: {name: 'test user'}});
+                }
+                }>
+                Logout
+            </button>
+
+            {state.user ? <p>Logged in as: {state.user.name}</p> : <p>Please log in</p>}
+
+
         </>
     )
 }
