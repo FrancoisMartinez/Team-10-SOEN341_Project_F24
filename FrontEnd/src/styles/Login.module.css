@@ -29,7 +29,8 @@
     float: right;
     background-color: #ffffff;
     border-radius: 100px;
-
+    display: flex;
+    flex-direction: column;
 }
 
 .logo {
@@ -50,18 +51,22 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
-.emailBox{
-    width: 400px;
+.inputBox{
+    width: 385px;
     height: 60px;
     margin-top:40px;
     margin-inline: auto;
     background-color: #dddddd;
     border-radius: 100px;
+    border: none;
+    padding-left: 15px;
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.emailTag{
-    padding-top: 15px;
-    padding-left: 60px;
+
+.inputBox::placeholder{
+    font-size: 1.5rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -69,21 +74,6 @@
     margin-top: 15px;
     margin-left: 20px;
     float:left;
-}
-
-.passBox{
-    width: 400px;
-    height: 60px;
-    margin-top:10px;
-    margin-inline: auto;
-    background-color: #dddddd;
-    border-radius: 100px;
-}
-
-.passTag{
-    padding-top: 15px;
-    padding-left: 60px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .passLogo{
@@ -99,12 +89,22 @@
     margin-inline: auto;
     background-color: #41d23c;
     border-radius: 100px;
+    border: none;
     color:rgb(255, 255, 255);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.loginButton:hover {
+    cursor: pointer;
 }
 .loginTag{
     padding-top: 12px;
+    font-size: 1.5rem;
     text-align: center;
+
 }
 .instructorLogin{
     padding-top: 20px;
@@ -112,8 +112,14 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #777777;
 }
+.instructorLogin:hover {
+    cursor: pointer;
+}
 .createAccount{
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #777777;
+}
+.createAccount:hover {
+    cursor: pointer;
 }
