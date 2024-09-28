@@ -1,3 +1,119 @@
-.loginTitle {
-    color: orange;
+.background {
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom right, #573C87, #bca2ed);
+}
+
+.loginWindow {
+    width: 1200px;
+    height: 700px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100px;
+}
+
+.loginWindowLeft {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-color: #ffffff;
+    border-radius: 100px;
+
+}
+
+.loginWindowRight {
+    width: 50%;
+    height: 100%;
+    float: right;
+    background-color: #ffffff;
+    border-radius: 100px;
+
+}
+
+.logo {
+    margin-top: 170px;
+    margin-left: 232px;
+    text-align: center;
+}
+
+.siteName {
+    color: #573C87;
+    margin-left: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+.studentLogIn{
+    margin-top: 130px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.emailBox{
+    width: 400px;
+    height: 60px;
+    margin-top:40px;
+    margin-inline: auto;
+    background-color: #dddddd;
+    border-radius: 100px;
+}
+
+.emailTag{
+    padding-top: 15px;
+    padding-left: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.emailLogo{
+    margin-top: 15px;
+    margin-left: 20px;
+    float:left;
+}
+
+.passBox{
+    width: 400px;
+    height: 60px;
+    margin-top:10px;
+    margin-inline: auto;
+    background-color: #dddddd;
+    border-radius: 100px;
+}
+
+.passTag{
+    padding-top: 15px;
+    padding-left: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.passLogo{
+    margin-top: 15px;
+    margin-left: 20px;
+    float:left;
+}
+
+.loginButton{
+    width: 400px;
+    height: 60px;
+    margin-top:40px;
+    margin-inline: auto;
+    background-color: #41d23c;
+    border-radius: 100px;
+    color:rgb(255, 255, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.loginTag{
+    padding-top: 12px;
+    text-align: center;
+}
+.instructorLogin{
+    padding-top: 20px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #777777;
+}
+.createAccount{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #777777;
 }
