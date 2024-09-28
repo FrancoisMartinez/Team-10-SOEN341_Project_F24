@@ -10,9 +10,12 @@ function Login() {
 
     return (
         <>
-            <h1 className={styles.loginTitle}>Login</h1>
+            <div>
+                <img src="Logo.webp" alt="Logo" width="50" height="50">
+                <h1>Peer review website</h1>
 
-            <p>{email}</p>
+
+            </div>
         </>
     )
 }
