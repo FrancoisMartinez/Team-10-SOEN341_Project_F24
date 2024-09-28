@@ -58,7 +58,7 @@ function Register() {
                         <input type='password' className={styles.inputBox} value={confirmPassword}
                                onChange={(e) => setConfirmPassword(e.target.value)} placeholder='Comfirm password'/>
 
-                        <p>{password !== confirmPassword ? 'Password does not match' : ''}</p>
+                        <p>{password !== confirmPassword && 'Password does not match'}</p>
 
                         {/*<img className={styles.passLogo} src="/password_logo.png" alt="password logo" width="30"*/}
                         {/*     height="30"/>*/}
