@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Header from '../components/header';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
+import Navigation from "../components/Navigation.jsx";
 
 
 function Login() {
@@ -16,8 +17,19 @@ function Login() {
 
 
 
+    console.log(state);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch({type: 'LOGIN', payload: {email: email, password: password}});
+        setEmail('')
+        setPassword('')
+        navigate('/')
+    }
+
     return (
         <>
+            <Navigation/>
             <div className={styles.background}>
                 <div className={styles.loginWindow}>
 
@@ -28,7 +40,7 @@ function Login() {
                     </div>
 
 
-                    <form className={styles.loginWindowRight}>
+                    <form className={styles.loginWindowRight} onSubmit={handleSubmit}>
 
                         <h1 className={styles.studentLogIn}>{student ? 'Student' : 'Instructor'} Login</h1>
 
@@ -47,20 +59,14 @@ function Login() {
 
 
 
-                        <button className={styles.loginButton}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                dispatch({type: 'LOGIN', payload: {name: 'test user'}});
-                            }
-                            }>
-                            <h2 className={styles.loginTag}>Login</h2>
+                        <button className={styles.loginButton} type="submit">Login
                         </button>
 
 
 
                         <h4 className={styles.instructorLogin} onClick={() => setStudent(prevState => !prevState)}>{student ? 'Instructor' : 'Student'} login</h4>
-
                         <h4 className={styles.createAccount} onClick={() => navigate('/register')}>Create your account</h4>
+
                     </form>
                 </div>
             </div>

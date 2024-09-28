@@ -8,6 +8,7 @@ import {GlobalStateProvider} from "./GlobalStateProvider.jsx";
 
 
 
+
 const router = createBrowserRouter([
     {path : "/", element : <Home />},
     {path : "/login", element : <Login />},

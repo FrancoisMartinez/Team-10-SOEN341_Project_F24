@@ -20,6 +20,10 @@ const reducer = (state, action) => {
             return { ...state, user: null };
         case 'UPDATE_USER':
             return { ...state, user: { ...state.user, ...action.payload } };
+
+        //testing
+        case 'LOGIN':
+            return { ...state, user: action.payload, loading: false };
         default:
             return state;
     }

@@ -1,6 +1,8 @@
 .background {
     min-height: 100vh;
     background-image: linear-gradient(to bottom right, #573C87, #bca2ed);
+    height: 100%;
+    width: 100%;
 }
 
 .loginWindow {
@@ -93,24 +95,21 @@
     color:rgb(255, 255, 255);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
 }
 .loginButton:hover {
     cursor: pointer;
 }
-.loginTag{
-    padding-top: 12px;
-    font-size: 1.5rem;
-    text-align: center;
 
-}
 .instructorLogin{
-    padding-top: 20px;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #777777;
+    margin-bottom: 0;
 }
 .instructorLogin:hover {
     cursor: pointer;

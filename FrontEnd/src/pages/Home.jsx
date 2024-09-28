@@ -19,7 +19,7 @@ function Home() {
             </button>
 
             <p>home</p>
-            {state.user ? <p>Logged in as: {state.user.name}</p> : <p>Please log in</p>}
+            {state.user ? <p>Logged in as: {state.user.email}</p> : <p>Please log in</p>}
 
         </div>
     )
