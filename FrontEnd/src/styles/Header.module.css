@@ -4,4 +4,12 @@
     padding: 10px 20px;
     display: flex;
     align-items: center;
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 1000; 
+}
+
+.siteName {
+    margin-left: 15px;
 }
