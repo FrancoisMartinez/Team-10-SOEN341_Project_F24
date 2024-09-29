@@ -20,12 +20,33 @@ function Register() {
 
     console.log(state);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // dispatch({type: 'LOGIN', payload: {email: email, password: password}});
-        setEmail('')
-        setPassword('')
-        navigate('/login')
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     // dispatch({type: 'LOGIN', payload: {email: email, password: password}});
+    //     setEmail('')
+    //     setPassword('')
+    //     navigate('/login')
+    // }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        axios.post("http://localhost:3000/signup", {name, email,password})
+            .then(result => {
+                navigate('/login')
+            })
+            .catch(err => console.log( err))
+    }
+
+    async function handleSubmit(e) {
+        try {
+            e.preventDefault();
+            const result = await axios.post("http://localhost:3000/signup", {name, email,password});
+            if (result.status === 200) {
+                navigate('/login');
+            }
+        } catch (error) {
+            setError(error.response.data);
+        }
     }
 
     return (
