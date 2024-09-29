@@ -8,9 +8,9 @@ function Header() {
         <>
             <header className={styles.header}>
 
-                <img src="/Logo.webp" alt="Logo" width="50" height="50" />
-                <h1 className = {styles.test}>Rate my teammates</h1>
-
+                <img src="/Logo.webp" alt="Logo" width="70" height="70" />
+                <h1 className = {styles.siteName}>Rate my teammates</h1>
+                
 
 
 

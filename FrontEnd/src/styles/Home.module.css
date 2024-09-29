@@ -1,0 +1,36 @@
+
+.mainImage {
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    object-fit: cover; /* Ensure the image scales properly */
+    z-index: -1; /* Send the image behind other content */
+}
+
+
+.welcomeMessage {
+    position: absolute;
+    left: 40px;
+    top: 140px;
+    background-color: rgba(87, 60, 135, 0.8); /* Adjusted for transparency */
+    padding: 15px 20px;
+    color: #bca2ed;
+    font-weight: bold;
+    font-size: 1.5em;
+    font-family: 'Arial', sans-serif;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 50%;
+}
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+    height: 100vh; /* Make sure body height is 100% */
+    width: 100vw; /* Make sure body width is 100% */
+    position: relative; /* Needed for absolute positioning of the image and message */
+}
