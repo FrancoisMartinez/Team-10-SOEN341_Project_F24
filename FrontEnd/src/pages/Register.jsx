@@ -5,6 +5,8 @@ import { useState } from 'react';
 import Header from '../components/header';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
 import Navigation from "../components/Navigation.jsx";
+import axios from 'axios';
+
 
 
 function Register() {
@@ -28,22 +30,16 @@ function Register() {
     //     navigate('/login')
     // }
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        axios.post("http://localhost:3000/signup", {name, email,password})
-            .then(result => {
-                navigate('/login')
-            })
-            .catch(err => console.log( err))
-    }
 
     async function handleSubmit(e) {
         try {
             e.preventDefault();
-            const result = await axios.post("http://localhost:3000/signup", {name, email,password});
+            const result = await axios.post("http://localhost:3000/signup", {email, password});
             if (result.status === 200) {
                 navigate('/login');
+
             }
+            console.log(result);
         } catch (error) {
             setError(error.response.data);
         }

@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // API endpoint to handle user registration
-router.post('/register', async (req, res) => {
+router.post('/signup', async (req, res) => {
 
     // Hash the password using bcrypt
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
