@@ -1,0 +1,124 @@
+.background {
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom right, #573C87, #bca2ed);
+    height: 100%;
+    width: 100%;
+}
+
+.loginWindow {
+    width: 1200px;
+    height: 700px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100px;
+}
+
+.loginWindowLeft {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-color: #ffffff;
+    border-radius: 100px;
+
+}
+
+.loginWindowRight {
+    width: 50%;
+    height: 100%;
+    float: right;
+    background-color: #ffffff;
+    border-radius: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    margin-top: 170px;
+    margin-left: 232px;
+    text-align: center;
+}
+
+.siteName {
+    color: #573C87;
+    margin-left: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+.studentLogIn{
+    margin-top: 130px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.inputBox{
+    width: 385px;
+    height: 60px;
+    margin-top:40px;
+    margin-inline: auto;
+    background-color: #dddddd;
+    border-radius: 100px;
+    border: none;
+    padding-left: 15px;
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.inputBox::placeholder{
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.emailLogo{
+    margin-top: 15px;
+    margin-left: 20px;
+    float:left;
+}
+
+.passLogo{
+    margin-top: 15px;
+    margin-left: 20px;
+    float:left;
+}
+
+.loginButton{
+    width: 400px;
+    height: 60px;
+    margin-top:40px;
+    margin-inline: auto;
+    background-color: #41d23c;
+    border-radius: 100px;
+    border: none;
+    color:rgb(255, 255, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+.loginButton:hover {
+    cursor: pointer;
+}
+
+.instructorLogin{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #777777;
+    margin-bottom: 0;
+}
+.instructorLogin:hover {
+    cursor: pointer;
+}
+.createAccount{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #777777;
+}
+.createAccount:hover {
+    cursor: pointer;
+}
