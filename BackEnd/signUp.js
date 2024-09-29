@@ -42,7 +42,28 @@ document.getElementById('signupForm').addEventListener('submit', function (e) {
 
     // If valid, submit form or show success message
     if (isValid) {
-        alert('Signup successful!');
-        // Add code here to handle the form submission (e.g., send data to the server)
+        // Send data to the server using fetch
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,      // sending username from the form
+                email: email,            // sending email from the form
+                password: password,      // sending password (plain, backend will hash it)
+            }),
+        })
+        .then(response => response.json())  // Parse the JSON response from the server
+        .then(data => {
+            if (data.message === 'User registered successfully!') {
+                alert('Signup successful!');   // Show success alert
+            } else {
+                alert('Error during signup: ' + data.message);   // Show error message
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);   // Handle fetch errors
+        });
     }
 });
