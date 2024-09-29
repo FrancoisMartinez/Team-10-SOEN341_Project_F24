@@ -15,6 +15,7 @@ function Register() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [student, setStudent] = useState(true);
+    const [passwordError, setPasswordError] = useState('');
 
 
 
@@ -23,9 +24,15 @@ function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // dispatch({type: 'LOGIN', payload: {email: email, password: password}});
-        setEmail('')
-        setPassword('')
-        navigate('/login')
+        if (password && password === confirmPassword) {
+            setEmail('')
+            setPassword('')
+            navigate('/login')
+            setPasswordError('');
+
+        } else if ( password !== confirmPassword) {
+            setPasswordError('Passwords don\'t match');
+        }
     }
 
     return (
@@ -58,7 +65,7 @@ function Register() {
                         <input type='password' className={styles.inputBox} value={confirmPassword}
                                onChange={(e) => setConfirmPassword(e.target.value)} placeholder='Comfirm password'/>
 
-                        <p>{password !== confirmPassword && 'Password does not match'}</p>
+                        <p>{passwordError}</p>
 
                         {/*<img className={styles.passLogo} src="/password_logo.png" alt="password logo" width="30"*/}
                         {/*     height="30"/>*/}
