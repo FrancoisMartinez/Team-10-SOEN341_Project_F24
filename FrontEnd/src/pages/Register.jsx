@@ -16,6 +16,7 @@ function Register() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [student, setStudent] = useState(true);
+    const [passwordError, setPasswordError] = useState('');
 
 
 
