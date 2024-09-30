@@ -1,0 +1,10 @@
+Participated in 4 meetings
+Setup VSCode: 30 min
+Create backend for Login page: 2 hours 30 minutes
+-	Link Database to index.js and backend files.
+-	Create functions to allow us to login using email and password.
+Create Mongo database for Home page: 4 hours
+-	Setup MongoDB
+-	Create database for user information.
+-	Download Node.js and link backend to database
+-	Successfully create and login to dummy account.
