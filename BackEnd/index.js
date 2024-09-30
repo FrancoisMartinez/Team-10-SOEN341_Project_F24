@@ -33,22 +33,19 @@ async function connectToMongoDB() {
     }
 }
 
-async function checkLoginInfo() {
+async function checkLoginInfo(email, password) {
     await connectToMongoDB();
-
-    const hardcodedEmail = 'varun.raval02@gmail.com';
-    const hardcodedPassword = 'test1243';  // Hardcoded password for testing
 
     try {
         // Check if the user exists
-        const existingUser = await User.findOne({ email: hardcodedEmail });
+        const existingUser = await User.findOne({ email: email });
         if (!existingUser) {
-            console.log('User does not exist:', hardcodedEmail);
+            console.log('User does not exist:', email);
             return;
         }
 
-        // Compare the hardcoded password with the stored hashed password
-        const isPasswordMatch = await bcrypt.compare(hardcodedPassword, existingUser.password);
+        // Compare the provided password with the stored hashed password
+        const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
         if (isPasswordMatch) {
             console.log('Login successful for user:', existingUser.email);
         } else {
@@ -60,26 +57,24 @@ async function checkLoginInfo() {
     }
 }
 
-async function signUpTo() {
-    await connectToMongoDB();
 
-    const hardcodedEmail = 'varun.raval02@gmail.com';
-    const hardcodedPassword = 'test123';  // You can test with this, but in reality, you should hash the password
+async function signUpTo(email, password) {
+    await connectToMongoDB();
 
     try {
         // Check if the user already exists
-        const existingUser = await User.findOne({ email: hardcodedEmail });
+        const existingUser = await User.findOne({ email: email });
         if (existingUser) {
             console.log('User already exists:', existingUser.email);
             return;
         }
 
-        // Hash the hardcoded password
-        const hashedPassword = await bcrypt.hash(hardcodedPassword, 10);
+        // Hash the provided password
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create the user
         const user = await User.create({
-            email: hardcodedEmail,
+            email: email,
             password: hashedPassword,
             balance: 5000  // Example balance, you can modify this as needed
         });
@@ -91,6 +86,7 @@ async function signUpTo() {
     }
 }
 
+
 connectToMongoDB();
-checkLoginInfo();
-signUpTo();
+signUpTo('email@example.com','test123');
+checkLoginInfo('email@example.com','test123');
