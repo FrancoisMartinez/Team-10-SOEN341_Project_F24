@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Header from '../components/header';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
 import Navigation from "../components/Navigation.jsx";
+import axios from 'axios';
 
 
 function Register() {
@@ -28,26 +29,30 @@ function Register() {
     //     navigate('/login')
     // }
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        axios.post("http://localhost:3000/signup", {name, email,password})
-            .then(result => {
-                navigate('/login')
-            })
-            .catch(err => console.log( err))
-    }
 
-    async function handleSubmit(e) {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // setError(null);
+        // setSuccess(false);
+
         try {
-            e.preventDefault();
-            const result = await axios.post("http://localhost:3000/signup", {name, email,password});
-            if (result.status === 200) {
-                navigate('/login');
+            // Send POST request to backend /signup route
+            const response = await axios.post("http://localhost:5000/signup", { email, password });
+
+            if (response.status === 200) {
+                // setSuccess(true);
+                console.log("User created successfully:", response.data);
             }
         } catch (error) {
-            setError(error.response.data);
+            if (error.response && error.response.status === 409) {
+                // setError("User with this email already exists.");
+            } else {
+                // setError("An error occurred. Please try again.");
+            }
         }
-    }
+    };
+
+
 
     return (
         <>

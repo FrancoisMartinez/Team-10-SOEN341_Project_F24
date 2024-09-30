@@ -1,27 +1,15 @@
 // Import necessary modules
 const express = require('express');
 const app = express();
-const bcrypt = require('bcrypt');
 const cors = require('cors');
 require('dotenv').config();
-const User = require('./models/user');
-
+const mongoose = require("mongoose");
 
 
 // Middleware to parse JSON body
 app.use(express.json());
 app.use(cors());
 
-
-const userRoutes = require("./routes/User")
-const mongoose = require("mongoose");
-app.use('/', userRoutes);
-
-
-// Start the server
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
-});
 
 async function connectToMongoDB() {
     try {
@@ -33,60 +21,13 @@ async function connectToMongoDB() {
     }
 }
 
-async function checkLoginInfo(email, password) {
-    await connectToMongoDB();
-
-    try {
-        // Check if the user exists
-        const existingUser = await User.findOne({ email: email });
-        if (!existingUser) {
-            console.log('User does not exist:', email);
-            return;
-        }
-
-        // Compare the provided password with the stored hashed password
-        const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
-        if (isPasswordMatch) {
-            console.log('Login successful for user:', existingUser.email);
-        } else {
-            console.log('Invalid password for user:', existingUser.email);
-        }
-
-    } catch (err) {
-        console.log('Error checking login info:', err);
-    }
-}
-
-
-async function signUpTo(email, password) {
-    await connectToMongoDB();
-
-    try {
-        // Check if the user already exists
-        const existingUser = await User.findOne({ email: email });
-        if (existingUser) {
-            console.log('User already exists:', existingUser.email);
-            return;
-        }
-
-        // Hash the provided password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create the user
-        const user = await User.create({
-            email: email,
-            password: hashedPassword,
-            balance: 5000  // Example balance, you can modify this as needed
-        });
-
-        console.log('User created successfully:', user);
-
-    } catch (err) {
-        console.log('Error creating user:', err);
-    }
-}
-
-
 connectToMongoDB();
-signUpTo('email@example.com','test123');
-checkLoginInfo('email@example.com','test123');
+
+const userRoutes = require("./routes/user")
+app.use('/', userRoutes);
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
