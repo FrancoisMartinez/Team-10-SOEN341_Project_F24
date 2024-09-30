@@ -47,7 +47,7 @@ Jeremie: Documentation and meeting secretary; backend developper.
 
 Varun: Backend developper
 
-Hoang Vu: Backend developper
+Hoang Vu: Frontend developper
 
 Jeffrey: Frontend developper
 
