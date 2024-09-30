@@ -31,14 +31,30 @@ function Home() {
                 <h2>Welcome to Rate My Teammates</h2>
 
                 {state.user ? <p>Logged in as: {state.user.email}</p> : <p>Please log in</p>}
-                {state.user ? <button onClick={(e) => {
-                    e.preventDefault();
-                    dispatch({ type: 'LOGOUT' });
-                }}>Logout</button> : <button onClick={() => { navigate('/login') }}>login</button>}
+
+                {state.user ?
+                    <button className={styles.button}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            dispatch({ type: 'LOGOUT' });
+                    }}>Logout
+                    </button>
+                    :
+                    <>
+                        <button className={styles.button}
+                            onClick={() => {
+                                navigate('/login')
+                        }}>LogIn
+                        </button>
+                        <button className={styles.button}
+                            onClick={() => {
+                                navigate('/register')
+                        }}>SignUp
+                        </button>
+                    </>
+                }
 
             </div>
-
-
 
 
         </div>

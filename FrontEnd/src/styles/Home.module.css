@@ -34,3 +34,14 @@ body {
     width: 100vw; /* Make sure body width is 100% */
     position: relative; /* Needed for absolute positioning of the image and message */
 }
+.button {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    padding: 8px 16px;
+    margin: 0 8px;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    border: none;
+    color:rgba(87, 60, 135);
+
+}
