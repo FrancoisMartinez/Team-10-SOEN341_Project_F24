@@ -40,6 +40,12 @@ function Login() {
             if (response.status === 200) {
                 // setSuccess(true);
                 console.log("User logged in successfully:", response.data);
+
+                dispatch({type: 'LOGIN', payload: {email: email, password: password}});
+                setEmail('')
+                setPassword('')
+                navigate('/')
+
             }
         } catch (error) {
             if (error.response && error.response.status === 409) {

@@ -42,6 +42,9 @@ function Register() {
             if (response.status === 200) {
                 // setSuccess(true);
                 console.log("User created successfully:", response.data);
+                    setEmail('')
+                    setPassword('')
+                    navigate('/login')
             }
         } catch (error) {
             if (error.response && error.response.status === 409) {
