@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Header from '../components/header';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
 import Navigation from "../components/Navigation.jsx";
+import axios from "axios";
 
 
 function Login() {
@@ -19,13 +20,35 @@ function Login() {
 
     console.log(state);
 
-    const handleSubmit = (e) => {
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     dispatch({type: 'LOGIN', payload: {email: email, password: password}});
+    //     setEmail('')
+    //     setPassword('')
+    //     navigate('/')
+    // }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch({type: 'LOGIN', payload: {email: email, password: password}});
-        setEmail('')
-        setPassword('')
-        navigate('/')
-    }
+        // setError(null);
+        // setSuccess(false);
+
+        try {
+            // Send POST request to backend /signup route
+            const response = await axios.post("http://localhost:3000/login", { email, password });
+
+            if (response.status === 200) {
+                // setSuccess(true);
+                console.log("User logged in successfully:", response.data);
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 409) {
+                // setError("User with this email already exists.");
+            } else {
+                // setError("An error occurred. Please try again.");
+            }
+        }
+    };
 
     return (
         <>

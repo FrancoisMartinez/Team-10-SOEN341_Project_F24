@@ -37,7 +37,7 @@ function Register() {
 
         try {
             // Send POST request to backend /signup route
-            const response = await axios.post("http://localhost:5000/signup", { email, password });
+            const response = await axios.post("http://localhost:3000/signup", { email, password });
 
             if (response.status === 200) {
                 // setSuccess(true);
