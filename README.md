@@ -37,7 +37,7 @@ PHP will be used to host the website for public access, SQL for the database, an
 
 ## **Team Member Roles**
 
-Francois: Team lead.
+Francois: Team lead; Frontend developper.
 
 Ayman: Lead backend developer.
 
@@ -49,7 +49,7 @@ Varun: Backend developper
 
 Hoang Vu: Frontend developper
 
-Jeffrey: Frontend developper
+Jeffrey: Backend developper
 
 
 
