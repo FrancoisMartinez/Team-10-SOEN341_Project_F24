@@ -33,7 +33,7 @@ HTML5 and CSS will be used to design the different pages. React will also be use
 
 ### **Back-end** 
 
-PHP will be used to host the website for public access, SQL for the database, and JavaScript will handle the back-end logics.
+PHP will be used to host the website for public access, MongoDB for the database, and JavaScript will handle the back-end logics.
 
 ## **Team Member Roles**
 
