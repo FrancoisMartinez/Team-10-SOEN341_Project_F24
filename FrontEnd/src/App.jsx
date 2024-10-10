@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login"
 import Register from "./pages/Register";
 import {GlobalStateProvider} from "./GlobalStateProvider.jsx";
-import Teams from "./styles/Teams.jsx";
+import Teams from "./pages/Teams.jsx";
 
 
 
