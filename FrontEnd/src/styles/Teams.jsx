@@ -23,7 +23,7 @@ function Teams() {
         <>
             {teams.map((team, index) => (
                 <div key={index} className="team">
-                    <h1>{}</h1>
+                    <h1>{team.teamName}</h1>
                 </div>
             ))}
 
