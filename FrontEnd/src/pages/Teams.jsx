@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from "/src/styles/Teams.module.css";
 
 const teams = [
     {
@@ -22,13 +23,19 @@ function Teams() {
     return (
         <>
             {teams.map((team, index) => (
-                <div key={index} className="team">
-                    <h1>{team.teamName}</h1>
-                    {team.students.map(student => (
-                        <div key={student.id}>
-                            <p>{student}</p>
-                        </div>
-                    ))}
+                <div  key={index} className={styles.teamContainer}>
+
+                    <div className={styles.team}>
+                        <h1>{team.teamName}</h1>
+                        {team.students.map(student => (
+                            <div key={student.id}>
+                                <p>{student}</p>
+                            </div>
+                        ))}
+
+                    </div>
+
+
                 </div>
             ))}
 
