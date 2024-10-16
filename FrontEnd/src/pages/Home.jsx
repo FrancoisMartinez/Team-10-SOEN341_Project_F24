@@ -42,14 +42,21 @@ function Home() {
                     :
                     <>
                         <button className={styles.button}
-                            onClick={() => {
-                                navigate('/login')
-                        }}>LogIn
+                                onClick={() => {
+                                    navigate('/login')
+                                }}>LogIn
                         </button>
+
                         <button className={styles.button}
-                            onClick={() => {
-                                navigate('/register')
-                        }}>SignUp
+                                onClick={() => {
+                                    navigate('/register')
+                                }}>SignUp
+                        </button>
+
+                        <button className={styles.button}
+                                onClick={() => {
+                                    navigate('/')
+                                }}>SignUp
                         </button>
                     </>
                 }
