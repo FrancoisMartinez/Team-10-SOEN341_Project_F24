@@ -1,7 +1,11 @@
 import React, {useContext, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
+import InstructorDashboardTeams from "../components/InstructorDashboardTeams.jsx";
+import Header from "../components/Header.jsx";
+import InstructorDashboardStudents from "../components/InstructorDashboardStudents.jsx";
 
-
+//fake team example
 const teams = [
     {
         teamName: "Team A",
@@ -35,18 +39,39 @@ const teams = [
     }
 ];
 
+const students = [
+    { name: "Alice", team: "Team A" },
+    { name: "Bob", team: "Team B" },
+    { name: "Charlie", team: "Team A" },
+    { name: "Diana", team: "Team C" },
+    { name: "Eve", team: "Team B" },
+    { name: "Frank", team: "Team A" },
+    { name: "Grace", team: "Team C" },
+    { name: "Hank", team: "Team B" },
+    { name: "Ivy", team: "Team C" },
+    { name: "Jack", team: "Team A" }
+];
+
 function InstructorDashboard() {
     const { state, dispatch } = useContext(GlobalContext);
-
-    const { team, setTeam } = useState('')
+    const navigate = useNavigate();
+    const  [teamSearch, setTeamSearch]  = useState('');
+    const  [view, setView] = useState('Team');
 
     return (
         <>
             {state.user && <p>Welcome {state.user.email}</p>}
 
-            <input type="text" value={team} onChange={(e) => setTeam(e.target.value) }/>
 
-            <p>{name}</p>
+            {/*<input type="text" value={teamSearch} onChange={(e) => setTeamSearch(e.target.value)} placeholder={'Search a Team or a Student'}/>*/}
+
+            <button onClick={() => setView(view === 'Team' ? 'Student' : 'Team')}>{view}</button>
+
+            <button onClick={() => navigate('/')}>new team</button>
+
+            <div>
+                {view === 'Team' ? <InstructorDashboardTeams teams={teams}/> : <InstructorDashboardStudents students={students}/>}
+            </div>
         </>
 
     )
