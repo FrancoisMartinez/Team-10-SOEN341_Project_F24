@@ -7,7 +7,7 @@ const User = require('../models/user');
 // Sign-up route
 router.post('/signup', async (req, res) => {
     try {
-        const { email, password } = req.body; // Extract email and password
+        const { firstName, lastName, email, password, instructor } = req.body; // Extract email and password
 
         // Check if the user already exists
         const existingUser = await User.findOne({ email: email });
@@ -20,8 +20,11 @@ router.post('/signup', async (req, res) => {
 
         // Create the user
         const user = await User.create({
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             password: hashedPassword,
+            instructor: instructor,
         });
 
         // Respond with success
