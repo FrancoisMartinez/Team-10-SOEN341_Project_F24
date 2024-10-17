@@ -4,6 +4,7 @@ import { GlobalContext } from "../GlobalStateProvider.jsx";
 import InstructorDashboardTeams from "../components/InstructorDashboardTeams.jsx";
 import Header from "../components/Header.jsx";
 import InstructorDashboardStudents from "../components/InstructorDashboardStudents.jsx";
+import styles from "../styles/InstructorDashboard.module.css";
 
 //fake team example
 const teams = [
@@ -65,11 +66,14 @@ function InstructorDashboard() {
 
             <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search for a ' + view}/>
 
-            <button onClick={() => setView(view === 'Team' ? 'Student' : 'Team')}>{view}</button>
+            <button onClick={() => {
+                setView(view === 'Team' ? 'Student' : 'Team');
+                setSearch('')
+            }}>{view}</button>
 
             <button onClick={() => navigate('/')}>new team</button>
 
-            <div>
+            <div className={styles.results}>
                 {view === 'Team' ? <InstructorDashboardTeams teams={teams} search={search}/> : <InstructorDashboardStudents students={students} search={search}/>}
             </div>
         </>

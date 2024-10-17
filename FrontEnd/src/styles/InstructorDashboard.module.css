@@ -1,0 +1,10 @@
+.results {
+
+    display: flex;
+
+    border: black 1px solid;
+    width: 70%;
+
+    height: 256px;
+    overflow-y: scroll;
+}
