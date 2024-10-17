@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 
@@ -39,26 +40,45 @@ router.post('/signup', async (req, res) => {
 
 // Login route (example for checking login info)
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, instructor } = req.body;
 
     try {
         // Check if the user exists
-        const existingUser = await User.findOne({ email: email });
+        const existingUser = await User.findOne({ email, instructor });
         if (!existingUser) {
-            return res.status(404).send("User not found");
+            console.log("User not found");
+            return res.status(404).json({ error: " not found" });
         }
 
         // Compare passwords
         const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
-        if (isPasswordMatch) {
-            return res.status(200).json({ message: "Login successful" });
-        } else {
-            return res.status(401).send("Invalid password");
+        if (!isPasswordMatch) {
+            console.log("Invalid password");
+            return res.status(401).json({ error: "Invalid password" });
         }
 
+        // Generate JWT token
+        const token = jwt.sign(
+            { id: existingUser._id, email: existingUser.email, instructor: existingUser.instructor },
+            process.env.JWT_ACCESS_SECRET,
+            { expiresIn: '2h' }
+        );
+
+        // Return user info and token
+        return res.status(200).json({
+            user: {
+                id: existingUser._id,
+                firstName: existingUser.firstName,
+                lastName: existingUser.lastName,
+                email: existingUser.email,
+                instructor: existingUser.instructor,
+            },
+            token
+        });
+
     } catch (err) {
-        console.log('Error during login:', err);
-        return res.status(500).send("Internal Server Error");
+        console.error('Error during login:', err);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 

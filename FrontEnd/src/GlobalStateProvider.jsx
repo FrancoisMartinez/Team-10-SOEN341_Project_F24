@@ -3,6 +3,7 @@ import React, {createContext, useReducer} from "react";
 // Initial state
 const initialState = {
     user: null,
+    token: localStorage.getItem('token') || null,
     loading: false,
     error: null,
 }
@@ -13,11 +14,13 @@ const reducer = (state, action) => {
         case 'LOGIN_REQUEST':
             return { ...state, loading: true, error: null };
         case 'LOGIN_SUCCESS':
-            return { ...state, user: action.payload, loading: false, error: null };
+            localStorage.setItem('token', action.payload.token);
+            return { ...state, user: action.payload.user, token: action.payload.token, loading: false, error: null };
         case 'LOGIN_FAILURE':
             return { ...state, loading: false, error: action.payload };
         case 'LOGOUT':
-            return { ...state, user: null };
+            localStorage.removeItem('token');
+            return { ...state, user: null, token: null };
         case 'UPDATE_USER':
             return { ...state, user: { ...state.user, ...action.payload } };
         case 'REGISTER_REQUEST':
