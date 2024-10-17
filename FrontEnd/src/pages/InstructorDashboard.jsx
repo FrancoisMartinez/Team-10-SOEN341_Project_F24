@@ -55,7 +55,7 @@ const students = [
 function InstructorDashboard() {
     const { state, dispatch } = useContext(GlobalContext);
     const navigate = useNavigate();
-    const  [teamSearch, setTeamSearch]  = useState('');
+    const  [search, setSearch]  = useState('');
     const  [view, setView] = useState('Team');
 
     return (
@@ -63,14 +63,14 @@ function InstructorDashboard() {
             {state.user && <p>Welcome {state.user.email}</p>}
 
 
-            {/*<input type="text" value={teamSearch} onChange={(e) => setTeamSearch(e.target.value)} placeholder={'Search a Team or a Student'}/>*/}
+            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search for a ' + view}/>
 
             <button onClick={() => setView(view === 'Team' ? 'Student' : 'Team')}>{view}</button>
 
             <button onClick={() => navigate('/')}>new team</button>
 
             <div>
-                {view === 'Team' ? <InstructorDashboardTeams teams={teams}/> : <InstructorDashboardStudents students={students}/>}
+                {view === 'Team' ? <InstructorDashboardTeams teams={teams} search={search}/> : <InstructorDashboardStudents students={students} search={search}/>}
             </div>
         </>
 

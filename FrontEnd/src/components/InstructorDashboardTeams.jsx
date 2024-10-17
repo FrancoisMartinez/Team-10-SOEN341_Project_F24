@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-function InstructorDashboardTeams({ teams }) {
+function InstructorDashboardTeams({ teams, search }) {
+
+    const [filteredTeams, setFilteredTeams] = useState(teams)
+
+    useEffect(() => {
+        setFilteredTeams(
+            teams.filter((student) => student.teamName.toLowerCase().includes(search.toLowerCase())))
+    }, [search, teams]);
 
     return (
         <div>
-            {teams.map((team, index) =>
+            {filteredTeams.map((team, index) =>
 
                 <div key={index}>
                     <h2>{team.teamName}</h2>
