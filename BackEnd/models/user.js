@@ -23,6 +23,9 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
+    teams : {
+
+    },
     secret: {
         type: String,
         default: null
