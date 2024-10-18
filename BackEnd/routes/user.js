@@ -13,7 +13,7 @@ router.post('/signup', async (req, res) => {
         // Check if the user already exists
         const existingUser = await User.findOne({ email: email });
         if (existingUser) {
-            return res.status(409).send("User with this email already exists");
+            return res.status(409).json({ error: "User with this email already exists" });
         }
 
         // Hash the password
@@ -29,11 +29,11 @@ router.post('/signup', async (req, res) => {
         });
 
         // Respond with success
-        return res.status(200).json({ status: "Success", user: user });
+        return res.status(200);
 
     } catch (err) {
         console.log('Error creating user:', err);
-        return res.status(500).send("Internal Server Error");
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
         const existingUser = await User.findOne({ email, instructor });
         if (!existingUser) {
             console.log("User not found");
-            return res.status(404).json({ error: " not found" });
+            return res.status(404).json({ error: (instructor ? 'Instructor' : ' Student') + " not found" });
         }
 
         // Compare passwords
@@ -57,11 +57,18 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: "Invalid password" });
         }
 
-        // Generate JWT token
-        const token = jwt.sign(
-            { id: existingUser._id, email: existingUser.email, instructor: existingUser.instructor },
+        // Generate Access Token
+        const accessToken = jwt.sign(
+            { firstName: existingUser.firstName, lastName: existingUser.lastName, email: existingUser.email, instructor: existingUser.instructor },
             process.env.JWT_ACCESS_SECRET,
-            { expiresIn: '2h' }
+            { expiresIn: '1h' }
+        );
+
+        // Generate Refresh Token
+        const refreshToken = jwt.sign(
+            { email: existingUser.email },
+            process.env.JWT_REFRESH_SECRET,
+            { expiresIn: '7d' }
         );
 
         // Return user info and token
@@ -73,7 +80,8 @@ router.post('/login', async (req, res) => {
                 email: existingUser.email,
                 instructor: existingUser.instructor,
             },
-            token
+            accessToken,
+            refreshToken
         });
 
     } catch (err) {
@@ -81,5 +89,36 @@ router.post('/login', async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+// Refresh token route
+router.post('/refresh', async (req, res) => {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+        return res.status(401).json({ error: 'Refresh token required' });
+    }
+
+    try {
+        const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+        const user = await User.findOne({ email: decoded.email });
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Generate new access token
+        const newAccessToken = jwt.sign(
+            { firstName: user.firstName, lastName: user.lastName, email: user.email, instructor: user.instructor },
+            process.env.JWT_ACCESS_SECRET,
+            { expiresIn: '1h' }
+        );
+
+        return res.status(200).json({ accessToken: newAccessToken });
+
+    } catch (err) {
+        return res.status(403).json({ error: 'Invalid refresh token' });
+    }
+});
+
 
 module.exports = router;

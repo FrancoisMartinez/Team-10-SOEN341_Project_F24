@@ -30,9 +30,9 @@ function Login() {
 
             if (response.status === 200) {
 
-                const { user, token } = response.data;
+                const { user, accessToken } = response.data;
 
-                dispatch({type: 'LOGIN_SUCCESS', payload: { user, token }});
+                dispatch({ type: 'LOGIN_SUCCESS', payload: { user, accessToken } });
                 setEmail('')
                 setPassword('')
                 navigate('/')
@@ -41,7 +41,7 @@ function Login() {
         } catch (error) {
             dispatch({
                 type: 'LOGIN_FAILURE',
-                payload: (instructor ?  'Instructor' : 'Student') + error.response?.data?.error || 'An error occurred. Please try again.'
+                payload: error.response?.data?.error || 'An error occurred. Please try again.'
             });
         }
     };

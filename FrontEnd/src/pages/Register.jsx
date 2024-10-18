@@ -64,7 +64,7 @@ function Register() {
         } catch (error) {
             dispatch({
                 type: 'REGISTER_FAILURE',
-                payload: error.response?.data?.message || 'An error occurred. Please try again.'
+                payload: error.response?.data?.error || 'An error occurred. Please try again.'
             });
         }
     };
