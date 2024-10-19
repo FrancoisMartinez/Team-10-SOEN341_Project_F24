@@ -41,7 +41,7 @@ function Login() {
         } catch (error) {
             dispatch({
                 type: 'LOGIN_FAILURE',
-                payload: (instructor ?  'Instructor' : 'Student') + error.response?.data?.error || 'An error occurred. Please try again.'
+                payload: error.response?.data?.error || 'An error occurred. Please try again.'
             });
         }
     };
