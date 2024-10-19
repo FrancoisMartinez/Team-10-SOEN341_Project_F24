@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
         });
 
         // Respond with success
-        return res.status(200);
+        return res.status(200).json({ status: "Success" });
 
     } catch (err) {
         console.log('Error creating user:', err);
