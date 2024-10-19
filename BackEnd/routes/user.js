@@ -29,18 +29,18 @@ router.post('/signup', async (req, res) => {
         });
 
         // Respond with success
-        return res.status(200);
+        return res.status(200).json({ status: "Success", user: user });
 
     } catch (err) {
         console.log('Error creating user:', err);
-        return res.status(500).json({ error: "Internal Server Error" });
+        return res.status(500).send("Internal Server Error");
     }
 });
 
 
 // Login route (example for checking login info)
 router.post('/login', async (req, res) => {
-    const { email, password, instructor } = req.body;
+    const { email, password } = req.body;
 
     try {
         // Check if the user exists
@@ -52,9 +52,10 @@ router.post('/login', async (req, res) => {
 
         // Compare passwords
         const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
-        if (!isPasswordMatch) {
-            console.log("Invalid password");
-            return res.status(401).json({ error: "Invalid password" });
+        if (isPasswordMatch) {
+            return res.status(200).json({ message: "Login successful" });
+        } else {
+            return res.status(401).send("Invalid password");
         }
 
         // Generate JWT token
@@ -77,40 +78,9 @@ router.post('/login', async (req, res) => {
         });
 
     } catch (err) {
-        console.error('Error during login:', err);
-        return res.status(500).json({ error: "Internal Server Error" });
+        console.log('Error during login:', err);
+        return res.status(500).send("Internal Server Error");
     }
 });
-//
-// // Refresh token route
-// router.post('/refresh', async (req, res) => {
-//     const { refreshToken } = req.body;
-//
-//     if (!refreshToken) {
-//         return res.status(401).json({ error: 'Refresh token required' });
-//     }
-//
-//     try {
-//         const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-//         const user = await User.findOne({ email: decoded.email });
-//
-//         if (!user) {
-//             return res.status(404).json({ error: 'User not found' });
-//         }
-//
-//         // Generate new access token
-//         const newAccessToken = jwt.sign(
-//             { firstName: user.firstName, lastName: user.lastName, email: user.email, instructor: user.instructor },
-//             process.env.JWT_ACCESS_SECRET,
-//             { expiresIn: '1h' }
-//         );
-//
-//         return res.status(200).json({ accessToken: newAccessToken });
-//
-//     } catch (err) {
-//         return res.status(403).json({ error: 'Invalid refresh token' });
-//     }
-// });
-
 
 module.exports = router;
