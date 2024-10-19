@@ -6,7 +6,7 @@ import axios from "axios";
 // Initial state
 const initialState = {
     user: null,
-    accessToken: localStorage.getItem('accessToken') || null,
+    token: localStorage.getItem('token') || null,
     loading: false,
     error: null,
 }
@@ -17,8 +17,8 @@ const reducer = (state, action) => {
         case 'LOGIN_REQUEST':
             return { ...state, loading: true, error: null };
         case 'LOGIN_SUCCESS':
-            localStorage.setItem('accessToken', action.payload.accessToken);
-            return { ...state, user: action.payload.user, accessToken: action.payload.accessToken, loading: false, error: null };
+            localStorage.setItem('token', action.payload.token);
+            return { ...state, user: action.payload.user, token: action.payload.token, loading: false, error: null };
         case 'LOGIN_FAILURE':
             return { ...state, loading: false, error: action.payload };
         case 'REFRESH_TOKEN':
