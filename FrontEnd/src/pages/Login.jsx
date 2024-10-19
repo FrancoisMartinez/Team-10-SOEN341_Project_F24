@@ -32,7 +32,7 @@ function Login() {
 
                 const { user, token } = response.data;
 
-                dispatch({type: 'LOGIN_SUCCESS', payload: { user, token }});
+                dispatch({type: 'LOGIN_SUCCESS', payload: { user }});
                 setEmail('')
                 setPassword('')
                 navigate('/')
