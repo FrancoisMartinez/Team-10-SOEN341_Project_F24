@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import DimensionRating from './DimensionRating';
 import axios from "axios";
+import {GlobalContext} from "../GlobalStateProvider.jsx";
 
-const Rating = () => {
+function Rating() {
+    const { state, dispatch } = useContext(GlobalContext);
     const dimensions = ['Cooperation', 'Conceptual Contribution', 'Practical Contribution', 'Work Ethic'];
     const [ratings, setRatings] = useState({});
     const [comments, setComments] = useState({});
+    const [studentEmail, setStudentEmail] = useState('');
 
 
     const handleRatingChange = (dimension, ratingValue) => {
@@ -27,18 +30,22 @@ const Rating = () => {
         // dispatch({ type: 'sum'})
 
         const data = {
+            user : {
+                studentEmail : studentEmail,
+                reviewer : state.user?.email || ''
+            },
             ratings: {
                 Cooperation: ratings['Cooperation'] || 0,
-                'Conceptual Contribution': ratings['Conceptual Contribution'] || 0,
-                'Practical Contribution': ratings['Practical Contribution'] || 0,
-                'Work Ethic': ratings['Work Ethic'] || 0
+                ConceptualContribution: ratings['Conceptual Contribution'] || 0,
+                PracticalContribution: ratings['Practical Contribution'] || 0,
+                WorkEthic: ratings['Work Ethic'] || 0
             },
             // Optional comments, if undefined, default to an empty string
             comments: {
                 Cooperation: comments['Cooperation'] || '',
-                'Conceptual Contribution': comments['Conceptual Contribution'] || '',
-                'Practical Contribution': comments['Practical Contribution'] || '',
-                'Work Ethic': comments['Work Ethic'] || ''
+                ConceptualContribution: comments['Conceptual Contribution'] || '',
+                PracticalContribution: comments['Practical Contribution'] || '',
+                WorkEthic: comments['Work Ethic'] || ''
             }
         };
 

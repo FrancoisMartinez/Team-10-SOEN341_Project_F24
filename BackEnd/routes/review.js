@@ -5,18 +5,20 @@ const Review = require('../models/reviewSchema');
 router.post('/reviewSubmission', async (req, res) => {
     console.log('test')
 
-    const { ratings, comments } = req.body;
+    const { user, ratings, comments } = req.body;
 
     try {
         const reviews = await Review.create({
+            studentEmail: user.studentEmail,
+            reviewer: user.reviewer,
             CooperationRating: ratings['Cooperation'],
-            ConceptualContributionRating: ratings['Conceptual Contribution'],
-            PracticalContributionRating: ratings['Practical Contribution'],
-            WorkEthicRating: ratings['Work Ethic'],
+            ConceptualContributionRating: ratings['ConceptualContribution'],
+            PracticalContributionRating: ratings['PracticalContribution'],
+            WorkEthicRating: ratings['WorkEthic'],
             CooperationComment: comments['Cooperation'] || '',
-            ConceptualContributionComment: comments['Conceptual Contribution'] || '',
-            PracticalContributionComment: comments['Practical Contribution'] || '',
-            WorkEthicComment: comments['Work Ethic'] || '',
+            ConceptualContributionComment: comments['ConceptualContribution'] || '',
+            PracticalContributionComment: comments['PracticalContribution'] || '',
+            WorkEthicComment: comments['WorkEthic'] || '',
         });
 
         return res.status(200).json({ status: "Success" });
