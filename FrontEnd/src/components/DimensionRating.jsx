@@ -50,6 +50,8 @@ const DimensionRating = ({ dimension, handleRatingChange, handleCommentChange })
                 onChange={handleCommentInput}
                 rows="4"
                 cols="50"
+                style={{ resize: 'none', overflowY: 'auto' }}
+
             />
         </div>
     );

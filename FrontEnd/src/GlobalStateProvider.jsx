@@ -9,6 +9,7 @@ const initialState = {
     // accessToken: localStorage.getItem('accessToken') || null,
     loading: false,
     error: null,
+
 }
 
 // Manage the user state

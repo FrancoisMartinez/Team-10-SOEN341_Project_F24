@@ -29,6 +29,12 @@ function Rating() {
         e.preventDefault();
         // dispatch({ type: 'sum'})
 
+        const confirmSubmit = window.confirm("Are you sure you want to submit your assessment?");
+        if (!confirmSubmit) {
+            return;
+        }
+
+
         const data = {
             user : {
                 studentEmail : studentEmail,
@@ -40,7 +46,6 @@ function Rating() {
                 PracticalContribution: ratings['Practical Contribution'] || 0,
                 WorkEthic: ratings['Work Ethic'] || 0
             },
-            // Optional comments, if undefined, default to an empty string
             comments: {
                 Cooperation: comments['Cooperation'] || '',
                 ConceptualContribution: comments['Conceptual Contribution'] || '',
