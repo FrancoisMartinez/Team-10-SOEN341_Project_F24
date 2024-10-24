@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../GlobalStateProvider'; 
 
 const TeammateSelection = () => {
   const [teammates, setTeammates] = useState([]);
   const { state } = useContext(GlobalContext); // Access user info 
-  const history = useHistory();
+  //const history = useHistory();
 
   // Fetch teammates from backend API
   useEffect(() => {
