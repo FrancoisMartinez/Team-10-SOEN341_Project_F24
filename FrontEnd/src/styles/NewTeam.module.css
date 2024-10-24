@@ -4,83 +4,160 @@
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background-color: #f4f4f4;
-    position: relative; /* Allows positioning relative to this container */
+    background-color: #e6e6fa; /* Light lavender background */
+    position: relative;
+    font-family: 'Arial', sans-serif; /* A clean font for better readability */
 }
 
-/* Team Name Input */
-.teamNameInput {
+/* Flexbox container for search bar and selected members */
+.flexContainer {
+    display: flex;
+    justify-content: center; /* Center content inside the container */
+    align-items: flex-start;
+    gap: 30px; /* Adds more spacing between the search bar and selected team members box */
+    padding: 20px;
+    background-color: #f3e5f5; /* Light purple background for the container */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Team Name Input at the Top-Left (under the header) */
+.teamNameInputContainer {
     position: absolute;
-    top: 110px;  /* Adjust this value to control the space below the header */
-    left: 20px; /* Align to the left of the screen */
-    padding: 10px;
-    width: 300px;
+    top: 100px;
+    left: 20px;
+    z-index: 10;
+}
+
+.teamNameInput {
+    padding: 12px;
+    width: 320px;
     font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #6f42c1; /* Purple color same as the header */
+    border: 2px solid #d1c4e9; /* Lighter purple border */
+    border-radius: 8px;
+    background-color: #9575cd; /* Purple background */
     color: white;
-    z-index: 10; /* Ensure it appears above the header */
+    transition: 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.teamNameInput:focus {
+    outline: none;
+    border-color: #7e57c2; /* Darker purple focus effect */
 }
 
 .teamNameInput::placeholder {
-    color: #ddd;
+    color: #e1bee7; /* Light purple placeholder */
 }
 
+/* Search Bar Styling */
 .searchContainer {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    height: 256px;
-    overflow-y: scroll;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 320px;
 }
 
 .searchInput {
-    width: 300px;
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
     font-size: 16px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-bottom: 12px;
+    border: 2px solid #d1c4e9;
+    border-radius: 8px;
+    background-color: #9575cd; /* Purple background */
+    color: white;
+    transition: 0.3s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #7e57c2; /* Darker purple on focus */
 }
 
 .searchButton {
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #7e57c2; /* Rich purple background */
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     margin-bottom: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .searchButton:hover {
-    background-color: #0056b3;
+    background-color: #6a1b9a; /* Darker purple on hover */
 }
 
+/* Scrollable Results Container */
 .resultsContainer {
     margin-top: 20px;
     width: 100%;
     text-align: left;
+    height: 256px;
+    overflow-y: scroll;
 }
 
 .resultsList {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .resultItem {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: #d1c4e9; /* Light purple for the list items */
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #b39ddb;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .resultItem:hover {
-    background-color: #ececec;
+    background-color: #b39ddb; /* Slightly darker on hover */
+}
+
+/* Selected Team Members */
+.newTeamContainer {
+    background-color: #ede7f6; /* Very light purple */
+    padding: 20px;
+    border-radius: 12px;
+    width: 320px;
+    border: 2px solid #d1c4e9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.newTeamList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.newTeamItem {
+    background-color: #d1c4e9;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.removeButton {
+    background-color: #ff4081; /* Pink color for remove button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+    background-color: #e91e63; /* Darker pink on hover */
 }
 
 /* Green Create Button */
@@ -90,13 +167,33 @@
     right: 20px;
     padding: 15px 30px;
     font-size: 16px;
-    background-color: #28a745;
+    background-color: #9575cd; /* Purple background */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .createButton:hover {
-    background-color: #218838;
+    background-color: #7e57c2; /* Darker purple on hover */
+}
+
+/* CSV Button */
+.CSVbutton {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #9575cd;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.CSVbutton:hover {
+    background-color: #7e57c2; /* Darker purple on hover */
 }
