@@ -97,6 +97,126 @@ const teams = [
             { name: "Nina", role: "Designer" },
             { name: "Oscar", role: "DevOps" }
         ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
     }
     
 ];
