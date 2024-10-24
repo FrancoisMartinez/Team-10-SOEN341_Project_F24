@@ -66,6 +66,19 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.inputBoxName{
+    width: 185px;
+    height: 60px;
+    margin-top:40px;
+    margin-inline: auto;
+    background-color: #dddddd;
+    border-radius: 100px;
+    border: none;
+    padding-left: 15px;
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 
 .inputBox::placeholder{
     font-size: 1.5rem;

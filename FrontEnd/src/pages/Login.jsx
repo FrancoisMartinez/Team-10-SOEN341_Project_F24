@@ -6,6 +6,8 @@ import Header from '../components/header';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
 import Navigation from "../components/Navigation.jsx";
 import axios from "axios";
+import Loading from "../components/Loading.jsx";
+import Error from "../components/Error.jsx";
 
 
 function Login() {
@@ -14,50 +16,42 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [student, setStudent] = useState(true);
+    const [instructor, setInstructor] = useState(false);
 
 
-
-    console.log(state);
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     dispatch({type: 'LOGIN', payload: {email: email, password: password}});
-    //     setEmail('')
-    //     setPassword('')
-    //     navigate('/')
-    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // setError(null);
-        // setSuccess(false);
+        dispatch({ type: 'LOGIN_REQUEST'})
 
         try {
             // Send POST request to backend /signup route
-            const response = await axios.post("http://localhost:3000/login", { email, password });
+            const response = await axios.post("http://localhost:3000/login", { email, password, instructor });
 
             if (response.status === 200) {
-                // setSuccess(true);
-                console.log("User logged in successfully:", response.data);
 
-                dispatch({type: 'LOGIN', payload: {email: email, password: password}});
+                const { user, accessToken } = response.data;
+
+                dispatch({type: 'LOGIN_SUCCESS', payload: { user }});
                 setEmail('')
                 setPassword('')
                 navigate('/')
 
             }
         } catch (error) {
-            if (error.response && error.response.status === 409) {
-                // setError("User with this email already exists.");
-            } else {
-                // setError("An error occurred. Please try again.");
-            }
+            dispatch({
+                type: 'LOGIN_FAILURE',
+                payload: error.response?.data?.error || 'An error occurred. Please try again.'
+            });
         }
     };
-
+//yo
     return (
         <>
+
+            {state.loading && <Loading/>}
+            {state.error && <Error/>}
+
             <Navigation/>
             <div className={styles.background}>
                 <div className={styles.loginWindow}>
@@ -71,29 +65,18 @@ function Login() {
 
                     <form className={styles.loginWindowRight} onSubmit={handleSubmit}>
 
-                        <h1 className={styles.studentLogIn}>{student ? 'Student' : 'Instructor'} Login</h1>
+                        <h1 className={styles.studentLogIn}>{instructor ? 'Instructor' : 'Student'} Login</h1>
 
                         <input type='email' className={styles.inputBox} value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email'/>
-                            {/*<img className={styles.emailLogo} src="/email_logo.png" alt="email logo" width="30"*/}
-                            {/*     height="30"/>*/}
-                            {/*<h2 className={styles.emailTag}>Email</h2>*/}
-
 
                         <input type='password' className={styles.inputBox} value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password'/>
-                            {/*<img className={styles.passLogo} src="/password_logo.png" alt="password logo" width="30"*/}
-                            {/*     height="30"/>*/}
-                            {/*<h2 className={styles.passTag}>Password</h2>*/}
-
-
-
-
 
                         <button className={styles.loginButton} type="submit">Login
                         </button>
 
 
 
-                        <h4 className={styles.instructorLogin} onClick={() => setStudent(prevState => !prevState)}>{student ? 'Instructor' : 'Student'} login</h4>
+                        <h4 className={styles.instructorLogin} onClick={() => setInstructor(prevState => !prevState)}>{instructor ? 'Student' : 'Instructor'} login</h4>
                         <h4 className={styles.createAccount} onClick={() => navigate('/register')}>Create your account</h4>
 
                     </form>
