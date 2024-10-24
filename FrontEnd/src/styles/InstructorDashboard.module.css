@@ -4,7 +4,7 @@
     padding-left: 10px;
     border: 1px solid #ccc; /* Lighter border for softer look */
     border-radius: 8px;      /* Rounded corners */
-    width: 655px;
+    width: 1150px;
     height: 400px;
     overflow-y: scroll;
     background-color: #f9f9f9; /* Light background for better contrast */
@@ -51,6 +51,7 @@
 
 
 .teamBlock {
+    padding-left: 10px;
     margin-right: 10px;
     margin-top: 5px;
     float: left;
@@ -101,9 +102,24 @@
     color: #999; /* Slightly darker placeholder for readability */
 }
 
+.studentBlock ul{
+    padding-left: 0px;
+    
+}
+
 .studentBlock li{
     border: 1px solid #ccc;
+    margin-bottom: 5px;
+    padding-left: 5px;
     border-radius: 5px;
     list-style-type: none;
-    margin-left: 5px;
+    margin-left: 0px;
+    width: 1100px;
+
+    background-color: #ffffff; /* White background for team blocks */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to team blocks */
+    transition: transform 0.3s ease; /* Adds a smooth hover effect */
+}
+.studentBlock li:hover {
+    transform: scale(1.005); /* Slight scale-up effect on hover */
 }

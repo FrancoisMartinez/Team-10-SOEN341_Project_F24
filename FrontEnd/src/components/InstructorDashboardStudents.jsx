@@ -18,6 +18,7 @@ function InstructorDashboardStudents({ students, search }) {
                 {filteredStudents.map((student, index) =>
                     <li key={index}>
                         <h3>{student.name}</h3>
+
                         <p>{student.team}</p>
                     </li>)}
             </ul>

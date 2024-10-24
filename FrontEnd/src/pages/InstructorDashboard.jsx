@@ -12,7 +12,7 @@ const teams = [
     {
         teamName: "Team A",
         members: [
-            { name: "Alice", role: "Developer" },
+            { name: "Julia", role: "Developer" },
             { name: "Bob", role: "Tester" },
             { name: "Charlie", role: "Manager" },
             { name: "Diana", role: "Designer" },
@@ -38,11 +38,72 @@ const teams = [
             { name: "Nina", role: "Designer" },
             { name: "Oscar", role: "DevOps" }
         ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
     }
+    
 ];
 
 const students = [
-    { name: "Alice", team: "Team A" },
+    { name: "Julia", team: "Team A" },
     { name: "Bob", team: "Team B" },
     { name: "Charlie", team: "Team A" },
     { name: "Diana", team: "Team C" },
