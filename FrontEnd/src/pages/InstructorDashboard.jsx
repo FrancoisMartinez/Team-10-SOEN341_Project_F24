@@ -248,6 +248,7 @@ function InstructorDashboard() {
                 <Header></Header>
 
             </div>
+            <h1 className={styles.pageTitle}>Instructor Dashboard: <br></br></h1>
             <div className={styles.displayBox}>
 
 
