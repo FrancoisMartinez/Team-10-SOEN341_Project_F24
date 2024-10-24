@@ -1,0 +1,102 @@
+.NewTeam {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f4f4f4;
+    position: relative; /* Allows positioning relative to this container */
+}
+
+/* Team Name Input */
+.teamNameInput {
+    position: absolute;
+    top: 110px;  /* Adjust this value to control the space below the header */
+    left: 20px; /* Align to the left of the screen */
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #6f42c1; /* Purple color same as the header */
+    color: white;
+    z-index: 10; /* Ensure it appears above the header */
+}
+
+.teamNameInput::placeholder {
+    color: #ddd;
+}
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 256px;
+    overflow-y: scroll;
+}
+
+.searchInput {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.searchButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.searchButton:hover {
+    background-color: #0056b3;
+}
+
+.resultsContainer {
+    margin-top: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+.resultsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.resultItem {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.resultItem:hover {
+    background-color: #ececec;
+}
+
+/* Green Create Button */
+.createButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.createButton:hover {
+    background-color: #218838;
+}
