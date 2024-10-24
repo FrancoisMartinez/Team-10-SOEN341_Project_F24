@@ -10,6 +10,11 @@
     background-color: #f9f9f9; /* Light background for better contrast */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
+
+.pageTitle{
+    padding-left: 10px;
+}
+
 .displayBox {
     margin-top: 15px;
     display: flex;
@@ -82,14 +87,14 @@
 .searchBar {
     width: 300px; /* Adjust width as needed */
     padding: 12px 20px;
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     border-radius: 50px; /* Rounded, pill-shaped input */
     font-size: 16px;
     outline: none;
     transition: all 0.3s ease; /* Smooth transition for hover and focus */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     background-color: #f9f9f9;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .searchBar:focus {
