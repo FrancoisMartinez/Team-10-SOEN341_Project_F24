@@ -1,10 +1,78 @@
 .results {
 
     display: flex;
-
-    border: black 1px solid;
-    width: 70%;
-
-    height: 256px;
+    padding-left: 10px;
+    border: 1px solid #ccc; /* Lighter border for softer look */
+    border-radius: 8px;      /* Rounded corners */
+    width: 655px;
+    height: 400px;
     overflow-y: scroll;
+    background-color: #f9f9f9; /* Light background for better contrast */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+.displayBox {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.displayBox button {
+    background: linear-gradient(45deg, #9c82cd, #a088cc); /* Gradient color */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px; /* Pill-shaped button */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth transitions */
+    outline: none;
+    text-transform: uppercase; /* Makes the text uppercase */
+}
+
+.displayBox button:hover {
+    background: linear-gradient(45deg, #9c82cd, #a088cc); /* Inverse gradient on hover */
+    transform: translateY(-3px); /* Moves button up slightly on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.displayBox button:active {
+    transform: translateY(0); /* Reset transform on click */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Restore original shadow */
+}
+
+
+
+.teamBlock {
+    margin-right: 10px;
+    margin-top: 5px;
+    float: left;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    
+    background-color: #ffffff; /* White background for team blocks */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to team blocks */
+    transition: transform 0.3s ease; /* Adds a smooth hover effect */
+}
+.teamBlock:hover {
+    transform: scale(1.05); /* Slight scale-up effect on hover */
+}
+
+/* General Styles for Scrollbar (optional) */
+.results::-webkit-scrollbar {
+    width: 8px;
+}
+
+.results::-webkit-scrollbar-thumb {
+    background-color: #9c82cd; /* Purple scroll bar */
+    border-radius: 10px;
+}
+.results::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Light background for the scrollbar track */
 }
