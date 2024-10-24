@@ -1,8 +1,8 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
 import InstructorDashboardTeams from "../components/InstructorDashboardTeams.jsx";
-import Header from "../components/Header.jsx";
+import Header from '../components/header.jsx';
 import InstructorDashboardStudents from "../components/InstructorDashboardStudents.jsx";
 import styles from "../styles/InstructorDashboard.module.css";
 
@@ -11,7 +11,7 @@ const teams = [
     {
         teamName: "Team A",
         members: [
-            { name: "Alice", role: "Developer" },
+            { name: "Julia", role: "Developer" },
             { name: "Bob", role: "Tester" },
             { name: "Charlie", role: "Manager" },
             { name: "Diana", role: "Designer" },
@@ -37,11 +37,72 @@ const teams = [
             { name: "Nina", role: "Designer" },
             { name: "Oscar", role: "DevOps" }
         ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team B",
+        members: [
+            { name: "Frank", role: "Developer" },
+            { name: "Grace", role: "Tester" },
+            { name: "Hank", role: "Manager" },
+            { name: "Ivy", role: "Designer" },
+            { name: "Jack", role: "DevOps" }
+        ]
+    },
+    {
+        teamName: "Team C",
+        members: [
+            { name: "Kevin", role: "Developer" },
+            { name: "Lana", role: "Tester" },
+            { name: "Mason", role: "Manager" },
+            { name: "Nina", role: "Designer" },
+            { name: "Oscar", role: "DevOps" }
+        ]
     }
+    
 ];
 
 const students = [
-    { name: "Alice", team: "Team A" },
+    { name: "Julia", team: "Team A" },
     { name: "Bob", team: "Team B" },
     { name: "Charlie", team: "Team A" },
     { name: "Diana", team: "Team C" },
@@ -56,26 +117,37 @@ const students = [
 function InstructorDashboard() {
     const { state, dispatch } = useContext(GlobalContext);
     const navigate = useNavigate();
-    const  [search, setSearch]  = useState('');
-    const  [view, setView] = useState('Team');
+    const [search, setSearch] = useState('');
+    const [view, setView] = useState('Team');
 
     return (
         <>
             {state.user && <p>Welcome {state.user.email}</p>}
 
+            <div>
+                <Header></Header>
 
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search for a ' + view}/>
-
-            <button onClick={() => {
-                setView(view === 'Team' ? 'Student' : 'Team');
-                setSearch('')
-            }}>{view}</button>
-
-            <button onClick={() => navigate('/')}>new team</button>
-
-            <div className={styles.results}>
-                {view === 'Team' ? <InstructorDashboardTeams teams={teams} search={search}/> : <InstructorDashboardStudents students={students} search={search}/>}
             </div>
+            <div className={styles.displayBox}>
+
+
+                <div className={styles.displayTeamsBox}>
+                    <button onClick={() => {
+
+                        setView(view === 'Team' ? 'Student' : 'Team');
+                        setSearch('')
+                    }}>{view}</button>
+                    <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search for a ' + view} />
+
+                    <button  onClick={() => navigate('/')}>new team</button>
+
+                    <div className={styles.results}>
+                        {view === 'Team' ? <InstructorDashboardTeams teams={teams} search={search} /> : <InstructorDashboardStudents students={students} search={search} />}
+                    </div>
+                </div>
+            </div>
+
+
         </>
 
     )

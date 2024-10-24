@@ -1,4 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import styles from "../styles/InstructorDashboard.module.css";
+
 
 function InstructorDashboardTeams({ teams, search }) {
 
@@ -10,10 +12,14 @@ function InstructorDashboardTeams({ teams, search }) {
     }, [search, teams]);
 
     return (
-        <div>
+        <div >
             {filteredTeams.map((team, index) =>
 
-                <div key={index}>
+                /* loops through all teams */
+                <div className={styles.teamBlock} key={index}>
+
+                    {/* group h2 and ul into a button */}
+
                     <h2>{team.teamName}</h2>
                     <ul>
                         {team.members.map((member, jndex) =>
@@ -21,6 +27,7 @@ function InstructorDashboardTeams({ teams, search }) {
                         )}
                     </ul>
                 </div>
+
             )}
         </div>
     )
