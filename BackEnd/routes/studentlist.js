@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 
 
-app.get('/students', async (req, res) => {
+router.get('/students', async (req, res) => {
     try {
         const students = await User.find(); // Retrieve all students from the database
         res.json(students); // Send the students as a JSON response
