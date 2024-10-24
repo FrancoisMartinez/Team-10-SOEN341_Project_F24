@@ -137,7 +137,7 @@ function InstructorDashboard() {
                         setView(view === 'Team' ? 'Student' : 'Team');
                         setSearch('')
                     }}>{view}</button>
-                    <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search for a ' + view} />
+                    <input className={styles.searchBar} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search for a ' + view} />
 
                     <button  onClick={() => navigate('/')}>new team</button>
 

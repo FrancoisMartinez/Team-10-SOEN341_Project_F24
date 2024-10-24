@@ -21,10 +21,12 @@
 }
 
 .displayBox button {
+    float: right;
     background: linear-gradient(45deg, #9c82cd, #a088cc); /* Gradient color */
     color: white;
     border: none;
     padding: 12px 20px;
+    margin-left: 5px;
     border-radius: 50px; /* Pill-shaped button */
     cursor: pointer;
     font-size: 16px;
@@ -33,6 +35,7 @@
     transition: all 0.3s ease; /* Smooth transitions */
     outline: none;
     text-transform: uppercase; /* Makes the text uppercase */
+    
 }
 
 .displayBox button:hover {
@@ -76,3 +79,26 @@
 .results::-webkit-scrollbar-track {
     background-color: #f1f1f1; /* Light background for the scrollbar track */
 }
+.searchBar {
+    width: 300px; /* Adjust width as needed */
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 50px; /* Rounded, pill-shaped input */
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease; /* Smooth transition for hover and focus */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+}
+
+.searchBar:focus {
+    border-color: #9c82cd; /* Highlight border on focus */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow on focus */
+    background-color: #fff; /* White background on focus */
+}
+
+.searchBar::placeholder {
+    color: #999; /* Slightly darker placeholder for readability */
+}
+
