@@ -50,7 +50,6 @@
 }
 
 
-
 .teamBlock {
     margin-right: 10px;
     margin-top: 5px;
@@ -102,3 +101,9 @@
     color: #999; /* Slightly darker placeholder for readability */
 }
 
+.studentBlock li{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    list-style-type: none;
+    margin-left: 5px;
+}

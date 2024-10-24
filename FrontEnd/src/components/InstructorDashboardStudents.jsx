@@ -1,4 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import styles from "../styles/InstructorDashboard.module.css";
+
 
 function InstructorDashboardStudents({ students, search }) {
 
@@ -10,13 +12,16 @@ function InstructorDashboardStudents({ students, search }) {
     }, [search, students]);
 
     return (
-        <ul>
-            {filteredStudents.map((student, index) =>
-            <li key={index}>
-                <h3>{student.name}</h3>
-                <p>{student.team}</p>
-            </li> )}
-        </ul>
+        <div className={styles.studentBlock}>
+
+            <ul>
+                {filteredStudents.map((student, index) =>
+                    <li key={index}>
+                        <h3>{student.name}</h3>
+                        <p>{student.team}</p>
+                    </li>)}
+            </ul>
+        </div>
     )
 }
 
