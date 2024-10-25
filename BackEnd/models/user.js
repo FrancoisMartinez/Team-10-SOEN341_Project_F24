@@ -23,9 +23,16 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    teams : {
-
+    team : {
+        type: Number,
     },
+
+/*
+teams: [{
+        type: Number
+    }],
+*/
+
     secret: {
         type: String,
         default: null
