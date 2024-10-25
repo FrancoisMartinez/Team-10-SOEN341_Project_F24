@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login"
 import Register from "./pages/Register";
 import NewTeam from "./pages/NewTeam";
+import FileImport from "./pages/FileImport";
 import {GlobalStateProvider} from "./GlobalStateProvider.jsx";
 
 
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     {path : "/login", element : <Login />},
     {path : "/register", element : <Register />},
     {path : "/newTeam", element : <NewTeam />},
-
+    {path: "/fileImport", element : <FileImport/>},
 ]);
 
 export default function App() {
