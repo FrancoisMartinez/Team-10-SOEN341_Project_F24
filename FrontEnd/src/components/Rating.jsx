@@ -2,6 +2,8 @@ import React, {useContext, useState} from 'react';
 import DimensionRating from './DimensionRating';
 import axios from "axios";
 import {GlobalContext} from "../GlobalStateProvider.jsx";
+import styles from "../styles/StudentDashboard.module.css";
+
 
 function Rating() {
     const { state, dispatch } = useContext(GlobalContext);
@@ -73,7 +75,7 @@ function Rating() {
     };
 
     return (
-        <div className="rating-container">
+        <div className={styles.rating_container}>
             {dimensions.map((dimension, index) => (
                 <DimensionRating
                     key={index}
@@ -82,7 +84,7 @@ function Rating() {
                     handleCommentChange={handleCommentChange}
                 />
             ))}
-            <button onClick={handleSubmit}>Submit Peer Assessment</button>
+            <button className={styles.submitButton} onClick={handleSubmit}>Submit Peer Assessment</button>
         </div>
     );
 };

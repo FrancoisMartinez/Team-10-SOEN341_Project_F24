@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+import styles from "../styles/StudentDashboard.module.css";
+
 
 const DimensionRating = ({ dimension, handleRatingChange, handleCommentChange }) => {
     const [rating, setRating] = useState(0);
@@ -17,9 +19,10 @@ const DimensionRating = ({ dimension, handleRatingChange, handleCommentChange })
     };
 
     return (
-        <div className="dimension-rating">
+        <div className={styles.dimension_rating}>
             <h3>{dimension}</h3>
-            <div className="star-rating">
+            
+            <div>
                 {[...Array(5)].map((star, index) => {
                     const ratingValue = index + 1;
 
@@ -34,7 +37,7 @@ const DimensionRating = ({ dimension, handleRatingChange, handleCommentChange })
                             />
                             <FaStar
                                 className="star"
-                                color={ratingValue <= (hoverRating || rating) ? 'gold' : 'gray'}
+                                color={ratingValue <= (hoverRating || rating) ? '#9c82cd' : 'gray'}
                                 size={24}
                                 onMouseEnter={() => setHoverRating(ratingValue)}
                                 onMouseLeave={() => setHoverRating(0)}

@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import {GlobalStateProvider} from "./GlobalStateProvider.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import InstructorDashboard from "./pages/InstructorDashboard.jsx";
+import ReviewForm from './pages/ReviewForm.jsx';
 
 
 
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
     {path : "/login", element : <Login />},
     {path : "/register", element : <Register />},
     {path : "/studentDashboard", element: <StudentDashboard/>},
-    {path : "/instructorDashboard", element : <InstructorDashboard/>}
+    {path : "/instructorDashboard", element : <InstructorDashboard/>},
+    {path : "/reviewForm", element : <ReviewForm/>}
 ]);
 
 export default function App() {
