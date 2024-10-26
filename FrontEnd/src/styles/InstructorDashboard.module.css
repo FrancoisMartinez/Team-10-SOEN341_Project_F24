@@ -10,6 +10,18 @@
     background-color: #f9f9f9; /* Light background for better contrast */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
+.addStudent{
+    color:#9c82cd;
+    font-size:40px;
+    float:right;
+    margin-left: 0px;
+    margin-top: -10px;
+    margin-right: 10px;
+    
+}
+.addStudent:hover{
+    transform: scale(1.05);
+}
 
 .pageTitle{
     padding-left: 10px;
@@ -54,6 +66,8 @@
     transform: translateY(0); /* Reset transform on click */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Restore original shadow */
 }
+
+
 
 
 .teamBlock {
