@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import TeammateSelection from './pages/TeammateSelection';
 import Register from "./pages/Register";
 import {GlobalStateProvider} from "./GlobalStateProvider.jsx";
+import InstructorDashboard from "./pages/InstructorDashboard.jsx";
 
 
 
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     {path : "/", element : <Home />},
     {path : "/login", element : <Login />},
     {path : "/register", element : <Register />},
+    {path : "/instructorDashboard", element : <InstructorDashboard/>},
     {path: '/teammates', element: <TeammateSelection /> },
 ]);
 
