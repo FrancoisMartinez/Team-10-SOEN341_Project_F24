@@ -1,3 +1,7 @@
-const assert = require('chai').assert;
+import { expect } from 'chai';
 
-assert.equal(1,1);
+describe('Sample Test', () => {
+  it('should return true', () => {
+    expect(true).to.be.true;
+  });
+});
