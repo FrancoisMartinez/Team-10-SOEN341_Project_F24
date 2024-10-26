@@ -21,7 +21,7 @@ function InstructorDashboardTeams({ teams, search }) {
                     {/* group h2 and ul into a button */}
 
                     <h2>{team.teamName}</h2>
-                    <ul>
+                    <ul >
                         {team.members.map((member, jndex) =>
                             <li key={jndex}>{member.name}</li>
                         )}

@@ -25,6 +25,7 @@
 
 }
 
+
 .displayBox button {
     float: right;
     background: linear-gradient(45deg, #9c82cd, #a088cc); /* Gradient color */
@@ -63,7 +64,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 200px;
+    height: 180px;
     
+    overflow-y:auto;
+
     background-color: #ffffff; /* White background for team blocks */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to team blocks */
     transition: transform 0.3s ease; /* Adds a smooth hover effect */
