@@ -29,6 +29,9 @@ const studentRoutes = require("./routes/studentlist.js")
 app.use('/', studentRoutes);
 
 
+const studentlistRoutes = require("./routes/studentlist")
+app.use('/', studentlistRoutes);
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
