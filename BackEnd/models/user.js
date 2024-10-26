@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     teams : {
-        type: Number,
+        type: String,
     },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
