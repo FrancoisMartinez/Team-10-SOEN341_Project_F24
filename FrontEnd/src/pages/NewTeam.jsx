@@ -27,6 +27,17 @@ function NewTeam() {
         fetchStudents();
     }, []);
 
+    const handleTeamCreation = async () => {
+
+        try {
+            const response = await axios.post("http://localhost:3000/", { newTeam, teamName });
+
+        } catch (error) {
+            console.error("Error creation");
+        }
+
+    }
+
     const handleSearch = (e) => {
         const term = e.target.value;
         setSearchTerm(term);
@@ -36,6 +47,8 @@ function NewTeam() {
         );
         setResults(filteredResults);
     };
+
+
 
     const handleTeamNameChange = (e) => {
         setTeamName(e.target.value);
@@ -112,7 +125,7 @@ function NewTeam() {
                     </div>
                 </div>
 
-                <button className={styles.createButton}>Create</button>
+                <button onClick={handleTeamCreation} className={styles.createButton}>Create</button>
 
                 {/* CSV Button */}
                 <button
