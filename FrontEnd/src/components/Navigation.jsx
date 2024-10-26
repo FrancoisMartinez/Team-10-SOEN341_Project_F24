@@ -7,7 +7,10 @@ function Navigation() {
 
     return (
         <>
-            <a className={styles.link} onClick={() => {navigate('/')}}>home</a>
+            <a className={styles.link} onClick={() => {
+                navigate('/')
+            }}>home</a>
+
 
         </>
     )

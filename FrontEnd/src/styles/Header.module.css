@@ -3,9 +3,11 @@
     background-color: #9c82cd;
     padding: 10px 20px;
     display: flex;
-    align-items: center;
-    position: fixed; 
-    top: 0; 
+    align-items: center;   
+
+
+    /* position: fixed; 
+    top: 0;  fixes overlapping*/
     width: 100%; 
     z-index: 1000; 
 }

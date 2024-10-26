@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import styles from '/src/styles/Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -6,53 +6,66 @@ import Header from '../components/header';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
 import Navigation from "../components/Navigation.jsx";
 import axios from 'axios';
+import Loading from "../components/Loading.jsx";
+import Error from "../components/Error.jsx";
 
 
 function Register() {
 
     const { state, dispatch } = useContext(GlobalContext);
     const navigate = useNavigate();
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [student, setStudent] = useState(true);
+    const [instructor, setInstructor] = useState(false);
     const [passwordError, setPasswordError] = useState('');
 
 
+    useEffect(() => {
+        if (password === confirmPassword) {
+            setPasswordError('')
+        } else {
+            setPasswordError('Confirm password does not match.')
 
-    console.log(state);
+        }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     // dispatch({type: 'LOGIN', payload: {email: email, password: password}});
-    //     setEmail('')
-    //     setPassword('')
-    //     navigate('/login')
-    // }
 
+    }, [password, confirmPassword]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // setError(null);
-        // setSuccess(false);
+
+        if (password !== confirmPassword) {
+            dispatch({type: 'REGISTER_FAILURE',
+                payload:  'Confirm password does not match.'
+            });
+            return;
+        }
+
+        dispatch({ type: 'REGISTER_REQUEST' });
 
         try {
             // Send POST request to backend /signup route
-            const response = await axios.post("http://localhost:3000/signup", { email, password });
+            const response = await axios.post("http://localhost:3000/signup", { firstName, lastName, email, password, instructor });
 
             if (response.status === 200) {
-                // setSuccess(true);
-                console.log("User created successfully:", response.data);
-                    setEmail('')
-                    setPassword('')
-                    navigate('/login')
+                dispatch({ type: 'REGISTER_SUCCESS' });
+
+
+                setFirstName('');
+                setLastName('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+                navigate('/login')
             }
         } catch (error) {
-            if (error.response && error.response.status === 409) {
-                // setError("User with this email already exists.");
-            } else {
-                // setError("An error occurred. Please try again.");
-            }
+            dispatch({
+                type: 'REGISTER_FAILURE',
+                payload: error.response?.data?.error || 'An error occurred. Please try again.'
+            });
         }
     };
 
@@ -60,6 +73,10 @@ function Register() {
 
     return (
         <>
+            {state.loading && <Loading/>}
+            {state.error && <Error/>}
+
+
             <Navigation/>
             <div className={styles.background}>
                 <div className={styles.loginWindow}>
@@ -73,13 +90,17 @@ function Register() {
 
                     <form className={styles.loginWindowRight} onSubmit={handleSubmit}>
 
-                        <h1 className={styles.studentLogIn}>{student ? 'Student' : 'Instructor'} Register</h1>
+                        <h1 className={styles.studentLogIn}>{instructor ? 'Instructor' : 'Student'} Register</h1>
+
+
+
+                        <input type='text' className={styles.inputBoxName} value={firstName}
+                               onChange={(e) => setFirstName(e.target.value)} placeholder='First Name'/>
+                        <input type='text' className={styles.inputBoxName} value={lastName}
+                               onChange={(e) => setLastName(e.target.value)} placeholder='Last Name'/>
 
                         <input type='email' className={styles.inputBox} value={email}
                                onChange={(e) => setEmail(e.target.value)} placeholder='Email'/>
-                        {/*<img className={styles.emailLogo} src="/email_logo.png" alt="email logo" width="30"*/}
-                        {/*     height="30"/>*/}
-                        {/*<h2 className={styles.emailTag}>Email</h2>*/}
 
 
                         <input type='password' className={styles.inputBox} value={password}
@@ -88,38 +109,22 @@ function Register() {
                         <input type='password' className={styles.inputBox} value={confirmPassword}
                                onChange={(e) => setConfirmPassword(e.target.value)} placeholder='Comfirm password'/>
 
-                        <p>{password !== confirmPassword && 'Password does not match'}</p>
-
-                        {/*<img className={styles.passLogo} src="/password_logo.png" alt="password logo" width="30"*/}
-                        {/*     height="30"/>*/}
-                        {/*<h2 className={styles.passTag}>Password</h2>*/}
-
+                        <p>{passwordError}</p>
 
                         <button className={styles.loginButton} type="submit">Register
                         </button>
 
 
                         <h4 className={styles.instructorLogin}
-                            onClick={() => setStudent(prevState => !prevState)}>{student ? 'Instructor' : 'Student'} register</h4>
+                            onClick={() => setInstructor(prevState => !prevState)}>{instructor ? 'Student' : 'Instructor'} register</h4>
                         <h4 className={styles.createAccount} onClick={() => navigate('/login')}>Login</h4>
+
+
 
                     </form>
                 </div>
             </div>
 
-            {/*<button onClick={() => {navigate('/')}}>home</button>*/}
-
-
-            {/*<button*/}
-            {/*    onClick={(e) => {*/}
-            {/*        e.preventDefault();*/}
-            {/*        dispatch({type: 'LOGOUT', payload: {name: 'test user'}});*/}
-            {/*    }*/}
-            {/*    }>*/}
-            {/*    Logout*/}
-            {/*</button>*/}
-
-            {/*{state.user ? <p>Logged in as: {state.user.name}</p> : <p>Please log in</p>}*/}
 
 
         </>
