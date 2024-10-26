@@ -1,26 +1,38 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.jsx';
 import styles from "../styles/NewTeam.module.css";
-
+import axios from "axios";
 
 function NewTeam() {
     const [searchTerm, setSearchTerm] = useState('');
-    const [results, setResults] = useState([]);
     const [teamName, setTeamName] = useState('');
     const [newTeam, setNewTeam] = useState([]);
-    const navigate = useNavigate(); // Initialize navigate
+    const [students, setStudents] = useState([]);
+    const [results, setResults] = useState([]);
 
-    const teamMembers = [
-        "Haichuan Li", "Hoang Vu Luu", "Jeremie", "Ayman", "Francois", 
-        "Varun", "Jeffrey", "Julia", "Yann", "Melina", "Steven", "Lam", "Tyson",
-    ];
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchStudents = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/students');
+                setStudents(response.data);
+                setResults(response.data); // Initialize results to show all students initially
+            } catch (error) {
+                console.error("Error fetching students:", error);
+            }
+        };
+
+        fetchStudents();
+    }, []);
 
     const handleSearch = (e) => {
         const term = e.target.value;
         setSearchTerm(term);
-        const filteredResults = teamMembers.filter(member =>
-            member.toLowerCase().includes(term.toLowerCase())
+        const filteredResults = students.filter(member =>
+            member.firstName.toLowerCase().includes(term.toLowerCase()) ||
+            member.lastName.toLowerCase().includes(term.toLowerCase())
         );
         setResults(filteredResults);
     };
@@ -30,13 +42,13 @@ function NewTeam() {
     };
 
     const handleSelectMember = (member) => {
-        if (!newTeam.includes(member)) {
+        if (!newTeam.some(m => m._id === member._id)) { // Check by unique ID if available
             setNewTeam([...newTeam, member]);
         }
     };
 
     const handleRemoveMember = (member) => {
-        setNewTeam(newTeam.filter((m) => m !== member));
+        setNewTeam(newTeam.filter((m) => m._id !== member._id));
     };
 
     return (
@@ -44,10 +56,10 @@ function NewTeam() {
             <Header />
             <div className={styles.NewTeam}>
                 <div className={styles.teamNameInputContainer}>
-                    <input 
-                        type="text" 
-                        placeholder="Enter Team Name" 
-                        value={teamName} 
+                    <input
+                        type="text"
+                        placeholder="Enter Team Name"
+                        value={teamName}
                         onChange={handleTeamNameChange}
                         className={styles.teamNameInput}
                     />
@@ -67,12 +79,12 @@ function NewTeam() {
                             {results.length > 0 ? (
                                 <ul className={styles.resultsList}>
                                     {results.map((result, index) => (
-                                        <li 
-                                            key={index} 
-                                            className={styles.resultItem} 
+                                        <li
+                                            key={index}
+                                            className={styles.resultItem}
                                             onClick={() => handleSelectMember(result)}
                                         >
-                                            {result}
+                                            {result.firstName} {result.lastName}
                                         </li>
                                     ))}
                                 </ul>
@@ -87,9 +99,9 @@ function NewTeam() {
                         <ul className={styles.newTeamList}>
                             {newTeam.map((member, index) => (
                                 <li key={index} className={styles.newTeamItem}>
-                                    {member}
-                                    <button 
-                                        className={styles.removeButton} 
+                                    {member.firstName} {member.lastName}
+                                    <button
+                                        className={styles.removeButton}
                                         onClick={() => handleRemoveMember(member)}
                                     >
                                         X
@@ -103,9 +115,9 @@ function NewTeam() {
                 <button className={styles.createButton}>Create</button>
 
                 {/* CSV Button */}
-                <button 
-                    className={styles.CSVbutton} 
-                    onClick={() => navigate('/fileImport')} // Navigate to FileImport page on click
+                <button
+                    className={styles.CSVbutton}
+                    onClick={() => navigate('/fileImport')}
                 >
                     Import File
                 </button>
