@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Header from '../components/header.jsx';
 import styles from "../styles/NewTeam.module.css";
 
+
 function NewTeam() {
     const [searchTerm, setSearchTerm] = useState('');
     const [results, setResults] = useState([]);
