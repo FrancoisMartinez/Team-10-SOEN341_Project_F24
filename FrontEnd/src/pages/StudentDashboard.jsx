@@ -251,11 +251,11 @@ function StudentDashboard() {
                 <Header></Header>
 
             </div>
-            <h1 className={styles.pageTitle}>Student Dashboard: <br></br></h1>
+            <h1 className={styles.pageTitle}>Student Dashboard: <br></br><br></br></h1>
 
             <div className={styles.displayBox}>
                 <div className={styles.displayTeamsBox}>
-                    <button onClick={() => {
+                    <button className={styles.buttonFilter} onClick={() => {
 
                         setView(view === 'All Teams' ? 'My Team' : 'All Teams');
                         setSearch('')
@@ -264,7 +264,7 @@ function StudentDashboard() {
 
 
                     <div className={styles.results}>
-                        {view === 'All Teams' ? <InstructorDashboardTeams teams={teams} search={search} /> : <InstructorDashboardStudents students={students} search={search} />}
+                        {view === 'My Team' ? <InstructorDashboardTeams teams={teams} search={search} /> : <InstructorDashboardStudents students={students} search={search} />}
                     </div>
                 </div>
             </div>

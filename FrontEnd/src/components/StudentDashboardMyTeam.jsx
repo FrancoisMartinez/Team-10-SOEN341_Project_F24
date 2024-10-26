@@ -15,10 +15,13 @@ function InstructorDashboardStudents({ students, search }) {
         <div className={styles.studentBlock}>
 
             <ul>
+                <h3>Choose a student to review.</h3>
+
+                {/* Add an onClick event that triggers a review form for a student. */}
                 {filteredStudents.map((student, index) =>
                     <li key={index}>
                         <h3>{student.name}</h3>
-                        <button className={styles.reviewButton}>Leave a review</button>
+                        
                     </li>)}
             </ul>
         </div>

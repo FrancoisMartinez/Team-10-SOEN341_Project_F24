@@ -5,7 +5,8 @@
 }
 
 .reviewButton{
-    
+    float:right;
+    z-index: 10px;
 }
 
 .results {
@@ -35,7 +36,7 @@
 
 }
 
-.displayBox button {
+.buttonFilter {
     float: right;
     background: linear-gradient(45deg, #9c82cd, #a088cc); /* Gradient color */
     color: white;
@@ -53,13 +54,13 @@
     
 }
 
-.displayBox button:hover {
+.buttonFilter:hover {
     background: linear-gradient(45deg, #9c82cd, #a088cc); /* Inverse gradient on hover */
     transform: translateY(-3px); /* Moves button up slightly on hover */
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
-.displayBox button:active {
+.buttonFilter:active {
     transform: translateY(0); /* Reset transform on click */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Restore original shadow */
 }
