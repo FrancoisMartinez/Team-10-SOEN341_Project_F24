@@ -71,6 +71,7 @@ function Register() {
 
 
 
+
     return (
         <>
             {state.loading && <Loading/>}
