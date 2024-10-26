@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     teams : {
         type: Number,
     },
+    reviews : {
+        type: [Number],
+        default: []
+    },
     secret: {
         type: String,
         default: null
