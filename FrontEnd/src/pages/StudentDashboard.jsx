@@ -18,6 +18,10 @@ const teams = [
             { name: "Bob", role: "Tester" },
             { name: "Charlie", role: "Manager" },
             { name: "Diana", role: "Designer" },
+            { name: "Eve", role: "DevOps" },
+            { name: "Diana", role: "Designer" },
+            { name: "Eve", role: "DevOps" },
+            { name: "Diana", role: "Designer" },
             { name: "Eve", role: "DevOps" }
         ]
     },
