@@ -8,6 +8,9 @@
     "react-dom": "^18.3.1"
   },
   "scripts": {
-    "test": "make test"
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^10.7.3"
   }
 }
