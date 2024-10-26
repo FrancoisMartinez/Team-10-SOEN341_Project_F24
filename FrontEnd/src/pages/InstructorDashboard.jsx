@@ -15,6 +15,10 @@ const teams = [
             { name: "Bob", role: "Tester" },
             { name: "Charlie", role: "Manager" },
             { name: "Diana", role: "Designer" },
+            { name: "Eve", role: "DevOps" },
+            { name: "Diana", role: "Designer" },
+            { name: "Eve", role: "DevOps" },
+            { name: "Diana", role: "Designer" },
             { name: "Eve", role: "DevOps" }
         ]
     },
@@ -238,7 +242,7 @@ function InstructorDashboard() {
     const { state, dispatch } = useContext(GlobalContext);
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
-    const [view, setView] = useState('Student');
+    const [view, setView] = useState('Team');
 
     return (
         <>
