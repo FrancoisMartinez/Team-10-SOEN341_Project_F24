@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const Review = require('../models/reviewSchema');
+const User = require('../models/user');
+
 
 router.post('/reviewSubmission', async (req, res) => {
     console.log('test')
 
-    const { user, ratings, comments } = req.body;
+    const { user, ratings, comments, studentEmail } = req.body;
 
     try {
         const reviews = await Review.create({
-            studentEmail: user.studentEmail,
+            studentEmail: studentEmail,
             reviewer: user.reviewer,
             CooperationRating: ratings['Cooperation'],
             ConceptualContributionRating: ratings['ConceptualContribution'],
@@ -20,6 +22,12 @@ router.post('/reviewSubmission', async (req, res) => {
             PracticalContributionComment: comments['PracticalContribution'] || '',
             WorkEthicComment: comments['WorkEthic'] || '',
         });
+
+        const student = await User.findOneAndUpdate(
+            { email: studentEmail },
+            { $push: { reviews: review._id } },
+            { new: true }
+        );
 
         return res.status(200).json({ status: "Success" });
     } catch (err) {
