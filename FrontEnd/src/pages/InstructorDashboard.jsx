@@ -242,7 +242,7 @@ function InstructorDashboard() {
 
     return (
         <>
-            {state.user && <p>Welcome {state.user.email}</p>}
+           
 
             <div>
                 <Header></Header>
