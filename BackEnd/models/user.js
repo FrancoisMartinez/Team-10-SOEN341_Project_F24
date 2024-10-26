@@ -24,8 +24,12 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     teams : {
-
+        type: Number,
     },
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review'
+    }],
     secret: {
         type: String,
         default: null

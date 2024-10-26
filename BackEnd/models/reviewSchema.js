@@ -10,7 +10,6 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-
     CooperationRating: {
         type: Number,
         required: true
