@@ -89,6 +89,35 @@ router.post('/login', async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+// Add team route (only for instructors)
+router.post('/add-team', async (req, res) => {
+    try {
+        const { email, teamName } = req.body;
+        const { instructor } = req.user; // Assume req.user is populated after authentication
+
+        // Ensure only instructors can add teams
+        if (!instructor) {
+            return res.status(403).json({ error: "Only instructors can add teams" });
+        }
+
+        // Find the user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Update the team field with a custom or default name
+        user.teams = teamName || `Team-${Math.floor(Math.random() * 1000)}`;
+        await user.save();
+
+        return res.status(200).json({ message: "Team added successfully", team: user.teams });
+    } catch (err) {
+        console.error('Error adding team:', err);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 //
 // // Refresh token route
 // router.post('/refresh', async (req, res) => {

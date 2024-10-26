@@ -8,8 +8,8 @@ const User = require('../models/user');
 
 router.get('/students', async (req, res) => {
     try {
-        const students = await User.find(); // Retrieve all students from the database
-        res.json(students); // Send the students as a JSON response
+        const students = await User.find({ instructor: false }); // Retrieve all students from the database
+        res.status(200).json(students); // Send the students as a JSON response
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
