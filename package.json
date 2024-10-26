@@ -11,6 +11,7 @@
     "test": "mocha"
   },
   "devDependencies": {
+    "chai": "^5.1.2",
     "mocha": "^10.7.3"
   }
 }
