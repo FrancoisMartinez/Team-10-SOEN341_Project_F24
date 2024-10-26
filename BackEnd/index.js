@@ -25,7 +25,7 @@ connectToMongoDB();
 
 const userRoutes = require("./routes/user")
 app.use('/', userRoutes);
-const studentRoutes = require("./routes/students")
+const studentRoutes = require("./routes/studentlist.js")
 app.use('/', studentRoutes);
 
 
