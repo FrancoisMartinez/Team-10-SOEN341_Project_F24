@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    reviews : {
+        type: [Number],
+        default: []
+    },
     secret: {
         type: String,
         default: null
