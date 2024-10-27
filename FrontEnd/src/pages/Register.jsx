@@ -80,7 +80,7 @@ function Register() {
 
             <Navigation/>
             <div className={styles.background}>
-                <div className={styles.loginWindow}>
+                <div className={styles.registerWindow}>
 
 
                     <div className={styles.loginWindowLeft}>
@@ -95,9 +95,9 @@ function Register() {
 
 
 
-                        <input type='text' className={styles.inputBoxName} value={firstName}
+                        <input type='text' className={styles.inputBox} value={firstName}
                                onChange={(e) => setFirstName(e.target.value)} placeholder='First Name'/>
-                        <input type='text' className={styles.inputBoxName} value={lastName}
+                        <input type='text' className={styles.inputBox} value={lastName}
                                onChange={(e) => setLastName(e.target.value)} placeholder='Last Name'/>
 
                         <input type='email' className={styles.inputBox} value={email}
