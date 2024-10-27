@@ -5,6 +5,7 @@ import styles from "../styles/FileImport.module.css";
 
 function FileImport() {
     const [csvFile, setCsvFile] = useState(null); // Store selected file
+    const [isLoading, setIsLoading] = useState(false); // Loading state
     const navigate = useNavigate();
 
     // Handle the file upload and store the selected file
@@ -28,7 +29,8 @@ function FileImport() {
         formData.append('file', csvFile); // Append the CSV file to the form data
 
         try {
-            const response = await fetch('/BackEnd/upload_csv.php', {
+            setIsLoading(true); // Set loading state
+            const response = await fetch('/BackEnd/routes/upload_csv.php', { // Updated path
                 method: 'POST',
                 body: formData,
             });
@@ -38,13 +40,15 @@ function FileImport() {
         } catch (error) {
             console.error('Error uploading file:', error);
             alert("There was an error uploading the file. Please try again.");
+        } finally {
+            setIsLoading(false); // Reset loading state
         }
     };
 
     // Handle Import button click: upload file and navigate
     const handleImportButtonClick = async () => {
         await uploadFileToBackend(); // Upload file to the backend
-        navigate('/newTeam'); // Navigate to NewTeam page
+        navigate('/newTeam'); // Navigate to NewTeam page after upload
     };
 
     return (
@@ -60,9 +64,12 @@ function FileImport() {
                 />
             </div>
 
+            {/* Show loading message when uploading */}
+            {isLoading && <p className={styles.loadingMessage}>Uploading file, please wait...</p>}
+
             {/* Import Button */}
-            <button className={styles.ImportButton} onClick={handleImportButtonClick}>
-                Import
+            <button className={styles.ImportButton} onClick={handleImportButtonClick} disabled={isLoading}>
+                {isLoading ? "Uploading..." : "Import"}
             </button>
         </>
     );
