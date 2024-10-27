@@ -9,6 +9,7 @@ const initialState = {
     // accessToken: localStorage.getItem('accessToken') || null,
     loading: false,
     error: null,
+    student: null,
 
 }
 
@@ -38,6 +39,8 @@ const reducer = (state, action) => {
             return { ...state, loading: false, error: action.payload };
         case 'ERROR_DISMISS':
             return { ...state, loading: false, error: null };
+        case 'SELECT_STUDENT':
+            return {...state, student: action.payload}
         default:
             return state;
     }
