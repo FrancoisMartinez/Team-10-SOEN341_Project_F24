@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.jsx';
 import styles from "../styles/NewTeam.module.css";
 import axios from "axios";
+import {GlobalContext} from "../GlobalStateProvider.jsx";
 
 function NewTeam() {
+    const { state, dispatch } = useContext(GlobalContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [teamName, setTeamName] = useState('');
     const [newTeam, setNewTeam] = useState([]);
@@ -28,9 +30,19 @@ function NewTeam() {
     }, []);
 
     const handleTeamCreation = async () => {
+        const data = {
+            members: newTeam,
+            teamName: teamName,
+            instructor: state.user?.instructor || true
+        }
 
         try {
-            const response = await axios.post("http://localhost:3000/", { newTeam, teamName });
+            const response = await axios.post("http://localhost:3000/add-team", data);
+
+            if (response.status === 200) {
+
+            }
+
 
         } catch (error) {
             console.error("Error creation");

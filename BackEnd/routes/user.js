@@ -93,8 +93,7 @@ router.post('/login', async (req, res) => {
 // Add team route (only for instructors)
 router.post('/add-team', async (req, res) => {
     try {
-        const { email, teamName } = req.body;
-        const { instructor } = req.user; // Assume req.user is populated after authentication
+        const { members, teamName, instructor } = req.body;
 
         // Ensure only instructors can add teams
         if (!instructor) {
@@ -102,16 +101,18 @@ router.post('/add-team', async (req, res) => {
         }
 
         // Find the user by email
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
+        // Iterate over each member and update their team field
+        const updatePromises = members.map(async (member) => {
+            const user = await User.findOne({ email : member.email });
+            if (user) {
+                user.teams = teamName;
+                await user.save();
+            }
+        });
 
-        // Update the team field with a custom or default name
-        user.teams = teamName || `Team-${Math.floor(Math.random() * 1000)}`;
-        await user.save();
+        await Promise.all(updatePromises);
 
-        return res.status(200).json({ message: "Team added successfully", team: user.teams });
+        return res.status(200).json({ message: "Team added successfully" });
     } catch (err) {
         console.error('Error adding team:', err);
         return res.status(500).json({ error: "Internal Server Error" });
