@@ -9,7 +9,7 @@ function InstructorDashboardTeams({ teams, search }) {
 
     useEffect(() => {
         setFilteredTeams(
-            teams.filter((student) => student.teamName.toLowerCase().includes(search.toLowerCase())))
+            teams.filter((team) => team.teamName.toLowerCase().includes(search.toLowerCase())))
     }, [search, teams]);
 
     return (
@@ -25,7 +25,7 @@ function InstructorDashboardTeams({ teams, search }) {
                     
                     <ul >
                         {team.members.map((member, jndex) =>
-                            <li key={jndex}>{member.name}</li>
+                            <li key={jndex}>{member.firstName} {member.lastName}</li>
                         )}
                     </ul>
                 </div>
