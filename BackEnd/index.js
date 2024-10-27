@@ -32,6 +32,7 @@ const studentRoutes = require("./routes/studentlist.js")
 app.use('/', studentRoutes);
 
 
+
 const studentlistRoutes = require("./routes/studentlist")
 app.use('/', studentlistRoutes);
 
