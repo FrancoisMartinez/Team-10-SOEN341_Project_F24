@@ -1,0 +1,10 @@
+Participated in every full team and front end only meetings
+created api calls to fetch students, post reviews, and create teams : 6h
+created the page to leave reviews : 3h
+designed and worked on the instructor and student dashboard : 8h
+implemented logic to display teams and students in both dashboard : 3h
+worked on the state management system for error, loading and user's state management : 5h
+help with the ci pipeline : 1h
+created tasks with github issues: 30min
+
+
