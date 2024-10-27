@@ -1,31 +1,50 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.jsx';
 import styles from "../styles/FileImport.module.css";
 
 function FileImport() {
-    const [csvContent, setCsvContent] = useState(null);
-    const navigate = useNavigate(); // Initialize navigate
+    const [csvFile, setCsvFile] = useState(null); // Store selected file
+    const navigate = useNavigate();
 
-    // Handle the file upload and parse the CSV
+    // Handle the file upload and store the selected file
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
         if (file && file.type === "text/csv") {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const content = e.target.result;
-                setCsvContent(content); // Store file content in state
-                // You can also send the content to a backend server here if needed
-            };
-            reader.readAsText(file);
+            setCsvFile(file); // Store file for upload
         } else {
             alert("Please upload a valid CSV file.");
         }
     };
 
-    // Navigate back to the NewTeam page
-    const handleImportButtonClick = () => {
-        navigate('/newTeam'); // Navigates back to NewTeam page
+    // Function to upload file to the backend
+    const uploadFileToBackend = async () => {
+        if (!csvFile) {
+            alert("Please select a CSV file to upload.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', csvFile); // Append the CSV file to the form data
+
+        try {
+            const response = await fetch('/BackEnd/upload_csv.php', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.text();
+            alert(result); // Show response from the backend (success or error message)
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            alert("There was an error uploading the file. Please try again.");
+        }
+    };
+
+    // Handle Import button click: upload file and navigate
+    const handleImportButtonClick = async () => {
+        await uploadFileToBackend(); // Upload file to the backend
+        navigate('/newTeam'); // Navigate to NewTeam page
     };
 
     return (
