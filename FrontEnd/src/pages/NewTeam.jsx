@@ -4,6 +4,9 @@ import Header from '../components/header.jsx';
 import styles from "../styles/NewTeam.module.css";
 import axios from "axios";
 import {GlobalContext} from "../GlobalStateProvider.jsx";
+import Loading from "../components/Loading.jsx";
+import Error from "../components/Error.jsx";
+import Success from "../components/Success.jsx";
 
 function NewTeam() {
     const { state, dispatch } = useContext(GlobalContext);
@@ -16,13 +19,23 @@ function NewTeam() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        dispatch({ type: 'REQUEST' })
         const fetchStudents = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/students');
-                setStudents(response.data);
-                setResults(response.data); // Initialize results to show all students initially
+
+                if (response.status === 200) {
+                    dispatch({ type: 'SUCCESS' })
+                    setStudents(response.data);
+                    setResults(response.data); // Initialize results to show all students initially
+                }
+
             } catch (error) {
                 console.error("Error fetching students:", error);
+                dispatch({
+                    type: 'ERROR',
+                    payload: error.response?.data?.error || 'Error fetching students. Please try again.'
+                });
             }
         };
 
@@ -30,22 +43,51 @@ function NewTeam() {
     }, []);
 
     const handleTeamCreation = async () => {
+        dispatch({ type: 'REQUEST' })
+
         const data = {
             members: newTeam,
             teamName: teamName,
             instructor: state.user?.instructor || true
         }
 
+        if (newTeam.length < 2) {
+            dispatch({
+                type: 'ERROR',
+                payload: 'At least 2 student must be chosen to create a team',
+            })
+            return;
+        } else if (teamName.length < 1) {
+            dispatch({
+                type: 'ERROR',
+                payload: 'You must enter a team name',
+            })
+            return;
+        }
+
+
+
         try {
             const response = await axios.post("http://localhost:3000/add-team", data);
 
             if (response.status === 200) {
-
+                dispatch({
+                    type: 'SUCCESS',
+                    payload: 'Team successfully created.'
+                })
+                setNewTeam([])
+                setTeamName('')
             }
 
 
         } catch (error) {
             console.error("Error creation");
+            dispatch({
+                type: 'ERROR',
+                payload: error.response?.data?.error || 'Error fetching creating team. Please try again.'
+            });
+            setNewTeam([])
+            setTeamName('')
         }
 
     }
@@ -78,6 +120,10 @@ function NewTeam() {
 
     return (
         <>
+            {state.success && <Success/>}
+            {state.loading && <Loading/>}
+            {state.error && <Error/>}
+
             <Header />
             <div className={styles.NewTeam}>
                 <div className={styles.teamNameInputContainer}>
