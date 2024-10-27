@@ -1,1 +1,5 @@
-
+Participated in every full team meeting
+Reasearching how to code csv file: 30 mins
+Created a function to add teams: 1 hour
+Added in making testing folder: 2 hours
+Researched ways to make better integration for teams branch for the back end: 2 hours
