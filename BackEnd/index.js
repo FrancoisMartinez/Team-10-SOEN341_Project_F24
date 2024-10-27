@@ -28,6 +28,12 @@ app.use('/', reviewRoutes);
 
 const userRoutes = require("./routes/user")
 app.use('/', userRoutes);
+const studentRoutes = require("./routes/studentlist.js")
+app.use('/', studentRoutes);
+
+
+const studentlistRoutes = require("./routes/studentlist")
+app.use('/', studentlistRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

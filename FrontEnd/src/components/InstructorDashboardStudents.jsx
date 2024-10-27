@@ -8,18 +8,17 @@ function InstructorDashboardStudents({ students, search }) {
 
     useEffect(() => {
         setFilteredStudents(
-            students.filter((student) => student.name.toLowerCase().includes(search.toLowerCase())))
+            students?.filter((student) => student.firstName.toLowerCase().includes(search.toLowerCase()) || student.lastName.toLowerCase().includes(search.toLowerCase())))
     }, [search, students]);
 
     return (
         <div className={styles.studentBlock}>
 
             <ul>
-                {filteredStudents.map((student, index) =>
+                {filteredStudents?.map((student, index) =>
                     <li key={index}>
-                        <h3>{student.name}</h3>
-
-                        <p>{student.team}</p>
+                        <h3>{student.firstName} {student.lastName}</h3>
+                        {/*<p>{student.team}</p>*/}
                     </li>)}
             </ul>
         </div>
