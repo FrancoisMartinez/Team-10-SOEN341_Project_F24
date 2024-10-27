@@ -16,6 +16,7 @@ function InstructorDashboardStudents({ students, search }) {
             students.filter((student) => student.name.toLowerCase().includes(search.toLowerCase())))
     }, [search, students]);
 
+    console.log(state.student)
     return (
         <div className={styles.studentBlock}>
 
@@ -25,7 +26,7 @@ function InstructorDashboardStudents({ students, search }) {
                 {/* Add an onClick event that triggers a review form for a student. */}
                 {filteredStudents.map((student, index) =>
                     <li key={index}>
-                        <h3 onClick={() => {
+                        <h3 onClick={(e) => {
                             navigate('/reviewForm');
                             dispatch({ type: 'SELECT_STUDENT', payload: student})
 

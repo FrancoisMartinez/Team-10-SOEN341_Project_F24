@@ -50,6 +50,8 @@ const reducer = (state, action) => {
             return { ...state, loading: false, error: null, success: null };
         case 'ERROR':
             return { ...state, loading: false, error: action.payload };
+        case 'DISMISS_STUDENT':
+            return { ...state, student: null }
 
 
         default:

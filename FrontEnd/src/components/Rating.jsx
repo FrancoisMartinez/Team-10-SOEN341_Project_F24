@@ -29,7 +29,10 @@ function Rating() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // dispatch({ type: 'sum'})
+
+        dispatch({ type: 'REQUEST'})
+
+
 
         const confirmSubmit = window.confirm("Are you sure you want to submit your assessment?");
         if (!confirmSubmit) {
@@ -39,7 +42,7 @@ function Rating() {
 
         const data = {
             user : {
-                studentEmail : studentEmail,
+                studentEmail : state.student,
                 reviewer : state.user?.email || ''
             },
             ratings: {
@@ -63,13 +66,13 @@ function Rating() {
             const response = await axios.post('http://localhost:3000/reviewSubmission', data);
 
             if (response.status === 200) {
-                // dispatch({type: 'sum'});
+                dispatch({type: 'SUCCESS'});
             }
         } catch (error) {
-            // dispatch({
-            //     type: 'sum',
-            //     payload: error.response?.data?.error || 'An error occurred. Please try again.'
-            // });
+            dispatch({
+                type: 'ERROR',
+                payload: error.response?.data?.error || 'An error occurred. Please try again.'
+            });
         }
 
     };

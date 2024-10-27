@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     {path : "/newTeam", element : <NewTeam />},
     {path: "/fileImport", element : <FileImport/>},
     {path : "/instructorDashboard", element : <InstructorDashboard/>},
-    {path : "/reviewForm", element : <ReviewForm/>}
+    {path : "/reviewForm", element : <ReviewForm/>},
     {path: '/teammates', element: <TeammateSelection /> },
 ]);
 
