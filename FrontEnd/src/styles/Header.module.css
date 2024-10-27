@@ -1,9 +1,10 @@
 
 .header {
+
     background-color: #9c82cd;
     padding: 10px 20px;
     display: flex;
-    align-items: center;   
+    align-items: center;
 
 
     /* position: fixed; 
@@ -14,4 +15,16 @@
 
 .siteName {
     margin-left: 15px;
+}
+
+.left {
+    display: flex;
+    flex-direction: row;
+}
+
+.home {
+    font-size: xx-large;
+    color: white;
+    margin-left: 1200px; /* This will push "home" to the right */
+    cursor: pointer;
 }

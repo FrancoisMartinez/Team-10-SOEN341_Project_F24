@@ -27,9 +27,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    reviews : {
-        type: [Number],
-        default: []
+
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review'
+    }],
     },
 
 }, { timestamps: true });

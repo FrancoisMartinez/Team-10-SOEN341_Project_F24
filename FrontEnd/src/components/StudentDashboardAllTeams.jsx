@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/InstructorDashboard.module.css";
-import { IoIosAddCircle } from "react-icons/io";
 
 
 function InstructorDashboardTeams({ teams, search }) {
@@ -21,9 +20,8 @@ function InstructorDashboardTeams({ teams, search }) {
 
                     {/* group h2 and ul into a button */}
 
-                    <h2>{team.teamName} <IoIosAddCircle className={styles.addStudent}/></h2>
-                    
-                    <ul >
+                    <h2>{team.teamName}</h2>
+                    <ul>
                         {team.members.map((member, jndex) =>
                             <li key={jndex}>{member.name}</li>
                         )}

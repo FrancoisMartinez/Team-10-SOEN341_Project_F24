@@ -40,33 +40,39 @@ function Home() {
                                 dispatch({type: 'LOGOUT'});
                             }}>Logout
                     </button>
-                    <button className={styles.button}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                navigate('/instructorDashboard')
-                            }}>Instructor Dashboard
-                    </button>
+
+                    {state.user.instructor ?
+                        <button className={styles.button}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    navigate('/instructorDashboard')
+                                }}>Instructor Dashboard
+                        </button>
+
+                        :
+                        <button className={styles.button}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    navigate('/studentDashboard')
+                                }}>Student Dashboard
+                        </button>
+                    }
                     </>
-
-                    :
+                            :
                     <>
-                    <button className={styles.button}
-                onClick={() => {
-                    navigate('/login')
-                }}>LogIn
+                        <button className={styles.button}
+                            onClick={() => {
+                                navigate('/login')
+                            }}>LogIn
                         </button>
 
                         <button className={styles.button}
-                                onClick={() => {
-                                    navigate('/register')
-                                }}>SignUp
+                            onClick={() => {
+                                navigate('/register')
+                            }}>SignUp
                         </button>
 
-                        <button className={styles.button}
-                                onClick={() => {
-                                    navigate('/')
-                                }}>SignUp
-                        </button>
+
                     </>
                 }
 

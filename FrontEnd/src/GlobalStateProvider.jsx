@@ -9,6 +9,8 @@ const initialState = {
     // accessToken: localStorage.getItem('accessToken') || null,
     loading: false,
     error: null,
+    student: null,
+
     success: null,
 }
 
@@ -38,6 +40,8 @@ const reducer = (state, action) => {
             return { ...state, loading: false, error: action.payload };
         case 'ERROR_DISMISS':
             return { ...state, loading: false, error: null };
+        case 'SELECT_STUDENT':
+            return {...state, student: action.payload}
         case 'REQUEST':
             return { ...state, loading: true, error: null };
         case 'SUCCESS':
@@ -46,6 +50,8 @@ const reducer = (state, action) => {
             return { ...state, loading: false, error: null, success: null };
         case 'ERROR':
             return { ...state, loading: false, error: action.payload };
+        case 'DISMISS_STUDENT':
+            return { ...state, student: null }
 
 
         default:

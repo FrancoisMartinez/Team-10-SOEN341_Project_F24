@@ -23,6 +23,9 @@ async function connectToMongoDB() {
 
 connectToMongoDB();
 
+const reviewRoutes = require("./routes/review")
+app.use('/', reviewRoutes);
+
 const userRoutes = require("./routes/user")
 app.use('/', userRoutes);
 const studentRoutes = require("./routes/studentlist.js")

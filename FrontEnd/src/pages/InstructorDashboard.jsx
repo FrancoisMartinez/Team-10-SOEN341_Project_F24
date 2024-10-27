@@ -35,10 +35,14 @@ function InstructorDashboard() {
 
     return (
         <>
+           
+
             <div>
                 <Header></Header>
+
             </div>
             <h1 className={styles.pageTitle}>Instructor Dashboard: <br></br></h1>
+
             <div className={styles.displayBox}>
 
 
@@ -47,10 +51,10 @@ function InstructorDashboard() {
 
                         setView(view === 'Team' ? 'Student' : 'Team');
                         setSearch('')
-                    }}>{view}</button>
+                    }}>{view === 'Team' ? 'Student' : 'Team'}</button>
                     <input className={styles.searchBar} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search for a ' + view} />
 
-                    <button  onClick={() => navigate('/')}>new team</button>
+                    <button  onClick={() => navigate('/newTeam')}>new team</button>
 
                     <div className={styles.results}>
                         {view === 'Team' ? <InstructorDashboardTeams teams={teams} search={search} /> : <InstructorDashboardStudents students={students} search={search} />}

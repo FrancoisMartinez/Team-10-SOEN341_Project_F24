@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
         const existingUser = await User.findOne({ email, instructor });
         if (!existingUser) {
             console.log("User not found");
-            return res.status(404).json({ error: (instructor ? 'Instructor' : ' Student') + " not found" });
+            return res.status(404).json({ error: (instructor ? 'Instructor' : ' Rating') + " not found" });
         }
 
         // Compare passwords
