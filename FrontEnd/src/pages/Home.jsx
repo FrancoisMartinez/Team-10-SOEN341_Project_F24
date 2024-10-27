@@ -62,11 +62,7 @@ function Home() {
                                 }}>SignUp
                         </button>
 
-                        <button className={styles.button}
-                                onClick={() => {
-                                    navigate('/')
-                                }}>SignUp
-                        </button>
+
                     </>
                 }
 
