@@ -7,11 +7,11 @@ const User = require('../models/user');
 router.post('/reviewSubmission', async (req, res) => {
     console.log('test')
 
-    const { user, ratings, comments, studentEmail } = req.body;
+    const { user, ratings, comments } = req.body;
 
     try {
         const reviews = await Review.create({
-            studentEmail: studentEmail,
+            studentEmail: user.studentEmail,
             reviewer: user.reviewer,
             CooperationRating: ratings['Cooperation'],
             ConceptualContributionRating: ratings['ConceptualContribution'],
@@ -24,8 +24,8 @@ router.post('/reviewSubmission', async (req, res) => {
         });
 
         const student = await User.findOneAndUpdate(
-            { email: studentEmail },
-            { $push: { reviews: review._id } },
+            { email: user.studentEmail },
+            { $push: { reviews: reviews._id } },
             { new: true }
         );
 

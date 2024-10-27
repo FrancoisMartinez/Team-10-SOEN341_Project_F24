@@ -42,7 +42,7 @@ function Rating() {
 
         const data = {
             user : {
-                studentEmail : state.student,
+                studentEmail : state.student.email,
                 reviewer : state.user?.email || ''
             },
             ratings: {
