@@ -9,6 +9,7 @@ const initialState = {
     // accessToken: localStorage.getItem('accessToken') || null,
     loading: false,
     error: null,
+    success: null,
 }
 
 // Manage the user state
@@ -37,6 +38,16 @@ const reducer = (state, action) => {
             return { ...state, loading: false, error: action.payload };
         case 'ERROR_DISMISS':
             return { ...state, loading: false, error: null };
+        case 'REQUEST':
+            return { ...state, loading: true, error: null };
+        case 'SUCCESS':
+            return { ...state, loading: false, error: null, success: action.payload || null };
+        case 'SUCCESS_DISMISS':
+            return { ...state, loading: false, error: null, success: null };
+        case 'ERROR':
+            return { ...state, loading: false, error: action.payload };
+
+
         default:
             return state;
     }

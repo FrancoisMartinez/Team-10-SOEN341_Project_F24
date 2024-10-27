@@ -24,7 +24,8 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     teams : {
-        type: Number,
+        type: String,
+        required: false,
     },
     reviews : {
         type: [Number],
