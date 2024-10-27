@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 
 /*Change these imports to all teams and teamates in a students team */
@@ -8,238 +8,7 @@ import InstructorDashboardStudents from "../components/StudentDashboardMyTeam.js
 import {GlobalContext} from "../GlobalStateProvider.jsx";
 import styles from "../styles/StudentDashboard.module.css";
 import Header from '../components/header.jsx';
-
-//fake team example
-const teams = [
-    {
-        teamName: "Team A",
-        members: [
-            { name: "Julia", role: "Developer" },
-            { name: "Bob", role: "Tester" },
-            { name: "Charlie", role: "Manager" },
-            { name: "Diana", role: "Designer" },
-            { name: "Eve", role: "DevOps" },
-            { name: "Diana", role: "Designer" },
-            { name: "Eve", role: "DevOps" },
-            { name: "Diana", role: "Designer" },
-            { name: "Eve", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team B",
-        members: [
-            { name: "Frank", role: "Developer" },
-            { name: "Grace", role: "Tester" },
-            { name: "Hank", role: "Manager" },
-            { name: "Ivy", role: "Designer" },
-            { name: "Jack", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team B",
-        members: [
-            { name: "Frank", role: "Developer" },
-            { name: "Grace", role: "Tester" },
-            { name: "Hank", role: "Manager" },
-            { name: "Ivy", role: "Designer" },
-            { name: "Jack", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team B",
-        members: [
-            { name: "Frank", role: "Developer" },
-            { name: "Grace", role: "Tester" },
-            { name: "Hank", role: "Manager" },
-            { name: "Ivy", role: "Designer" },
-            { name: "Jack", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team B",
-        members: [
-            { name: "Frank", role: "Developer" },
-            { name: "Grace", role: "Tester" },
-            { name: "Hank", role: "Manager" },
-            { name: "Ivy", role: "Designer" },
-            { name: "Jack", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team B",
-        members: [
-            { name: "Frank", role: "Developer" },
-            { name: "Grace", role: "Tester" },
-            { name: "Hank", role: "Manager" },
-            { name: "Ivy", role: "Designer" },
-            { name: "Jack", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team B",
-        members: [
-            { name: "Frank", role: "Developer" },
-            { name: "Grace", role: "Tester" },
-            { name: "Hank", role: "Manager" },
-            { name: "Ivy", role: "Designer" },
-            { name: "Jack", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team B",
-        members: [
-            { name: "Frank", role: "Developer" },
-            { name: "Grace", role: "Tester" },
-            { name: "Hank", role: "Manager" },
-            { name: "Ivy", role: "Designer" },
-            { name: "Jack", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team B",
-        members: [
-            { name: "Frank", role: "Developer" },
-            { name: "Grace", role: "Tester" },
-            { name: "Hank", role: "Manager" },
-            { name: "Ivy", role: "Designer" },
-            { name: "Jack", role: "DevOps" }
-        ]
-    },
-    {
-        teamName: "Team C",
-        members: [
-            { name: "Kevin", role: "Developer" },
-            { name: "Lana", role: "Tester" },
-            { name: "Mason", role: "Manager" },
-            { name: "Nina", role: "Designer" },
-            { name: "Oscar", role: "DevOps" }
-        ]
-    }
-    
-];
-
-const students = [
-    { name: "Julia", team: "Team A" },
-    { name: "Bob", team: "Team B" },
-    { name: "Charlie", team: "Team A" },
-    { name: "Diana", team: "Team C" },
-    { name: "Eve", team: "Team B" },
-    { name: "Frank", team: "Team A" },
-    { name: "Grace", team: "Team C" },
-    { name: "Hank", team: "Team B" },
-    { name: "Ivy", team: "Team C" },
-    { name: "Jack", team: "Team A" }
-];
+import axios from "axios";
 
 function StudentDashboard() {
 
@@ -247,6 +16,41 @@ function StudentDashboard() {
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
     const [view, setView] = useState('All Teams');
+    const [students, setStudents] = useState([]);
+    const [teams, setTeams] = useState([]);
+
+
+
+    useEffect(() => {
+        const fetchStudents = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/students');  // Ensure this endpoint matches your backend route
+                // console.log(response);
+                const fetchedStudents = response.data;  // Access the data inside the response
+
+
+                setStudents(fetchedStudents);
+
+                const processedTeams = fetchedStudents.reduce((acc, student) => {
+                    if (student.teams) {
+                        if (!acc[student.teams]) {
+                            acc[student.teams] = { teamName: student.teams, members: [] };
+                        }
+                        acc[student.teams].members.push(student);
+                    }
+                    return acc;
+                }, {});
+
+                setTeams(Object.values(processedTeams));
+            } catch (error) {
+                console.error("Error fetching students:", error);
+            }
+        };
+
+        fetchStudents();  // Call the function to fetch students on component mount
+    }, []);
+
+    console.log(state.user);
 
     return (
 

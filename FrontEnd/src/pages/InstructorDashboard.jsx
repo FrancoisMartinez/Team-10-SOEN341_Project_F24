@@ -20,8 +20,24 @@ function InstructorDashboard() {
         const fetchStudents = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/students');  // Ensure this endpoint matches your backend route
-                // console.log(response);
-                setStudents(response.data);  // Access the data inside the response
+
+                const fetchedStudents = response.data;  // Access the data inside the response
+
+
+                setStudents(fetchedStudents);
+
+                const processedTeams = fetchedStudents.reduce((acc, student) => {
+                    if (student.teams) {
+                        if (!acc[student.teams]) {
+                            acc[student.teams] = { teamName: student.teams, members: [] };
+                        }
+                        acc[student.teams].members.push(student);
+                    }
+                    return acc;
+                }, {});
+
+                setTeams(Object.values(processedTeams));
+
             } catch (error) {
                 console.error("Error fetching students:", error);
             }
@@ -32,6 +48,7 @@ function InstructorDashboard() {
 
     console.log(students)
 
+    console.log(teams)
 
     return (
         <>

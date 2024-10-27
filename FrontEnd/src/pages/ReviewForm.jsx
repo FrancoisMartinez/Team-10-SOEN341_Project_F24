@@ -27,7 +27,7 @@ function ReviewForm() {
 
             <div className={styles.reviewDiv}>
                 
-            <h2>Leave a review for: {state.student?.name}</h2><br></br>
+            <h2>Leave a review for: {state.student?.firstName} {state.student?.lastName}</h2><br></br>
 
             <Rating/>
             <Comments/>
