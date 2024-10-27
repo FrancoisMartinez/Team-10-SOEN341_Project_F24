@@ -48,7 +48,7 @@ function NewTeam() {
         const data = {
             members: newTeam,
             teamName: teamName,
-            instructor: state.user?.instructor || true
+            instructor: state.user?.instructor || false
         }
 
         if (newTeam.length < 2) {
