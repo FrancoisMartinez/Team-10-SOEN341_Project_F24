@@ -58,18 +58,10 @@ router.post('/login', async (req, res) => {
         }
 
         // Generate Access Token
-        const accessToken = jwt.sign(
-            { firstName: existingUser.firstName, lastName: existingUser.lastName, email: existingUser.email, instructor: existingUser.instructor },
-            process.env.JWT_ACCESS_SECRET,
-            { expiresIn: '1h' }
-        );
+        
 
         // Generate Refresh Token
-        const refreshToken = jwt.sign(
-            { email: existingUser.email },
-            process.env.JWT_REFRESH_SECRET,
-            { expiresIn: '7d' }
-        );
+        
 
         // Return user info and token
         return res.status(200).json({
@@ -80,8 +72,6 @@ router.post('/login', async (req, res) => {
                 email: existingUser.email,
                 instructor: existingUser.instructor,
             },
-            accessToken,
-            refreshToken
         });
 
     } catch (err) {

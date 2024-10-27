@@ -27,13 +27,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review'
     }],
-    secret: {
-        type: String,
-        default: null
     },
 
 }, { timestamps: true });
