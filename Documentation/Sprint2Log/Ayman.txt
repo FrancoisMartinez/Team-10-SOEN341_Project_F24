@@ -1,0 +1,6 @@
+Participated in every full team and backend only meetings:  4h
+Implemented functions to fetch students from the database and display them: 4h
+Implemented new database for reviews: 2h
+Implemented functions to allow reviews to be linked to the student being reviewed: 6h
+Created tasks and user stories using Github issues: 1h
+
