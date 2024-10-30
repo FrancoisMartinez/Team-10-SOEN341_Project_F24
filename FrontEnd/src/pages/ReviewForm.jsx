@@ -31,7 +31,7 @@ function ReviewForm() {
 
             <Rating/>
             <Comments/>
-                <button onClick={() => navigate('/studentDashboard')}>back</button>
+                <button className={styles.submitButton} onClick={() => navigate('/studentDashboard')}>back</button>
 
             </div>
         </>

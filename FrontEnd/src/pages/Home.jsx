@@ -63,13 +63,13 @@ function Home() {
                         <button className={styles.button}
                             onClick={() => {
                                 navigate('/login')
-                            }}>LogIn
+                            }}>Log In
                         </button>
 
                         <button className={styles.button}
                             onClick={() => {
                                 navigate('/register')
-                            }}>SignUp
+                            }}>Sign Up
                         </button>
 
 

@@ -1,16 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styles from "../styles/InstructorDashboard.module.css";
 import { IoIosAddCircle } from "react-icons/io";
+import {useNavigate} from "react-router-dom";
+import {GlobalContext} from "../GlobalStateProvider.jsx";
 
 
 function InstructorDashboardTeams({ teams, search }) {
-
+    const { state, dispatch } = useContext(GlobalContext);
     const [filteredTeams, setFilteredTeams] = useState(teams)
+
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         setFilteredTeams(
             teams.filter((team) => team.teamName.toLowerCase().includes(search.toLowerCase())))
     }, [search, teams]);
+
+
+    const handleTeamClick = (team) => {
+        dispatch({ type: 'SELECT_TEAM', payload: team });
+        setTimeout(() => {
+            navigate('/updateTeam');
+        }, 100);
+    };
+
+
+
 
     return (
         <div >
@@ -21,7 +37,7 @@ function InstructorDashboardTeams({ teams, search }) {
 
                     {/* group h2 and ul into a button */}
 
-                    <h2>{team.teamName} <IoIosAddCircle className={styles.addStudent}/></h2>
+                    <h2 >{team.teamName} <IoIosAddCircle onClick={() => handleTeamClick(team)} className={styles.addStudent}/></h2>
                     
                     <ul >
                         {team.members.map((member, jndex) =>

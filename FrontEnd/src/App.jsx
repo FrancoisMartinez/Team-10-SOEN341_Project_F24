@@ -10,6 +10,7 @@ import {GlobalStateProvider} from "./GlobalStateProvider.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import InstructorDashboard from "./pages/InstructorDashboard.jsx";
 import ReviewForm from './pages/ReviewForm.jsx';
+import UpdateTeam from "./pages/UpdateTeam.jsx";
 
 
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     {path : "/register", element : <Register />},
     {path : "/studentDashboard", element: <StudentDashboard/>},
     {path : "/newTeam", element : <NewTeam />},
+    {path : "/updateTeam", element : <UpdateTeam />},
     {path: "/fileImport", element : <FileImport/>},
     {path : "/instructorDashboard", element : <InstructorDashboard/>},
     {path : "/reviewForm", element : <ReviewForm/>},

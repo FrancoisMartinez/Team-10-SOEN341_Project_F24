@@ -46,9 +46,6 @@ function InstructorDashboard() {
         fetchStudents();  // Call the function to fetch students on component mount
     }, []);
 
-    console.log(students)
-
-    console.log(teams)
 
     return (
         <>

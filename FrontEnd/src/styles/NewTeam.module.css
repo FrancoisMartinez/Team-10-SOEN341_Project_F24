@@ -88,7 +88,7 @@
     text-align: left;
     height: 256px;
     overflow-y: scroll;
-    overflow-x:none;
+    overflow-x: hidden;
 }
 
 
@@ -184,9 +184,30 @@
     background-color: #7e57c2;
     transform: translateY(-3px);
 }
+.CSVbutton {
+    position: absolute;
+    bottom: 20px;
+    right: 175px;
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #9c82cd;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+}
+
+.CSVbutton:hover {
+    background-color: #7e57c2;
+    transform: translateY(-3px);
+}
+
 
 /* CSV Button */
-.CSVbutton {
+.backButton {
     position: absolute;
     bottom: 20px;
     left: 20px;
@@ -202,7 +223,7 @@
     text-transform: uppercase;
 }
 
-.CSVbutton:hover {
+.backButton:hover {
     background-color: #7e57c2;
     transform: translateY(-3px);
 }

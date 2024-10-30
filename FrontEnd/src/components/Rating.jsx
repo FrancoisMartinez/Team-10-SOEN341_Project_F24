@@ -3,6 +3,7 @@ import DimensionRating from './DimensionRating';
 import axios from "axios";
 import {GlobalContext} from "../GlobalStateProvider.jsx";
 import styles from "../styles/StudentDashboard.module.css";
+import {useNavigate} from "react-router-dom";
 
 
 function Rating() {
@@ -11,6 +12,8 @@ function Rating() {
     const [ratings, setRatings] = useState({});
     const [comments, setComments] = useState({});
     const [studentEmail, setStudentEmail] = useState('');
+
+    const navigate = useNavigate();
 
 
     const handleRatingChange = (dimension, ratingValue) => {
@@ -68,6 +71,7 @@ function Rating() {
             if (response.status === 200) {
                 dispatch({type: 'SUCCESS'});
             }
+            navigate('/studentDashboard')
         } catch (error) {
             dispatch({
                 type: 'ERROR',
@@ -78,7 +82,7 @@ function Rating() {
     };
 
     return (
-        <div className={styles.rating_container}>
+        <div className={styles.ratingContainer}>
             {dimensions.map((dimension, index) => (
                 <DimensionRating
                     key={index}

@@ -26,6 +26,7 @@ router.post('/signup', async (req, res) => {
             email: email,
             password: hashedPassword,
             instructor: instructor,
+            teams: null,
         });
 
         // Respond with success

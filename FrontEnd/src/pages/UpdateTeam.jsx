@@ -8,15 +8,18 @@ import Loading from "../components/Loading.jsx";
 import Error from "../components/Error.jsx";
 import Success from "../components/Success.jsx";
 
-function NewTeam() {
+function UpdateTeam() {
     const { state, dispatch } = useContext(GlobalContext);
     const [searchTerm, setSearchTerm] = useState('');
-    const [teamName, setTeamName] = useState('');
-    const [newTeam, setNewTeam] = useState([]);
+    const [oldTeam, setOldTeam] = useState(state.team.members);
+    const [teamName, setTeamName] = useState(state.team.teamName);
+    const [newTeam, setNewTeam] = useState(oldTeam);
+    const [removedMembers, setRemovedMembers] = useState([]);
     const [students, setStudents] = useState([]);
     const [results, setResults] = useState([]);
 
     const navigate = useNavigate();
+
 
     useEffect(() => {
         dispatch({ type: 'REQUEST' })
@@ -26,10 +29,11 @@ function NewTeam() {
 
                 if (response.status === 200) {
                     dispatch({ type: 'SUCCESS' })
+
                     const unassignedStudents = response.data.filter(student => student.teams === null || student.teams === undefined);
 
                     setStudents(unassignedStudents);
-                    setResults(unassignedStudents);
+                    setResults(unassignedStudents); // Initialize results to show all students initially
                 }
 
             } catch (error) {
@@ -44,7 +48,9 @@ function NewTeam() {
         fetchStudents();
     }, []);
 
-    const handleTeamCreation = async () => {
+
+
+    const handleTeamUpdate = async () => {
         dispatch({ type: 'REQUEST' })
 
         const data = {
@@ -52,6 +58,11 @@ function NewTeam() {
             teamName: teamName,
             instructor: state.user?.instructor || false
         }
+        const removedData = {
+            members: removedMembers,
+            teamName: null,
+            instructor: state.user?.instructor || false
+        };
 
         if (newTeam.length < 2) {
             dispatch({
@@ -70,15 +81,15 @@ function NewTeam() {
 
 
         try {
-            const response = await axios.post("http://localhost:3000/add-team", data);
+            const response1 = await axios.post("http://localhost:3000/add-team", data);
+            const response2 = await axios.post("http://localhost:3000/add-team", removedData);
 
-            if (response.status === 200) {
+            if (response1.status === 200 && response2.status === 200) {
                 dispatch({
                     type: 'SUCCESS',
-                    payload: 'Team successfully created.'
+                    payload: 'Team successfully updated.'
                 })
-                setNewTeam([])
-                setTeamName('')
+
             }
 
 
@@ -86,11 +97,12 @@ function NewTeam() {
             console.error("Error creation");
             dispatch({
                 type: 'ERROR',
-                payload: error.response?.data?.error || 'Error fetching creating team. Please try again.'
+                payload: error.response?.data?.error || 'Error fetching updating team. Please try again.'
             });
-            setNewTeam([])
-            setTeamName('')
+            navigate('/instructorDashboard')
+
         }
+
 
     }
 
@@ -105,19 +117,19 @@ function NewTeam() {
     };
 
 
-
-    const handleTeamNameChange = (e) => {
-        setTeamName(e.target.value);
-    };
-
     const handleSelectMember = (member) => {
-        if (!newTeam.some(m => m._id === member._id)) { // Check by unique ID if available
+        if (!newTeam.some(m => m._id === member._id)) {
             setNewTeam([...newTeam, member]);
+            setRemovedMembers(removedMembers.filter(m => m._id !== member._id));
         }
     };
 
     const handleRemoveMember = (member) => {
         setNewTeam(newTeam.filter((m) => m._id !== member._id));
+        if (!removedMembers.some(m => m._id === member._id)) {
+            setRemovedMembers([...removedMembers, member]);
+            member.teamName = null;
+        }
     };
 
     return (
@@ -133,7 +145,7 @@ function NewTeam() {
                         type="text"
                         placeholder="Enter Team Name"
                         value={teamName}
-                        onChange={handleTeamNameChange}
+                        onChange={(e) => setTeamName(e.target.value)}
                         className={styles.teamNameInput}
                     />
                 </div>
@@ -185,18 +197,7 @@ function NewTeam() {
                     </div>
                 </div>
 
-
-                    <button onClick={handleTeamCreation} className={styles.createButton}>Create</button>
-
-                    {/* CSV Button */}
-                    <button
-                        className={styles.CSVbutton}
-                        onClick={() => navigate('/fileImport')}
-                    >
-                        Import File
-                    </button>
-
-
+                <button onClick={handleTeamUpdate} className={styles.createButton}>Update Team</button>
 
                 <button
                     className={styles.backButton}
@@ -204,9 +205,10 @@ function NewTeam() {
                 >
                     Back
                 </button>
+
             </div>
         </>
     );
 }
 
-export default NewTeam;
+export default UpdateTeam;

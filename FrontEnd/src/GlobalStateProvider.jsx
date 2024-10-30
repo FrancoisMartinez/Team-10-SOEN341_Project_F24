@@ -11,6 +11,7 @@ const initialState = {
     error: null,
     student: null,
     success: null,
+    team: null,
 }
 
 // Manage the user state
@@ -40,7 +41,9 @@ const reducer = (state, action) => {
         case 'ERROR_DISMISS':
             return { ...state, loading: false, error: null };
         case 'SELECT_STUDENT':
-            return {...state, student: action.payload}
+            return {...state, student: action.payload};
+        case 'SELECT_TEAM':
+            return {...state, team: action.payload};
         case 'REQUEST':
             return { ...state, loading: true, error: null };
         case 'SUCCESS':
