@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    teams : {
+    teams: {
         type: String,
         required: false,
     },
@@ -31,8 +31,8 @@ const userSchema = new mongoose.Schema({
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review'
-    }],
-
+    }]
+},
 
 { timestamps: true });
 
