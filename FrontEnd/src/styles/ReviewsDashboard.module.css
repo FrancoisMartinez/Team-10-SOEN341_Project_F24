@@ -1,0 +1,80 @@
+.pageTitle{
+    padding-left: 10px;
+}
+
+.displayBox {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+.displayBox button {
+    float: right;
+    background: linear-gradient(45deg, #9c82cd, #a088cc); /* Gradient color */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-left: 5px;
+    border-radius: 50px; /* Pill-shaped button */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth transitions */
+    outline: none;
+    text-transform: uppercase; /* Makes the text uppercase */
+    
+}
+
+.displayBox button:hover {
+    background: linear-gradient(45deg, #9c82cd, #a088cc); /* Inverse gradient on hover */
+    transform: translateY(-3px); /* Moves button up slightly on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.displayBox button:active {
+    transform: translateY(0); /* Reset transform on click */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Restore original shadow */
+}
+
+.searchBar {
+    width: 300px; /* Adjust width as needed */
+    padding: 12px 20px;
+    border: 3px solid #ccc;
+    border-radius: 50px; /* Rounded, pill-shaped input */
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease; /* Smooth transition for hover and focus */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+}
+
+.searchBar:focus {
+    border-color: #9c82cd; /* Highlight border on focus */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow on focus */
+    background-color: #fff; /* White background on focus */
+}
+
+.searchBar::placeholder {
+    color: #999; /* Slightly darker placeholder for readability */
+}
+
+.results {
+
+    display: flex;
+    padding-left: 10px;
+    border: 1px solid #ccc; /* Lighter border for softer look */
+    border-radius: 8px;      /* Rounded corners */
+    width: 1150px;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    background-color: #f9f9f9; /* Light background for better contrast */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}

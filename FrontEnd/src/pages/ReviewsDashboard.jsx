@@ -1,31 +1,24 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-/*Change these imports to all teams and teamates in a students team */
-import InstructorDashboardTeams from "../components/StudentDashboardAllTeams.jsx";
-import InstructorDashboardStudents from "../components/StudentDashboardMyTeam.jsx";
-
-import {GlobalContext} from "../GlobalStateProvider.jsx";
-import styles from "../styles/StudentDashboard.module.css";
-import Header from '../components/Header.jsx';
+import { GlobalContext } from "../GlobalStateProvider.jsx";
+import Header from "../components/Header.jsx";
+import styles from "../styles/ReviewsDashboard.module.css";
 import axios from "axios";
 
-function StudentDashboard() {
 
+function ReviewsDashboard() {
     const { state, dispatch } = useContext(GlobalContext);
     const navigate = useNavigate();
-    const [search, setSearch] = useState('');
-    const [view, setView] = useState('All Teams');
+    const [search, setSearch]  = useState('');
+    const [view, setView] = useState('Student');
     const [students, setStudents] = useState([]);
     const [teams, setTeams] = useState([]);
-
-
 
     useEffect(() => {
         const fetchStudents = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/students');  // Ensure this endpoint matches your backend route
-                // console.log(response);
+
                 const fetchedStudents = response.data;  // Access the data inside the response
 
 
@@ -42,6 +35,7 @@ function StudentDashboard() {
                 }, {});
 
                 setTeams(Object.values(processedTeams));
+
             } catch (error) {
                 console.error("Error fetching students:", error);
             }
@@ -50,37 +44,37 @@ function StudentDashboard() {
         fetchStudents();  // Call the function to fetch students on component mount
     }, []);
 
-    console.log(state.user);
 
     return (
-
         <>
-             <div>
+           
+
+            <div>
                 <Header></Header>
 
             </div>
-            <h1 className={styles.pageTitle}>Student Dashboard: <br></br><br></br></h1>
+            <h1 className={styles.pageTitle}>Reviews:  <br></br></h1>
 
             <div className={styles.displayBox}>
-                <div className={styles.displayTeamsBox}>
-                    <button className={styles.buttonFilter} onClick={() => {
 
-                        setView(view === 'All Teams' ? 'My Team' : 'All Teams');
+
+                <div className={styles.displayType}>
+                    <button onClick={() => {
+
+                        setView(view === 'Summary' ? 'Detailed' : 'Summary');
                         setSearch('')
-                    }}>{view}</button>
+                    }}>{view === 'Summary' ? 'Detailed' : 'Summary'}</button>
                     <input className={styles.searchBar} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search'} />
 
-
                     <div className={styles.results}>
-                        {view === 'My Team' ? <InstructorDashboardTeams teams={teams} search={search} /> : <InstructorDashboardStudents students={students} search={search} />}
                     </div>
                 </div>
             </div>
-            
-        </>
 
+
+        </>
 
     )
 }
 
-export default StudentDashboard;
+export default ReviewsDashboard;
