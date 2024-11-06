@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Generate Access Token
-        
+
 
         // Generate Refresh Token
         
@@ -91,6 +91,10 @@ router.post('/add-team', async (req, res) => {
         if (!instructor) {
             return res.status(403).json({ error: "Only instructors can add teams" });
         }
+        const existingTeam = await User.findOne({ teams: teamName });
+        if (existingTeam) {
+            return res.status(400).json({ error: "Team name already exists" });
+        }
 
         // Find the user by email
         // Iterate over each member and update their team field
@@ -105,6 +109,33 @@ router.post('/add-team', async (req, res) => {
         await Promise.all(updatePromises);
 
         return res.status(200).json({ message: "Team added successfully" });
+    } catch (err) {
+        console.error('Error adding team:', err);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+router.post('/update-team', async (req, res) => {
+    try {
+        const { members, teamName, instructor } = req.body;
+
+        // Ensure only instructors can add teams
+        if (!instructor) {
+            return res.status(403).json({ error: "Only instructors can add teams" });
+        }
+
+        // Find the user by email
+        // Iterate over each member and update their team field
+        const updatePromises = members.map(async (member) => {
+            const user = await User.findOne({ email : member.email });
+            if (user) {
+                user.teams = teamName;
+                await user.save();
+            }
+        });
+
+        await Promise.all(updatePromises);
+
+        return res.status(200).json({ message: "Team updated successfully" });
     } catch (err) {
         console.error('Error adding team:', err);
         return res.status(500).json({ error: "Internal Server Error" });
