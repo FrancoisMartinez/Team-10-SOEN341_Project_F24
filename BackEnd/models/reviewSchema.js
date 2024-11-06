@@ -1,49 +1,62 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
-
-    studentEmail : {
+    studentId: { // ID of the student being reviewed
+        type: String,
+        required: true
+    },
+    firstName: { // First name of the student being reviewed
+        type: String,
+        required: true
+    },
+    lastName: { // Last name of the student being reviewed
+        type: String,
+        required: true
+    },
+    teamName: { // Team name for grouping in detailed view
+        type: String,
+        required: true
+    },
+    studentEmail: { // Email of the student being reviewed
         type: String,
         required: false
     },
-    reviewer: {
+    reviewer: { // ID or email of the student providing the review
         type: String,
         required: false
     },
-    CooperationRating: {
+    CooperationRating: { // Rating for Cooperation
         type: Number,
         required: true
     },
-    ConceptualContributionRating: {
+    ConceptualContributionRating: { // Rating for Conceptual Contribution
         type: Number,
         required: true
     },
-    PracticalContributionRating: {
+    PracticalContributionRating: { // Rating for Practical Contribution
         type: Number,
         required: true
     },
-    WorkEthicRating: {
+    WorkEthicRating: { // Rating for Work Ethic
         type: Number,
         required: true
     },
-    CooperationComment: {
+    CooperationComment: { // Comment for Cooperation
         type: String,
         required: false
     },
-    ConceptualContributionComment: {
+    ConceptualContributionComment: { // Comment for Conceptual Contribution
         type: String,
         required: false
     },
-    PracticalContributionComment: {
+    PracticalContributionComment: { // Comment for Practical Contribution
         type: String,
         required: false
     },
-    WorkEthicComment: {
+    WorkEthicComment: { // Comment for Work Ethic
         type: String,
         required: false
     },
-
-
 }, { timestamps: true });
 
 const Review = mongoose.model('Review', reviewSchema, "reviews");
