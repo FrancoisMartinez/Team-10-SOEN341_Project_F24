@@ -92,7 +92,7 @@
 
 /* General Styles for Scrollbar (optional) */
 .results::-webkit-scrollbar {
-    width: 8px;
+    width: 12px;
 }
 
 .results::-webkit-scrollbar-thumb {
@@ -142,7 +142,4 @@
     background-color: #ffffff; /* White background for team blocks */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to team blocks */
     transition: transform 0.3s ease; /* Adds a smooth hover effect */
-}
-.studentBlock li:hover {
-    transform: scale(1.005); /* Slight scale-up effect on hover */
 }

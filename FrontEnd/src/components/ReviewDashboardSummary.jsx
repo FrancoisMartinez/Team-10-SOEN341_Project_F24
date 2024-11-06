@@ -14,17 +14,42 @@ function ReviewDashboardSummary({ students, search }) {
 
     return (
         <div className={styles.studentBlock}>
-
-            <ul>
-                {filteredStudents?.map((student, index) =>
-                    <li key={index}>
-                        <h3>{student.firstName} {student.lastName}</h3>
-                        <p>{student.Cooperation}</p>
-                        {/*<p>{student.team}</p>*/}
-                    </li>)}
-            </ul>
+            <table className={styles.studentTable}>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Team</th>
+                        <th>Cooperation</th>
+                        <th>Conceptual</th>
+                        <th>Practical</th>
+                        <th>Work Ethic</th>
+                        <th>Average</th>
+                        <th>Responded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filteredStudents?.map((student, index) => (
+                        <tr key={index}>
+                            <td>{student.email}</td>
+                            <td>{student.firstName}</td>
+                            <td>{student.lastName}</td>
+                            <td>{student.team}</td>
+                            <td>{student.cooperation}</td>
+                            <td>{student.conceptual}</td>
+                            <td>{student.practical}</td>
+                            <td>{student.workEthic}</td>
+                            <td>{student.average}</td>
+                            <td>{student.responded}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
-    )
+    );
+    
+    
 }
 
 export default ReviewDashboardSummary;

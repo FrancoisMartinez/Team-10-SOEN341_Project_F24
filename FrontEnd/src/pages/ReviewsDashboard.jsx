@@ -5,18 +5,154 @@ import Header from "../components/Header.jsx";
 import styles from "../styles/ReviewsDashboard.module.css";
 import axios from "axios";
 import ReviewDashboardSummary from "../components/ReviewDashboardSummary.jsx";
+import ReviewDashboardDetailed from "../components/ReviewDashboardDetailed.jsx";
+import TeammateSelection from './TeammateSelection.jsx';
+
 
 const studentsList = [
     {
-        email: "student@gmail.com",
-        lastName: "John",
-        firstName: "John",
-        Cooperation: 3,
-
+        email: "student112211321321231@gmail.com",
+        lastName: "Doe",
+        firstName: "Jane",
+        team: "Team A",
+        cooperation: 4,
+        conceptual: 4,
+        practical: 3,
+        workEthic: 5,
+        average: 4,
+        responded: 4,
+    },
+    {
+        email: "student2@gmail.com",
+        lastName: "Smith",
+        firstName: "Alex",
+        team: "Team B",
+        cooperation: 5,
+        conceptual: 3,
+        practical: 4,
+        workEthic: 5,
+        average: 4.25,
+        responded: 5,
+    },
+    {
+        email: "student3@gmail.com",
+        lastName: "Johnson",
+        firstName: "Chris",
+        team: "Team C",
+        cooperation: 2,
+        conceptual: 3,
+        practical: 5,
+        workEthic: 4,
+        average: 3.5,
+        responded: 4,
+    },
+    {
+        email: "student4@gmail.com",
+        lastName: "Brown",
+        firstName: "Taylor",
+        team: "Team B",
+        cooperation: 4,
+        conceptual: 4,
+        practical: 4,
+        workEthic: 3,
+        average: 3.75,
+        responded: 5,
+    },
+    {
+        email: "student5@gmail.com",
+        lastName: "Davis",
+        firstName: "Jordan",
+        team: "Team C",
+        cooperation: 3,
+        conceptual: 5,
+        practical: 4,
+        workEthic: 4,
+        average: 4,
+        responded: 5,
+    },
+    {
+        email: "student6@gmail.com",
+        lastName: "Miller",
+        firstName: "Morgan",
+        team: "Team A",
+        cooperation: 5,
+        conceptual: 4,
+        practical: 5,
+        workEthic: 5,
+        average: 4.75,
+        responded: 5,
+    },
+    {
+        email: "student7@gmail.com",
+        lastName: "Wilson",
+        firstName: "Jamie",
+        team: "Team B",
+        cooperation: 3,
+        conceptual: 2,
+        practical: 4,
+        workEthic: 4,
+        average: 3.25,
+        responded: 4,
+    },
+    {
+        email: "student8@gmail.com",
+        lastName: "Moore",
+        firstName: "Casey",
+        team: "Team C",
+        cooperation: 4,
+        conceptual: 3,
+        practical: 3,
+        workEthic: 5,
+        average: 3.75,
+        responded: 4,
+    },
+    {
+        email: "student9@gmail.com",
+        lastName: "Taylor",
+        firstName: "Cameron",
+        team: "Team A",
+        cooperation: 2,
+        conceptual: 4,
+        practical: 5,
+        workEthic: 3,
+        average: 3.5,
+        responded: 5,
+    },
+    {
+        email: "student10@gmail.com",
+        lastName: "Anderson",
+        firstName: "Riley",
+        team: "Team B",
+        cooperation: 5,
+        conceptual: 5,
+        practical: 5,
+        workEthic: 4,
+        average: 4.75,
+        responded: 5,
+    },
+    {
+        email: "student11@gmail.com",
+        lastName: "Lee",
+        firstName: "Taylor",
+        team: "Team C",
+        cooperation: 3,
+        conceptual: 4,
+        practical: 4,
+        workEthic: 3,
+        average: 3.5,
+        responded: 4,
     }
-]
+];
 
-
+const processedTeams = Object.values(
+    studentsList.reduce((acc, student) => {
+        if (!acc[student.team]) {
+            acc[student.team] = { teamName: student.team, members: [] };
+        }
+        acc[student.team].members.push(student);
+        return acc;
+    }, {})
+);
 
 
 function ReviewsDashboard() {
@@ -25,7 +161,7 @@ function ReviewsDashboard() {
     const [search, setSearch]  = useState('');
     const [view, setView] = useState('Summary');
     const [students, setStudents] = useState(studentsList);
-    const [teams, setTeams] = useState([]);
+    const [teams, setTeams] = useState(processedTeams);
 
     // useEffect(() => {
     //     const fetchStudents = async () => {
@@ -57,7 +193,6 @@ function ReviewsDashboard() {
     //     fetchStudents();  // Call the function to fetch students on component mount
     // }, []);
 
-
     return (
         <>
 
@@ -79,7 +214,7 @@ function ReviewsDashboard() {
                     <input className={styles.searchBar} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search'} />
 
                     <div className={styles.results}>
-                        {view === 'Summary' ? <ReviewDashboardSummary students={students} search={search}/> :  <ReviewDashboardSummary students={students} search={search}/>}
+                        {view === 'Detailed' ? <ReviewDashboardSummary students={students} search={search}/> :  <ReviewDashboardDetailed teams={teams} search={search}/>}
                     </div>
                 </div>
             </div>
