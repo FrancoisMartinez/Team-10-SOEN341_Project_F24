@@ -67,4 +67,46 @@ router.get('/reviews/summary', async (req, res) => {
     }
 });
 
+// Detailed Aggregation Endpoint
+router.get('/reviews/detailed/:teamName', async (req, res) => {
+    try {
+        const teamName = req.params.teamName;
+        const detailedData = await Review.aggregate([
+            { $match: { teamName } }, // Filter by team name
+            {
+                $group: {
+                    _id: "$studentId",
+                    studentId: { $first: "$studentId" },
+                    studentName: { $first: { $concat: ["$firstName", " ", "$lastName"] } },
+                    ratings: {
+                        $push: {
+                            cooperation: "$CooperationRating",
+                            conceptual: "$ConceptualContributionRating",
+                            practical: "$PracticalContributionRating",
+                            workEthic: "$WorkEthicRating"
+                        }
+                    },
+                    averageScore: { 
+                        $avg: { 
+                            $avg: ["$CooperationRating", "$ConceptualContributionRating", "$PracticalContributionRating", "$WorkEthicRating"] 
+                        } 
+                    },
+                    comments: { 
+                        $push: {
+                            cooperationComment: "$CooperationComment",
+                            conceptualComment: "$ConceptualContributionComment",
+                            practicalComment: "$PracticalContributionComment",
+                            workEthicComment: "$WorkEthicComment"
+                        }
+                    }
+                }
+            }
+        ]);
+        res.json(detailedData);
+    } catch (error) {
+        console.error('Error fetching detailed data:', error.message);
+        res.status(500).send("Error fetching detailed data");
+    }
+});
+
 module.exports = router;
