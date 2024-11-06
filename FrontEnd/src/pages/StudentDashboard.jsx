@@ -32,6 +32,7 @@ function StudentDashboard() {
                 setStudents(fetchedStudents);
 
                 const processedTeams = fetchedStudents.reduce((acc, student) => {
+
                     if (student.teams) {
                         if (!acc[student.teams]) {
                             acc[student.teams] = { teamName: student.teams, members: [] };
