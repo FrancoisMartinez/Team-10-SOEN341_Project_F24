@@ -81,8 +81,8 @@ function UpdateTeam() {
 
 
         try {
-            const response1 = await axios.post("http://localhost:3000/add-team", data);
-            const response2 = await axios.post("http://localhost:3000/add-team", removedData);
+            const response1 = await axios.post("http://localhost:3000/update-team", data);
+            const response2 = await axios.post("http://localhost:3000/update-team", removedData);
 
             if (response1.status === 200 && response2.status === 200) {
                 dispatch({
