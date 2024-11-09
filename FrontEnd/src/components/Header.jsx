@@ -16,7 +16,7 @@ function Header() {
                     <h1 className={styles.siteName}>Rate my teammates</h1>
                 </div>
 
-                <a className={styles.home} onClick={() => navigate('/')}>home</a>
+                <a className={styles.home} onClick={() => navigate('/')}>Home</a>
 
             </header>
 
