@@ -7,7 +7,7 @@ import InstructorDashboardStudents from "../components/StudentDashboardMyTeam.js
 
 import {GlobalContext} from "../GlobalStateProvider.jsx";
 import styles from "../styles/StudentDashboard.module.css";
-import Header from '../components/header.jsx';
+import Header from '../components/Header.jsx';
 import axios from "axios";
 
 function StudentDashboard() {

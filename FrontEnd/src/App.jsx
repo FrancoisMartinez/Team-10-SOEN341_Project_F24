@@ -11,6 +11,8 @@ import StudentDashboard from "./pages/StudentDashboard.jsx";
 import InstructorDashboard from "./pages/InstructorDashboard.jsx";
 import ReviewForm from './pages/ReviewForm.jsx';
 import UpdateTeam from "./pages/UpdateTeam.jsx";
+import ReviewsDashboard from './pages/ReviewsDashboard.jsx';
+import Profile from './pages/Profile.jsx';
 
 
 
@@ -27,6 +29,9 @@ const router = createBrowserRouter([
     {path : "/instructorDashboard", element : <InstructorDashboard/>},
     {path : "/reviewForm", element : <ReviewForm/>},
     {path: '/teammates', element: <TeammateSelection /> },
+    {path: '/reviews', element: <ReviewsDashboard /> },
+    {path: '/profile', element: <Profile /> },
+
 ]);
 
 export default function App() {
