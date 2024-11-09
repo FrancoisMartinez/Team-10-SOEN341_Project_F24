@@ -1,0 +1,14 @@
+[
+{
+Team 1
+example1@gmail.com
+example2@gmail.com 
+example3@gmail.com 
+}
+{
+Team 2
+example1@gmail.com
+example2@gmail.com 
+example3@gmail.com 
+}
+]

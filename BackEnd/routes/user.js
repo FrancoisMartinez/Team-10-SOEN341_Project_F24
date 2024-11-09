@@ -142,6 +142,63 @@ router.post('/update-team', async (req, res) => {
     }
 });
 
+// Import teams route (only for instructors)
+router.post('/import-teams', async (req, res) => {
+    try {
+        const { teams, instructor } = req.body;
+
+        // Ensure only instructors can import teams
+        if (!instructor) {
+            return res.status(403).json({ error: "Only instructors can import teams" });
+        }
+
+        for (const team of teams) {
+            const { teamName, members } = team;
+
+            // Check if team name already exists
+            const existingTeam = await User.findOne({ teams: teamName });
+            if (existingTeam) {
+                invalidTeams.push({ teamName, error: "Team name already exists" });
+                continue;
+            }
+
+            // Check if any member is already part of another team
+            const existingMembers = await User.find({ email: { $in: members } });
+            const alreadyAssigned = existingMembers.some(user => user.teams);
+
+            if (alreadyAssigned) {
+                invalidTeams.push({ teamName, error: "One or more members already belong to a team" });
+                continue;
+            }
+
+            // If validation passes, update each member with the new team
+            const updatePromises = members.map(async (memberEmail) => {
+                const user = await User.findOne({ email: memberEmail });
+                if (user) {
+                    user.teams = teamName;
+                    await user.save();
+                }
+            });
+
+            await Promise.all(updatePromises);
+        }
+
+        // Check if any teams failed validation
+        if (invalidTeams.length > 0) {
+            return res.status(400).json({
+                message: "Some teams failed validation",
+                invalidTeams
+            });
+        }
+
+        return res.status(200).json({ message: "All teams imported successfully" });
+    } catch (err) {
+        console.error('Error importing teams:', err);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
 //
 // // Refresh token route
 // router.post('/refresh', async (req, res) => {
