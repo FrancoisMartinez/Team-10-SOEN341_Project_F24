@@ -5,6 +5,26 @@ import {GlobalContext} from "../GlobalStateProvider.jsx";
 import styles from "../styles/StudentDashboard.module.css";
 import {useNavigate} from "react-router-dom";
 
+const sendReviewEmail = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/email', {
+        params: {
+          email: 'liretin487@lineacr.com',
+          subject: 'You have a new review!',
+          message: 'You’ve received a new peer review. Log in to check it out!',
+        },
+      });
+  
+      if (response.data.success) {
+        console.log('Email sent successfully!');
+      } else {
+        console.error('Error sending email:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error.response ? error.response.data : error.message);
+    }
+  };
+
 
 function Rating() {
     const { state, dispatch } = useContext(GlobalContext);
@@ -62,6 +82,7 @@ function Rating() {
             }
         };
 
+        sendReviewEmail();
         console.log("Submitted Data:", data); // To check if all fields are present
 
         try {
