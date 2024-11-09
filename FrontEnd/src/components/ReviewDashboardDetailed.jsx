@@ -2,6 +2,45 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/ReviewsDashboard.module.css";
 
+function calculateAverageRating(reviews) {
+    if (reviews.length === 0) return {
+        CooperationRating: "N/A",
+        ConceptualContributionRating: "N/A",
+        PracticalContributionRating: "N/A",
+        WorkEthicRating: "N/A",
+        OverallAverage: "N/A"
+    };
+
+    // Calculate the average for each rating category
+    const totalRatings = reviews.reduce((acc, review) => {
+        acc.CooperationRating += review.CooperationRating || 0;
+        acc.ConceptualContributionRating += review.ConceptualContributionRating || 0;
+        acc.PracticalContributionRating += review.PracticalContributionRating || 0;
+        acc.WorkEthicRating += review.WorkEthicRating || 0;
+        return acc;
+    }, {
+        CooperationRating: 0,
+        ConceptualContributionRating: 0,
+        PracticalContributionRating: 0,
+        WorkEthicRating: 0
+    });
+
+const averages = {
+    CooperationRating: (totalRatings.CooperationRating / reviews.length).toFixed(2),
+    ConceptualContributionRating: (totalRatings.ConceptualContributionRating / reviews.length).toFixed(2),
+    PracticalContributionRating: (totalRatings.PracticalContributionRating / reviews.length).toFixed(2),
+    WorkEthicRating: (totalRatings.WorkEthicRating / reviews.length).toFixed(2),
+    OverallAverage: (
+        (totalRatings.CooperationRating +
+            totalRatings.ConceptualContributionRating +
+            totalRatings.PracticalContributionRating +
+            totalRatings.WorkEthicRating) /
+        (4 * reviews.length)
+    ).toFixed(2)
+};
+
+return averages;
+}
 
 function ReviewDashboardDetailed({ teams, search }) {
 
@@ -11,7 +50,7 @@ function ReviewDashboardDetailed({ teams, search }) {
 
     useEffect(() => {
         setFilteredTeams(
-            teams.filter((team) => team.teamName.toLowerCase().includes(search.toLowerCase())))
+            teams.filter((team) => team.teamName?.toLowerCase().includes(search.toLowerCase())))
     }, [search, teams]);
 
 
@@ -20,52 +59,76 @@ function ReviewDashboardDetailed({ teams, search }) {
 
     return (
         <div>
-            <div>
+            {filteredTeams.map((team, index) => (
+                <div className={styles.teamBlock} key={index}>
+                    <h2>{team.teamName}</h2>
 
-                {filteredTeams.map((team, index) =>
-                    /* loops through all teams */
-                    <div className={styles.teamBlock} key={index}>
-
-                        <h2>{team.teamName}</h2>
-                        {team.members.map((member, jndex) => (
-                            <div>
-                                <h3>{member.firstName} {member.lastName}</h3>
-                                <table className={styles.studentTable}>
-                                    <thead>
-                                        <tr>
-                                            <th>Student</th>
-                                            <th>Cooperation</th>
-                                            <th>Conceptual</th>
-                                            <th>Practical</th>
-                                            <th>Work Ethic</th>
-                                            <th>Average</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {team.members.map((member, jndex) => (
-                                            <tr key={index}>
-                                                <td>{member.firstName} {member.lastName}</td>
-                                                <td>{member.cooperation}</td>
-                                                <td>{member.conceptual}</td>
-                                                <td>{member.practical}</td>
-                                                <td>{member.workEthic}</td>
-                                                <td>{member.average}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-
-                                
-                                <br></br> </div>))}
-
-
-
+                    <div className={styles.studentNames}>
+                        {team.members.map((member) => (
+                            <span key={member._id}>{member.firstName} {member.lastName}</span>
+                        )).reduce((prev, curr) => [prev, ", ", curr])} {/* Comma-separated names */}
                     </div>
-
-                )}
-            </div>
-
-
+                    <br/>
+                    <table className={styles.studentTable}>
+                        <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Cooperation</th>
+                            <th>Conceptual</th>
+                            <th>Practical</th>
+                            <th>Work Ethic</th>
+                            <th>Average</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {team.members.map((member, jndex) => {
+                            const averages = calculateAverageRating(member.reviews);
+                            return (
+                                <tr key={`${index}-${jndex}`}>
+                                    <td>{member.firstName} {member.lastName}</td>
+                                    <td>{averages.CooperationRating}</td>
+                                    <td>{averages.ConceptualContributionRating}</td>
+                                    <td>{averages.PracticalContributionRating}</td>
+                                    <td>{averages.WorkEthicRating}</td>
+                                    <td>{averages.OverallAverage}</td>
+                                </tr>
+                            );
+                        })}
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div className={styles.commentsSection}>
+                        <h3>Comments:</h3>
+                        {team.members
+                            .filter((member) =>
+                                member.reviews &&
+                                member.reviews.some(
+                                    (review) =>
+                                        review.CooperationComment ||
+                                        review.ConceptualContributionComment ||
+                                        review.PracticalContributionComment ||
+                                        review.WorkEthicComment
+                                )
+                            )
+                            .map((member, jndex) => (
+                                <div key={`${index}-comment-${jndex}`}>
+                                    <strong>{member.firstName} {member.lastName} comment:</strong> {" "}
+                                    {member.reviews
+                                        .map((review, reviewIndex) => (
+                                            <span key={reviewIndex}>
+                                                {review.CooperationComment ||
+                                                    review.ConceptualContributionComment ||
+                                                    review.PracticalContributionComment ||
+                                                    review.WorkEthicComment || "empty"}
+                                            </span>
+                                        ))
+                                        .reduce((prev, curr) => [prev, "; ", curr], "")} {/* Initial value as empty string */}
+                                </div>
+                            ))}
+                    </div>
+                    <br/>
+                </div>
+            ))}
         </div>
 
     );
