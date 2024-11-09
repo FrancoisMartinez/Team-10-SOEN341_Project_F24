@@ -42,6 +42,7 @@ function Home() {
                     </button>
 
                     {state.user.instructor ?
+                        <>
                         <button className={styles.button}
                                 onClick={(e) => {
                                     e.preventDefault();
@@ -49,22 +50,29 @@ function Home() {
                                 }}>Instructor Dashboard
                         </button>
 
-                        :
                         <button className={styles.button}
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    navigate('/studentDashboard')
-                                }}>Student Dashboard
+                                    navigate('/reviews')
+                                }}>Reviews Dashboard
                         </button>
-                    }
-                    </>
-                            :
-                    <>
+                        </>
+                        :
                         <button className={styles.button}
-                            onClick={() => {
-                                navigate('/login')
-                            }}>Log In
-                        </button>
+                    onClick={(e) => {
+                        e.preventDefault();
+                        navigate('/studentDashboard')
+                    }}>Student Dashboard
+                    </button>
+                }
+            </>
+            :
+            <>
+                <button className={styles.button}
+                        onClick={() => {
+                            navigate('/login')
+                        }}>Log In
+                </button>
 
                         <button className={styles.button}
                             onClick={() => {
