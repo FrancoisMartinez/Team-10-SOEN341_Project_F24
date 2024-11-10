@@ -17,6 +17,8 @@ function ReviewsDashboard() {
     const [view, setView] = useState('Summary');
     const [students, setStudents] = useState([]);
     const [teams, setTeams] = useState([]);
+    const [originalTeams, setOriginalTeams] = useState([]); // Holds the static team data
+
 
     useEffect(() => {
         const fetchStudents = async () => {

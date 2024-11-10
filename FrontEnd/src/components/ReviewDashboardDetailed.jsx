@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/ReviewsDashboard.module.css";
+import { FaSort,FaSortDown, FaSortUp } from "react-icons/fa6";
+
 
 function calculateAverageRating(reviews) {
     if (reviews.length === 0) return {
@@ -53,12 +55,25 @@ function ReviewDashboardDetailed({ teams, search }) {
 
         const sortedTeams = [...filteredTeams].map((team) => {
             const sortedMembers = [...team.members].sort((a, b) => {
-                const valueA = column === 'average'
-                    ? calculateAverageRating(a.reviews).OverallAverage
-                    : calculateAverageRating(a.reviews)[column];
-                const valueB = column === 'average'
-                    ? calculateAverageRating(b.reviews).OverallAverage
-                    : calculateAverageRating(b.reviews)[column];
+                let valueA, valueB;
+
+                if (column === 'firstName') {
+                    // Sort by first name
+                    valueA = a.firstName.toLowerCase();
+                    valueB = b.firstName.toLowerCase();
+                } else {
+                    // Sort by rating or average
+                    valueA = column === 'average'
+                        ? calculateAverageRating(a.reviews).OverallAverage
+                        : calculateAverageRating(a.reviews)[column];
+                    valueB = column === 'average'
+                        ? calculateAverageRating(b.reviews).OverallAverage
+                        : calculateAverageRating(b.reviews)[column];
+
+                    // Convert "N/A" to appropriate default values for sorting
+                    valueA = valueA === "N/A" ? (order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY) : parseFloat(valueA);
+                    valueB = valueB === "N/A" ? (order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY) : parseFloat(valueB);
+                }
 
                 if (order === 'asc') return valueA > valueB ? 1 : -1;
                 return valueA < valueB ? 1 : -1;
@@ -78,6 +93,12 @@ function ReviewDashboardDetailed({ teams, search }) {
         );
     }, [search, teams]);
 
+    const renderSortIcon = (column) => {
+        if (sortBy === column) {
+            return sortOrder === 'asc' ? <FaSortUp color="purple" /> : <FaSortDown color="purple" />;
+        }
+        return <FaSort color="gray" />;
+    };
     return (
         <div>
             {filteredTeams.map((team, index) => (
@@ -92,12 +113,24 @@ function ReviewDashboardDetailed({ teams, search }) {
                     <table className={styles.studentTable}>
                         <thead>
                         <tr>
-                            <th>Student</th>
-                            <th onClick={() => handleSort('CooperationRating')}>Cooperation</th>
-                            <th onClick={() => handleSort('ConceptualContributionRating')}>Conceptual</th>
-                            <th onClick={() => handleSort('PracticalContributionRating')}>Practical</th>
-                            <th onClick={() => handleSort('WorkEthicRating')}>Work Ethic</th>
-                            <th onClick={() => handleSort('average')}>Average</th>
+                            <th onClick={() => handleSort('firstName')}>
+                                Student {renderSortIcon('firstName')}
+                            </th>
+                            <th onClick={() => handleSort('CooperationRating')}>
+                                Cooperation {renderSortIcon('CooperationRating')}
+                            </th>
+                            <th onClick={() => handleSort('ConceptualContributionRating')}>
+                                Conceptual {renderSortIcon('ConceptualContributionRating')}
+                            </th>
+                            <th onClick={() => handleSort('PracticalContributionRating')}>
+                                Practical {renderSortIcon('PracticalContributionRating')}
+                            </th>
+                            <th onClick={() => handleSort('WorkEthicRating')}>
+                                Work Ethic {renderSortIcon('WorkEthicRating')}
+                            </th>
+                            <th onClick={() => handleSort('average')}>
+                                Average {renderSortIcon('average')}
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
