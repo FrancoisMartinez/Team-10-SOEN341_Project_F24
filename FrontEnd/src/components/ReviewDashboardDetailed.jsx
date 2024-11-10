@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/ReviewsDashboard.module.css";
 
 function calculateAverageRating(reviews) {
-    if (!reviews || reviews.length === 0) return {
+    if (reviews.length === 0) return {
         CooperationRating: "N/A",
         ConceptualContributionRating: "N/A",
         PracticalContributionRating: "N/A",
@@ -40,77 +40,117 @@ function calculateAverageRating(reviews) {
     return averages;
 }
 
-function ReviewDashboardSummary({ students = [], search = "" }) {
-    const [filteredStudents, setFilteredStudents] = useState(students);
+function ReviewDashboardDetailed({ teams, search }) {
+    const [filteredTeams, setFilteredTeams] = useState(teams);
     const [sortBy, setSortBy] = useState(null);
     const [sortOrder, setSortOrder] = useState('asc');
 
-    // Function to handle sorting
+    // Handle sorting
     const handleSort = (column) => {
         const order = (sortBy === column && sortOrder === 'asc') ? 'desc' : 'asc';
         setSortBy(column);
         setSortOrder(order);
 
-        // Sort the students based on the selected column and order
-        const sortedStudents = [...filteredStudents].sort((a, b) => {
-            const valueA = column === 'average' ? calculateAverageRating(a.reviews).OverallAverage : a[column];
-            const valueB = column === 'average' ? calculateAverageRating(b.reviews).OverallAverage : b[column];
+        const sortedTeams = [...filteredTeams].map((team) => {
+            const sortedMembers = [...team.members].sort((a, b) => {
+                const valueA = column === 'average'
+                    ? calculateAverageRating(a.reviews).OverallAverage
+                    : calculateAverageRating(a.reviews)[column];
+                const valueB = column === 'average'
+                    ? calculateAverageRating(b.reviews).OverallAverage
+                    : calculateAverageRating(b.reviews)[column];
 
-            if (order === 'asc') return valueA > valueB ? 1 : -1;
-            return valueA < valueB ? 1 : -1;
+                if (order === 'asc') return valueA > valueB ? 1 : -1;
+                return valueA < valueB ? 1 : -1;
+            });
+
+            return { ...team, members: sortedMembers };
         });
 
-        setFilteredStudents(sortedStudents);
+        setFilteredTeams(sortedTeams);
     };
 
+    // Filter teams based on search input
     useEffect(() => {
-        setFilteredStudents(
-            students?.filter((student) =>
-                student.firstName?.toLowerCase().includes(search.toLowerCase()) ||
-                student.lastName?.toLowerCase().includes(search.toLowerCase())
-            ) || []
+        setFilteredTeams(
+            teams.filter((team) =>
+                team.teamName?.toLowerCase().includes(search.toLowerCase()))
         );
-    }, [search, students]);
+    }, [search, teams]);
 
     return (
-        <div className={styles.studentBlock}>
-            <table className={styles.studentTable}>
-                <thead>
-                <tr>
-                    <th onClick={() => handleSort('email')}>Email</th>
-                    <th onClick={() => handleSort('firstName')}>First Name</th>
-                    <th onClick={() => handleSort('lastName')}>Last Name</th>
-                    <th onClick={() => handleSort('teams')}>Team</th>
-                    <th onClick={() => handleSort('CooperationRating')}>Cooperation</th>
-                    <th onClick={() => handleSort('ConceptualContributionRating')}>Conceptual</th>
-                    <th onClick={() => handleSort('PracticalContributionRating')}>Practical</th>
-                    <th onClick={() => handleSort('WorkEthicRating')}>Work Ethic</th>
-                    <th onClick={() => handleSort('average')}>Average</th>
-                    <th onClick={() => handleSort('reviews')}>Responded</th>
-                </tr>
-                </thead>
-                <tbody>
-                {filteredStudents.map((student, index) => {
-                    const averages = calculateAverageRating(student.reviews || []);
-                    return (
-                        <tr key={index}>
-                            <td>{student.email}</td>
-                            <td>{student.firstName}</td>
-                            <td>{student.lastName}</td>
-                            <td>{student.teams}</td>
-                            <td>{averages.CooperationRating}</td>
-                            <td>{averages.ConceptualContributionRating}</td>
-                            <td>{averages.PracticalContributionRating}</td>
-                            <td>{averages.WorkEthicRating}</td>
-                            <td>{averages.OverallAverage}</td>
-                            <td>{student.reviews?.length || 0}</td>
+        <div>
+            {filteredTeams.map((team, index) => (
+                <div className={styles.teamBlock} key={index}>
+                    <h2>{team.teamName}</h2>
+                    <div className={styles.studentNames}>
+                        {team.members.map((member) => (
+                            <span key={member._id}>{member.firstName} {member.lastName}</span>
+                        )).reduce((prev, curr) => [prev, ", ", curr])}
+                    </div>
+                    <br/>
+                    <table className={styles.studentTable}>
+                        <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th onClick={() => handleSort('CooperationRating')}>Cooperation</th>
+                            <th onClick={() => handleSort('ConceptualContributionRating')}>Conceptual</th>
+                            <th onClick={() => handleSort('PracticalContributionRating')}>Practical</th>
+                            <th onClick={() => handleSort('WorkEthicRating')}>Work Ethic</th>
+                            <th onClick={() => handleSort('average')}>Average</th>
                         </tr>
-                    );
-                })}
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                        {team.members.map((member, jndex) => {
+                            const averages = calculateAverageRating(member.reviews);
+                            return (
+                                <tr key={`${index}-${jndex}`}>
+                                    <td>{member.firstName} {member.lastName}</td>
+                                    <td>{averages.CooperationRating}</td>
+                                    <td>{averages.ConceptualContributionRating}</td>
+                                    <td>{averages.PracticalContributionRating}</td>
+                                    <td>{averages.WorkEthicRating}</td>
+                                    <td>{averages.OverallAverage}</td>
+                                </tr>
+                            );
+                        })}
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div className={styles.commentsSection}>
+                        <h3>Comments:</h3>
+                        {team.members
+                            .filter((member) =>
+                                member.reviews &&
+                                member.reviews.some(
+                                    (review) =>
+                                        review.CooperationComment ||
+                                        review.ConceptualContributionComment ||
+                                        review.PracticalContributionComment ||
+                                        review.WorkEthicComment
+                                )
+                            )
+                            .map((member, jndex) => (
+                                <div key={`${index}-comment-${jndex}`}>
+                                    <strong>{member.firstName} {member.lastName} comment:</strong> {" "}
+                                    {member.reviews
+                                        .map((review, reviewIndex) => (
+                                            <span key={reviewIndex}>
+                                                {review.CooperationComment ||
+                                                    review.ConceptualContributionComment ||
+                                                    review.PracticalContributionComment ||
+                                                    review.WorkEthicComment || "empty"}
+                                            </span>
+                                        ))
+                                        .reduce((prev, curr) => [prev, "; ", curr], "")}
+                                </div>
+                            ))}
+                    </div>
+                    <br/>
+                </div>
+            ))}
         </div>
     );
 }
 
-export default ReviewDashboardSummary;
+export default ReviewDashboardDetailed;
