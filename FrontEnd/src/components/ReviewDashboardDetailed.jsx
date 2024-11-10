@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/ReviewsDashboard.module.css";
-import { FaSort,FaSortDown, FaSortUp } from "react-icons/fa6";
-
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
 
 function calculateAverageRating(reviews) {
     if (reviews.length === 0) return {
@@ -42,7 +41,7 @@ function calculateAverageRating(reviews) {
     return averages;
 }
 
-function ReviewDashboardDetailed({ teams, search }) {
+function ReviewDashboardDetailed({ teams, originalTeams, search }) {
     const [filteredTeams, setFilteredTeams] = useState(teams);
     const [sortBy, setSortBy] = useState(null);
     const [sortOrder, setSortOrder] = useState('asc');
@@ -58,11 +57,9 @@ function ReviewDashboardDetailed({ teams, search }) {
                 let valueA, valueB;
 
                 if (column === 'firstName') {
-                    // Sort by first name
                     valueA = a.firstName.toLowerCase();
                     valueB = b.firstName.toLowerCase();
                 } else {
-                    // Sort by rating or average
                     valueA = column === 'average'
                         ? calculateAverageRating(a.reviews).OverallAverage
                         : calculateAverageRating(a.reviews)[column];
@@ -70,18 +67,15 @@ function ReviewDashboardDetailed({ teams, search }) {
                         ? calculateAverageRating(b.reviews).OverallAverage
                         : calculateAverageRating(b.reviews)[column];
 
-                    // Convert "N/A" to appropriate default values for sorting
                     valueA = valueA === "N/A" ? (order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY) : parseFloat(valueA);
                     valueB = valueB === "N/A" ? (order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY) : parseFloat(valueB);
                 }
 
-                if (order === 'asc') return valueA > valueB ? 1 : -1;
-                return valueA < valueB ? 1 : -1;
+                return order === 'asc' ? valueA > valueB ? 1 : -1 : valueA < valueB ? 1 : -1;
             });
 
             return { ...team, members: sortedMembers };
         });
-
         setFilteredTeams(sortedTeams);
     };
 
@@ -99,89 +93,63 @@ function ReviewDashboardDetailed({ teams, search }) {
         }
         return <FaSort color="gray" />;
     };
+
     return (
         <div>
-            {filteredTeams.map((team, index) => (
-                <div className={styles.teamBlock} key={index}>
-                    <h2>{team.teamName}</h2>
-                    <div className={styles.studentNames}>
-                        {team.members.map((member) => (
-                            <span key={member._id}>{member.firstName} {member.lastName}</span>
-                        )).reduce((prev, curr) => [prev, ", ", curr])}
+            {filteredTeams.map((team, index) => {
+                const originalTeam = originalTeams.find((t) => t.teamName === team.teamName);
+                return (
+                    <div className={styles.teamBlock} key={index}>
+                        <h2>{team.teamName}</h2>
+                        <div className={styles.studentNames}>
+                            {originalTeam.members.map((member) => (
+                                <span key={member._id}>{member.firstName} {member.lastName}</span>
+                            )).reduce((prev, curr) => [prev, ", ", curr])}
+                        </div>
+                        <br/>
+                        <table className={styles.studentTable}>
+                            <thead>
+                            <tr>
+                                <th onClick={() => handleSort('firstName')}>
+                                    Student {renderSortIcon('firstName')}
+                                </th>
+                                <th onClick={() => handleSort('CooperationRating')}>
+                                    Cooperation {renderSortIcon('CooperationRating')}
+                                </th>
+                                <th onClick={() => handleSort('ConceptualContributionRating')}>
+                                    Conceptual {renderSortIcon('ConceptualContributionRating')}
+                                </th>
+                                <th onClick={() => handleSort('PracticalContributionRating')}>
+                                    Practical {renderSortIcon('PracticalContributionRating')}
+                                </th>
+                                <th onClick={() => handleSort('WorkEthicRating')}>
+                                    Work Ethic {renderSortIcon('WorkEthicRating')}
+                                </th>
+                                <th onClick={() => handleSort('average')}>
+                                    Average {renderSortIcon('average')}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {team.members.map((member, jndex) => {
+                                const averages = calculateAverageRating(member.reviews);
+                                return (
+                                    <tr key={`${index}-${jndex}`}>
+                                        <td>{member.firstName} {member.lastName}</td>
+                                        <td>{averages.CooperationRating}</td>
+                                        <td>{averages.ConceptualContributionRating}</td>
+                                        <td>{averages.PracticalContributionRating}</td>
+                                        <td>{averages.WorkEthicRating}</td>
+                                        <td>{averages.OverallAverage}</td>
+                                    </tr>
+                                );
+                            })}
+                            </tbody>
+                        </table>
+                        <br/>
                     </div>
-                    <br/>
-                    <table className={styles.studentTable}>
-                        <thead>
-                        <tr>
-                            <th onClick={() => handleSort('firstName')}>
-                                Student {renderSortIcon('firstName')}
-                            </th>
-                            <th onClick={() => handleSort('CooperationRating')}>
-                                Cooperation {renderSortIcon('CooperationRating')}
-                            </th>
-                            <th onClick={() => handleSort('ConceptualContributionRating')}>
-                                Conceptual {renderSortIcon('ConceptualContributionRating')}
-                            </th>
-                            <th onClick={() => handleSort('PracticalContributionRating')}>
-                                Practical {renderSortIcon('PracticalContributionRating')}
-                            </th>
-                            <th onClick={() => handleSort('WorkEthicRating')}>
-                                Work Ethic {renderSortIcon('WorkEthicRating')}
-                            </th>
-                            <th onClick={() => handleSort('average')}>
-                                Average {renderSortIcon('average')}
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {team.members.map((member, jndex) => {
-                            const averages = calculateAverageRating(member.reviews);
-                            return (
-                                <tr key={`${index}-${jndex}`}>
-                                    <td>{member.firstName} {member.lastName}</td>
-                                    <td>{averages.CooperationRating}</td>
-                                    <td>{averages.ConceptualContributionRating}</td>
-                                    <td>{averages.PracticalContributionRating}</td>
-                                    <td>{averages.WorkEthicRating}</td>
-                                    <td>{averages.OverallAverage}</td>
-                                </tr>
-                            );
-                        })}
-                        </tbody>
-                    </table>
-                    <br/>
-                    <div className={styles.commentsSection}>
-                        <h3>Comments:</h3>
-                        {team.members
-                            .filter((member) =>
-                                member.reviews &&
-                                member.reviews.some(
-                                    (review) =>
-                                        review.CooperationComment ||
-                                        review.ConceptualContributionComment ||
-                                        review.PracticalContributionComment ||
-                                        review.WorkEthicComment
-                                )
-                            )
-                            .map((member, jndex) => (
-                                <div key={`${index}-comment-${jndex}`}>
-                                    <strong>{member.firstName} {member.lastName} comment:</strong> {" "}
-                                    {member.reviews
-                                        .map((review, reviewIndex) => (
-                                            <span key={reviewIndex}>
-                                                {review.CooperationComment ||
-                                                    review.ConceptualContributionComment ||
-                                                    review.PracticalContributionComment ||
-                                                    review.WorkEthicComment || "empty"}
-                                            </span>
-                                        ))
-                                        .reduce((prev, curr) => [prev, "; ", curr], "")}
-                                </div>
-                            ))}
-                    </div>
-                    <br/>
-                </div>
-            ))}
+                );
+            })}
         </div>
     );
 }

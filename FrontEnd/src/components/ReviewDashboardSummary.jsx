@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/ReviewsDashboard.module.css";
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
 
 function calculateAverageRating(reviews) {
-    if (!reviews || reviews.length === 0) return {
+    if (reviews.length === 0) return {
         CooperationRating: "N/A",
         ConceptualContributionRating: "N/A",
         PracticalContributionRating: "N/A",
@@ -32,8 +33,7 @@ function calculateAverageRating(reviews) {
             (totalRatings.CooperationRating +
                 totalRatings.ConceptualContributionRating +
                 totalRatings.PracticalContributionRating +
-                totalRatings.WorkEthicRating) /
-            (4 * reviews.length)
+                totalRatings.WorkEthicRating) / (4 * reviews.length)
         ).toFixed(2)
     };
 
@@ -45,16 +45,32 @@ function ReviewDashboardSummary({ students = [], search = "" }) {
     const [sortBy, setSortBy] = useState(null);
     const [sortOrder, setSortOrder] = useState('asc');
 
-    // Function to handle sorting
     const handleSort = (column) => {
         const order = (sortBy === column && sortOrder === 'asc') ? 'desc' : 'asc';
         setSortBy(column);
         setSortOrder(order);
 
-        // Sort the students based on the selected column and order
         const sortedStudents = [...filteredStudents].sort((a, b) => {
-            const valueA = column === 'average' ? calculateAverageRating(a.reviews).OverallAverage : a[column];
-            const valueB = column === 'average' ? calculateAverageRating(b.reviews).OverallAverage : b[column];
+            let valueA, valueB;
+
+            if (column === 'firstName' || column === 'lastName') {
+                valueA = a[column]?.toLowerCase() || ""; // Case-insensitive sorting for names
+                valueB = b[column]?.toLowerCase() || "";
+            } else if (column === 'average') {
+                valueA = calculateAverageRating(a.reviews).OverallAverage;
+                valueB = calculateAverageRating(b.reviews).OverallAverage;
+            } else if (column === 'teams') {
+                valueA = a.teams || "No Team";
+                valueB = b.teams || "No Team";
+            } else {
+                // For individual ratings like CooperationRating, ConceptualContributionRating, etc.
+                valueA = calculateAverageRating(a.reviews)[column];
+                valueB = calculateAverageRating(b.reviews)[column];
+            }
+
+            // Convert "N/A" to infinity for sorting, ensuring "N/A" appears last
+            valueA = valueA === "N/A" ? (order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY) : parseFloat(valueA);
+            valueB = valueB === "N/A" ? (order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY) : parseFloat(valueB);
 
             if (order === 'asc') return valueA > valueB ? 1 : -1;
             return valueA < valueB ? 1 : -1;
@@ -63,30 +79,39 @@ function ReviewDashboardSummary({ students = [], search = "" }) {
         setFilteredStudents(sortedStudents);
     };
 
+
+
     useEffect(() => {
         setFilteredStudents(
-            students?.filter((student) =>
+            students.filter((student) =>
                 student.firstName?.toLowerCase().includes(search.toLowerCase()) ||
                 student.lastName?.toLowerCase().includes(search.toLowerCase())
-            ) || []
+            )
         );
     }, [search, students]);
+
+    const renderSortIcon = (column) => {
+        if (sortBy === column) {
+            return sortOrder === 'asc' ? <FaSortUp color="purple" /> : <FaSortDown color="purple" />;
+        }
+        return <FaSort color="gray" />;
+    };
 
     return (
         <div className={styles.studentBlock}>
             <table className={styles.studentTable}>
                 <thead>
                 <tr>
-                    <th onClick={() => handleSort('email')}>Email</th>
-                    <th onClick={() => handleSort('firstName')}>First Name</th>
-                    <th onClick={() => handleSort('lastName')}>Last Name</th>
-                    <th onClick={() => handleSort('teams')}>Team</th>
-                    <th onClick={() => handleSort('CooperationRating')}>Cooperation</th>
-                    <th onClick={() => handleSort('ConceptualContributionRating')}>Conceptual</th>
-                    <th onClick={() => handleSort('PracticalContributionRating')}>Practical</th>
-                    <th onClick={() => handleSort('WorkEthicRating')}>Work Ethic</th>
-                    <th onClick={() => handleSort('average')}>Average</th>
-                    <th onClick={() => handleSort('reviews')}>Responded</th>
+                    <th onClick={() => handleSort('email')}>Email {renderSortIcon('email')}</th>
+                    <th onClick={() => handleSort('firstName')}>First Name {renderSortIcon('firstName')}</th>
+                    <th onClick={() => handleSort('lastName')}>Last Name {renderSortIcon('lastName')}</th>
+                    <th onClick={() => handleSort('teams')}>Team {renderSortIcon('teams')}</th>
+                    <th onClick={() => handleSort('CooperationRating')}>Cooperation {renderSortIcon('CooperationRating')}</th>
+                    <th onClick={() => handleSort('ConceptualContributionRating')}>Conceptual {renderSortIcon('ConceptualContributionRating')}</th>
+                    <th onClick={() => handleSort('PracticalContributionRating')}>Practical {renderSortIcon('PracticalContributionRating')}</th>
+                    <th onClick={() => handleSort('WorkEthicRating')}>Work Ethic {renderSortIcon('WorkEthicRating')}</th>
+                    <th onClick={() => handleSort('average')}>Average {renderSortIcon('average')}</th>
+                    <th onClick={() => handleSort('reviews')}>Responded {renderSortIcon('reviews')}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -97,7 +122,7 @@ function ReviewDashboardSummary({ students = [], search = "" }) {
                             <td>{student.email}</td>
                             <td>{student.firstName}</td>
                             <td>{student.lastName}</td>
-                            <td>{student.teams}</td>
+                            <td>{student.teams || "No Team"}</td> {/* Handle null team names */}
                             <td>{averages.CooperationRating}</td>
                             <td>{averages.ConceptualContributionRating}</td>
                             <td>{averages.PracticalContributionRating}</td>
