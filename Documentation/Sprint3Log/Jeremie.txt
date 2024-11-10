@@ -1,0 +1,5 @@
+Partcipated in every full team meeting
+Creating new user stories: 30 minutes
+Discussing/creating backend database architecture: 2 hours
+Creating integration pipeline: 5 hours
+
