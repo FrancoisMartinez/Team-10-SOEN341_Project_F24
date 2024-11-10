@@ -1,13 +1,26 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/ReviewsDashboard.module.css";
+import axios from "axios";
 
-function ReviewDashboardSummary({ students, search }) {
-    const [filteredStudents, setFilteredStudents] = useState(students);
-    const [popupVisible, setPopupVisible] = useState(false);
-    const [selectedStudent, setSelectedStudent] = useState(null); // Store the full student object
-    const [message, setMessage] = useState("Enter your message."); // State to manage message input
-    const [submissionStatus, setSubmissionStatus] = useState(""); // State to manage submission status
-}
+const sendEmail = async (recipientEmail, body) => {
+    try {
+      const response = await axios.post('http://localhost:3000/email', {
+        email: recipientEmail,
+        subject: 'You have a new message from your instructor',
+        message: body,
+      });
+  
+      if (response.data.success) {
+        console.log('Email sent successfully!');
+        console.log(recipientEmail);
+      } else {
+        console.error('Error sending email:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error.response ? error.response.data : error.message);
+    }
+  };
+
 function calculateAverageRating(reviews) {
     if (!reviews || reviews.length === 0) return {
         CooperationRating: "N/A",
@@ -49,6 +62,10 @@ function calculateAverageRating(reviews) {
 
 function ReviewDashboardSummary({ students = [], search = "" }) {
     const [filteredStudents, setFilteredStudents] = useState(students);
+    const [popupVisible, setPopupVisible] = useState(false);
+    const [selectedStudent, setSelectedStudent] = useState(null); // Store the full student object
+    const [message, setMessage] = useState("Enter your message."); // State to manage message input
+    const [submissionStatus, setSubmissionStatus] = useState(""); // State to manage submission status
 
     useEffect(() => {
         setFilteredStudents(
@@ -94,6 +111,7 @@ function ReviewDashboardSummary({ students = [], search = "" }) {
         if (message.trim() === "" || message === "Enter your message.") {
             setSubmissionStatus("Please enter a valid message before submitting.");
         } else {
+            sendEmail(selectedStudent.email, message);
             setSubmissionStatus("Message sent!");
             console.log("Message submitted:", message);
         }
