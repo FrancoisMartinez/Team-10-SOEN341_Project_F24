@@ -42,6 +42,26 @@ function calculateAverageRating(reviews) {
 
 function ReviewDashboardSummary({ students = [], search = "" }) {
     const [filteredStudents, setFilteredStudents] = useState(students);
+    const [sortBy, setSortBy] = useState(null);
+    const [sortOrder, setSortOrder] = useState('asc');
+
+    // Function to handle sorting
+    const handleSort = (column) => {
+        const order = (sortBy === column && sortOrder === 'asc') ? 'desc' : 'asc';
+        setSortBy(column);
+        setSortOrder(order);
+
+        // Sort the students based on the selected column and order
+        const sortedStudents = [...filteredStudents].sort((a, b) => {
+            const valueA = column === 'average' ? calculateAverageRating(a.reviews).OverallAverage : a[column];
+            const valueB = column === 'average' ? calculateAverageRating(b.reviews).OverallAverage : b[column];
+
+            if (order === 'asc') return valueA > valueB ? 1 : -1;
+            return valueA < valueB ? 1 : -1;
+        });
+
+        setFilteredStudents(sortedStudents);
+    };
 
     useEffect(() => {
         setFilteredStudents(
@@ -57,16 +77,16 @@ function ReviewDashboardSummary({ students = [], search = "" }) {
             <table className={styles.studentTable}>
                 <thead>
                 <tr>
-                    <th>Email</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Team</th>
-                    <th>Cooperation</th>
-                    <th>Conceptual</th>
-                    <th>Practical</th>
-                    <th>Work Ethic</th>
-                    <th>Average</th>
-                    <th>Responded</th>
+                    <th onClick={() => handleSort('email')}>Email</th>
+                    <th onClick={() => handleSort('firstName')}>First Name</th>
+                    <th onClick={() => handleSort('lastName')}>Last Name</th>
+                    <th onClick={() => handleSort('teams')}>Team</th>
+                    <th onClick={() => handleSort('CooperationRating')}>Cooperation</th>
+                    <th onClick={() => handleSort('ConceptualContributionRating')}>Conceptual</th>
+                    <th onClick={() => handleSort('PracticalContributionRating')}>Practical</th>
+                    <th onClick={() => handleSort('WorkEthicRating')}>Work Ethic</th>
+                    <th onClick={() => handleSort('average')}>Average</th>
+                    <th onClick={() => handleSort('reviews')}>Responded</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -83,7 +103,7 @@ function ReviewDashboardSummary({ students = [], search = "" }) {
                             <td>{averages.PracticalContributionRating}</td>
                             <td>{averages.WorkEthicRating}</td>
                             <td>{averages.OverallAverage}</td>
-                            <td>{student.reviews?.length || 0}</td> {/* Display the number of reviews */}
+                            <td>{student.reviews?.length || 0}</td>
                         </tr>
                     );
                 })}
