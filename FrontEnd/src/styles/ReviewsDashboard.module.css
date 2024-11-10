@@ -1,4 +1,4 @@
-.pageTitle{
+.pageTitle {
     padding-left: 10px;
 }
 
@@ -15,71 +15,95 @@
 
 .displayBox button {
     float: right;
-    background: linear-gradient(45deg, #9c82cd, #a088cc); /* Gradient color */
+    background: linear-gradient(45deg, #9c82cd, #a088cc);
+    /* Gradient color */
     color: white;
     border: none;
     padding: 12px 20px;
     margin-left: 5px;
-    border-radius: 50px; /* Pill-shaped button */
+    border-radius: 50px;
+    /* Pill-shaped button */
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: all 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: all 0.3s ease;
+    /* Smooth transitions */
     outline: none;
-    text-transform: uppercase; /* Makes the text uppercase */
-    
+    text-transform: uppercase;
+    /* Makes the text uppercase */
+
 }
 
 .displayBox button:hover {
-    background: linear-gradient(45deg, #9c82cd, #a088cc); /* Inverse gradient on hover */
-    transform: translateY(-3px); /* Moves button up slightly on hover */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    background: linear-gradient(45deg, #9c82cd, #a088cc);
+    /* Inverse gradient on hover */
+    transform: translateY(-3px);
+    /* Moves button up slightly on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    /* Stronger shadow on hover */
 }
 
 .displayBox button:active {
-    transform: translateY(0); /* Reset transform on click */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Restore original shadow */
+    transform: translateY(0);
+    /* Reset transform on click */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Restore original shadow */
 }
 
 .searchBar {
-    width: 300px; /* Adjust width as needed */
+    width: 300px;
+    /* Adjust width as needed */
     padding: 12px 20px;
     border: 3px solid #ccc;
-    border-radius: 50px; /* Rounded, pill-shaped input */
+    border-radius: 50px;
+    /* Rounded, pill-shaped input */
     font-size: 16px;
     outline: none;
-    transition: all 0.3s ease; /* Smooth transition for hover and focus */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease;
+    /* Smooth transition for hover and focus */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
     background-color: #f9f9f9;
     margin-bottom: 15px;
 }
 
 .searchBar:focus {
-    border-color: #9c82cd; /* Highlight border on focus */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow on focus */
-    background-color: #fff; /* White background on focus */
+    border-color: #9c82cd;
+    /* Highlight border on focus */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    /* Stronger shadow on focus */
+    background-color: #fff;
+    /* White background on focus */
 }
 
 .searchBar::placeholder {
-    color: #999; /* Slightly darker placeholder for readability */
+    color: #999;
+    /* Slightly darker placeholder for readability */
 }
 
 .results {
 
     display: flex;
     padding-left: 10px;
-    border: 1px solid #ccc; /* Lighter border for softer look */
-    border-radius: 8px;      /* Rounded corners */
+    border: 1px solid #ccc;
+    /* Lighter border for softer look */
+    border-radius: 8px;
+    /* Rounded corners */
     width: 1150px;
     height: 400px;
     overflow-y: scroll;
     overflow-x: auto;
-    background-color: #f9f9f9; /* Light background for better contrast */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #f9f9f9;
+    /* Light background for better contrast */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
 }
+
 .studentBlock li:hover {
-    transform: scale(1.005); /* Slight scale-up effect on hover */
+    transform: scale(1.005);
+    /* Slight scale-up effect on hover */
 }
 
 .studentTable {
@@ -89,16 +113,19 @@
 
 .studentTable th,
 .studentTable td {
-    border: 1px solid #ddd; /* Outline for each cell */
+    border: 1px solid #ddd;
+    /* Outline for each cell */
     padding: 8px;
     text-align: left;
     overflow-x: auto;
-    max-width: 180px; /* Maximum width for each cell */
+    max-width: 180px;
+    /* Maximum width for each cell */
 
 }
 
 .studentTable th {
-    background-color: #f2f2f2; /* Light background for headers */
+    background-color: #f2f2f2;
+    /* Light background for headers */
     font-weight: bold;
 }
 
@@ -108,12 +135,16 @@
 }
 
 .results::-webkit-scrollbar-thumb {
-    background-color: #9c82cd; /* Purple scroll bar */
+    background-color: #9c82cd;
+    /* Purple scroll bar */
     border-radius: 10px;
 }
+
 .results::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Light background for the scrollbar track */
+    background-color: #f1f1f1;
+    /* Light background for the scrollbar track */
 }
+
 /* General Styles for Scrollbar (optional) */
 .studentTable td::-webkit-scrollbar {
     width: 8px;
@@ -121,11 +152,14 @@
 }
 
 .studentTable td::-webkit-scrollbar-thumb {
-    background-color: #9c82cd; /* Purple scroll bar */
+    background-color: #9c82cd;
+    /* Purple scroll bar */
     border-radius: 10px;
 }
+
 .studentTable td::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Light background for the scrollbar track */
+    background-color: #f1f1f1;
+    /* Light background for the scrollbar track */
 }
 
 .teamBlock {
@@ -137,11 +171,117 @@
     border-radius: 5px;
     width: 1100px;
     padding-right: 10px;
-    
-    
-    overflow-y:auto;
 
-    background-color: #ffffff; /* White background for team blocks */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to team blocks */
-    transition: transform 0.3s ease; /* Adds a smooth hover effect */
+
+    overflow-y: auto;
+
+    background-color: #ffffff;
+    /* White background for team blocks */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* Adds shadow to team blocks */
+    transition: transform 0.3s ease;
+    /* Adds a smooth hover effect */
+}
+
+/* Styles for the main student table */
+.studentBlock {
+    /* Your styles here */
+}
+
+.studentTable {
+    /* Your styles here */
+}
+
+/* Styles for the popup overlay */
+.popup_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styles for the popup container */
+.popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 300px;
+    max-width: 80%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Close button styling */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Content within the popup */
+.popup_content {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* Styling for the message textarea */
+.messageTextArea {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Styling for the placeholder */
+.messageTextArea::placeholder {
+    color: #aaa;
+}
+
+/* Styling for focus */
+.messageTextArea:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Styling for the submit button */
+.submitButton {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submitButton:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for submission status */
+.submissionStatus {
+    margin-top: 10px;
+    font-size: 14px;
+    color: green;
+}
+
+.submissionStatus.error {
+    color: red;
 }

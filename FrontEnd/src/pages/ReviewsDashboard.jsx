@@ -9,6 +9,7 @@ import ReviewDashboardDetailed from "../components/ReviewDashboardDetailed.jsx";
 import TeammateSelection from './TeammateSelection.jsx';
 
 
+
 const studentsList = [
     {
         email: "student112211321321231@gmail.com",
@@ -214,7 +215,7 @@ function ReviewsDashboard() {
                     <input className={styles.searchBar} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={'Search'} />
 
                     <div className={styles.results}>
-                        {view === 'Detailed' ? <ReviewDashboardSummary students={students} search={search}/> :  <ReviewDashboardDetailed teams={teams} search={search}/>}
+                        {view === 'Summary' ? <ReviewDashboardSummary students={students} search={search}/> :  <ReviewDashboardDetailed teams={teams} search={search}/>}
                     </div>
                 </div>
             </div>
