@@ -8,11 +8,9 @@ import {useNavigate} from "react-router-dom";
 const sendReviewEmail = async () => {
     try {
       const response = await axios.post('http://localhost:3000/email', {
-        params: {
-          email: 'liretin487@lineacr.com',
-          subject: 'You have a new review!',
-          message: 'You’ve received a new peer review. Log in to check it out!',
-        },
+        email: 'liretin487@lineacr.com',
+        subject: 'You have a new review!',
+        message: 'You’ve received a new peer review. Log in to check it out!',
       });
   
       if (response.data.success) {
