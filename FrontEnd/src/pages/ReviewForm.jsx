@@ -3,7 +3,7 @@ import {GlobalContext} from "../GlobalStateProvider.jsx";
 import Comments from "../components/Comments.jsx";
 import Rating from "../components/Rating.jsx";
 import styles from "../styles/StudentDashboard.module.css";
-import Header from '../components/header.jsx';
+import Header from '../components/Header.jsx';
 import {useNavigate} from "react-router-dom";
 import Success from "../components/Success.jsx";
 import Loading from "../components/Loading.jsx";
