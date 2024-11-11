@@ -73,24 +73,36 @@ function ReviewDashboardSummary({ students = [], search = "" }) {
         const sortedStudents = [...filteredStudents].sort((a, b) => {
             let valueA, valueB;
 
-            if (column === 'firstName' || column === 'lastName') {
-                valueA = a[column]?.toLowerCase() || ""; // Case-insensitive sorting for names
-                valueB = b[column]?.toLowerCase() || "";
+            if (column === 'firstName') {
+                // Case-insensitive sorting for firstName
+                valueA = a.firstName?.toString().toLowerCase() || "";
+                valueB = b.firstName?.toString().toLowerCase() || "";
+            } else if (column === 'lastName') {
+                // Case-insensitive sorting for lastName
+                valueA = a.lastName?.toString().toLowerCase() || "";
+                valueB = b.lastName?.toString().toLowerCase() || "";
+            } else if (column === 'email') {
+                // Case-insensitive sorting for email
+                valueA = a.email?.toString().toLowerCase() || "";
+                valueB = b.email?.toString().toLowerCase() || "";
+            } else if (column === 'teams') {
+                valueA = a.teams?.toString().toLowerCase() || "No Team";
+                valueB = b.teams?.toString().toLowerCase() || "No Team";
             } else if (column === 'average') {
                 valueA = calculateAverageRating(a.reviews).OverallAverage;
                 valueB = calculateAverageRating(b.reviews).OverallAverage;
-            } else if (column === 'teams') {
-                valueA = a.teams || "No Team";
-                valueB = b.teams || "No Team";
-            } else {
+            } else if (column === 'reviews') {
+                valueA = a.reviews?.length || 0; // Default to 0 if undefined
+                valueB = b.reviews?.length || 0;
+            }  else {
                 // For individual ratings like CooperationRating, ConceptualContributionRating, etc.
                 valueA = calculateAverageRating(a.reviews)[column];
                 valueB = calculateAverageRating(b.reviews)[column];
             }
 
             // Convert "N/A" to infinity for sorting, ensuring "N/A" appears last
-            valueA = valueA === "N/A" ? (order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY) : parseFloat(valueA);
-            valueB = valueB === "N/A" ? (order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY) : parseFloat(valueB);
+            if (valueA === "N/A") valueA = order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
+            if (valueB === "N/A") valueB = order === 'asc' ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
 
             if (order === 'asc') return valueA > valueB ? 1 : -1;
             return valueA < valueB ? 1 : -1;
