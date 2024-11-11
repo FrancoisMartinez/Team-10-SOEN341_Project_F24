@@ -1,1 +1,4 @@
-
+Participated in every team meeting:  3h
+Implemented functions to fetch reviews from the database and display them: 3h
+Corrected database for reviews to allow for better functionality: 2h
+Implemented functions to allow frontend to display reviews based on the student's unique identifier (e-mail): 1h
