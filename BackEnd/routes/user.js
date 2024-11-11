@@ -82,6 +82,28 @@ router.post('/login', async (req, res) => {
     }
 });
 
+//delete student for tests
+router.post('/deleteStudent', async (req, res) => {
+    try {
+        const { email } = req.body; // Extract email and password
+
+        // Check if the user already exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Delete the user
+        await User.deleteOne({ email });
+        return res.status(200).json({ status: "User deleted successfully" });
+
+    } catch (err) {
+        console.log('Error creating user:', err);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
 // Add team route (only for instructors)
 router.post('/add-team', async (req, res) => {
     try {
