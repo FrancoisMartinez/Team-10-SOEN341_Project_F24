@@ -1,0 +1,4 @@
+Meetings: 2h
+Fixed bugs from sprint 2 : 3h
+Worked on the review dashboard : 4h
+Developed unit test : 1h
