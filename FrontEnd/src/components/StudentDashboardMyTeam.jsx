@@ -13,8 +13,11 @@ function InstructorDashboardStudents({ students, search }) {
     useEffect(() => {
         setFilteredStudents(
             students
+                .filter(student => student.email !== state.user?.email)
                 .filter((student) => student.teams && state.user?.teams === student.teams)
-                .filter((student) => student.lastName.toLowerCase().includes(search.toLowerCase()) || student.firstName.toLowerCase().includes(search.toLowerCase())))
+                .filter((student) => student.lastName.toLowerCase().includes(search.toLowerCase()) || student.firstName.toLowerCase().includes(search.toLowerCase()))
+                .sort((a, b) => a.lastName.localeCompare(b.lastName))
+        );
     }, [search, students]);
 
     const handleStudentClick = (student) => {
@@ -34,7 +37,7 @@ function InstructorDashboardStudents({ students, search }) {
             {state.user?.teams ?
 
                 <ul>
-                    <h3>Choose a student to review.</h3>
+                    <h3>Choose a student to review in {state.user.teams}.</h3>
 
                     {/* Add an onClick event that triggers a review form for a student. */}
                     {filteredStudents.map((student, index) =>

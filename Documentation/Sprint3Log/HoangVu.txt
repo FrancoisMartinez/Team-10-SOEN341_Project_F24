@@ -1,0 +1,4 @@
+Team meeting participation: 1h
+Made the User Acceptance Test: 1h
+Updated the Excel Sprint Planning Sheet for Sprint 3: 1h
+Worked on the ReviewDashboard for the FrontEnd : 4h

@@ -9,7 +9,10 @@ function InstructorDashboardTeams({ teams, search }) {
     useEffect(() => {
         setFilteredTeams(
 
-            teams.filter((student) => student.teamName.toLowerCase().includes(search.toLowerCase())))
+            teams
+                .filter((student) => student.teamName.toLowerCase().includes(search.toLowerCase()))
+                .sort((a, b) => a.teamName.localeCompare(b.teamName))
+        );
     }, [search, teams]);
 
     return (

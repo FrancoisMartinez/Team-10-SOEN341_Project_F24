@@ -32,6 +32,7 @@ function StudentDashboard() {
                 setStudents(fetchedStudents);
 
                 const processedTeams = fetchedStudents.reduce((acc, student) => {
+
                     if (student.teams) {
                         if (!acc[student.teams]) {
                             acc[student.teams] = { teamName: student.teams, members: [] };
@@ -50,7 +51,6 @@ function StudentDashboard() {
         fetchStudents();  // Call the function to fetch students on component mount
     }, []);
 
-    console.log(state.user);
 
     return (
 
@@ -59,7 +59,14 @@ function StudentDashboard() {
                 <Header></Header>
 
             </div>
-            <h1 className={styles.pageTitle}>Student Dashboard: <br></br><br></br></h1>
+            <h1 className={styles.pageTitle}>
+                {state.user ? (
+                    state.user.teams ? 'Welcome to ' + state.user.teams + ', ' + state.user.firstName + ' ' + state.user.lastName : 'Welcome ' + state.user.firstName + ' ' + state.user.lastName + ', you are currently not in a team'
+                    )
+                    : 'You are currently not logged in.'}
+            </h1>
+            <h1 className={styles.pageTitle}>Student Dashboard: </h1>
+
 
             <div className={styles.displayBox}>
                 <div className={styles.displayTeamsBox}>

@@ -8,7 +8,9 @@ function InstructorDashboardStudents({ students, search }) {
 
     useEffect(() => {
         setFilteredStudents(
-            students?.filter((student) => student.firstName.toLowerCase().includes(search.toLowerCase()) || student.lastName.toLowerCase().includes(search.toLowerCase())))
+            students?.filter((student) => student.firstName.toLowerCase().includes(search.toLowerCase()) || student.lastName.toLowerCase().includes(search.toLowerCase()))
+                .sort((a, b) => a.lastName.localeCompare(b.lastName))
+        );
     }, [search, students]);
 
     return (

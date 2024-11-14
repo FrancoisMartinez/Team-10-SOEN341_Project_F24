@@ -1,0 +1,3 @@
+Participated in every team meeting:  3h
+implement read from csv file 1h
+implement import teams file for csv script 2h

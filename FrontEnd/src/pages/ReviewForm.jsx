@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import Success from "../components/Success.jsx";
 import Loading from "../components/Loading.jsx";
 import Error from "../components/Error.jsx";
+import axios from 'axios';
 
 
 function ReviewForm() {
@@ -31,7 +32,12 @@ function ReviewForm() {
 
             <Rating/>
             <Comments/>
-                <button className={styles.submitButton} onClick={() => navigate('/studentDashboard')}>back</button>
+                <button className={styles.submitButton} onClick={async () =>{
+                     navigate('/studentDashboard');
+                    }}
+                    >
+                    back
+                    </button>
 
             </div>
         </>
