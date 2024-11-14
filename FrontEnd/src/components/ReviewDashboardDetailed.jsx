@@ -148,8 +148,45 @@ function ReviewDashboardDetailed({ teams, originalTeams, search }) {
                             </tbody>
                         </table>
                         <br/>
+                        <div className={styles.commentsSection}>
+                            <h3>Comments:</h3>
+                            {team.members
+                                .filter(member => member.reviews && member.reviews.some(review =>
+                                    review.CooperationComment ||
+                                    review.ConceptualContributionComment ||
+                                    review.PracticalContributionComment ||
+                                    review.WorkEthicComment
+                                ))
+                                .map((member, memberIndex) => (
+                                    <div key={`${memberIndex}-comment`}>
+                                        <strong>{member.firstName} {member.lastName} comments:</strong>
+                                        <ul style={{marginLeft: '20px', listStyleType: 'disc'}}>
+                                            {member.reviews.map((review, reviewIndex) => (
+                                                <React.Fragment key={reviewIndex}>
+                                                    {review.CooperationComment && (
+                                                        <li>Cooperation: {review.CooperationComment}</li>
+                                                    )}
+                                                    {review.ConceptualContributionComment && (
+                                                        <li>Conceptual
+                                                            Contribution: {review.ConceptualContributionComment}</li>
+                                                    )}
+                                                    {review.PracticalContributionComment && (
+                                                        <li>Practical
+                                                            Contribution: {review.PracticalContributionComment}</li>
+                                                    )}
+                                                    {review.WorkEthicComment && (
+                                                        <li>Work Ethic: {review.WorkEthicComment}</li>
+                                                    )}
+                                                </React.Fragment>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                        </div>
+
                     </div>
                 );
+
             })}
         </div>
 
