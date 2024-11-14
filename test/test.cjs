@@ -2,8 +2,6 @@ const React = require('react');
 const {expect} = import('chai');
 const axios = require("axios");
 
-// Your component definition goes here
-
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -11,7 +9,6 @@ function getRandomInt(min, max) {
 const handleSubmit1 = async (email, password, instructor) => {
 
   try {
-      // Send POST request to backend /signup route
       const response = await axios.post("http://localhost:3000/login", { email, password, instructor });
 
       if (response.status === 200) {
@@ -25,7 +22,6 @@ const handleSubmit1 = async (email, password, instructor) => {
 
 const handleSubmit2 = async ( firstName, lastName, email, password, instructor ) => {
   try {
-      // Send POST request to backend /signup route
       const response = await axios.post("http://localhost:3000/signup", { firstName, lastName, email, password, instructor });
 
       if (response.status === 200) {;
