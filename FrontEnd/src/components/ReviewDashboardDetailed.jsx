@@ -55,7 +55,7 @@ function ReviewDashboardDetailed({ teams, search }) {
 
 
 
-
+    console.log(filteredTeams)
 
     return (
         <div>
@@ -100,32 +100,40 @@ function ReviewDashboardDetailed({ teams, search }) {
                     <div className={styles.commentsSection}>
                         <h3>Comments:</h3>
                         {team.members
-                            .filter((member) =>
-                                member.reviews &&
-                                member.reviews.some(
-                                    (review) =>
-                                        review.CooperationComment ||
-                                        review.ConceptualContributionComment ||
-                                        review.PracticalContributionComment ||
-                                        review.WorkEthicComment
-                                )
-                            )
-                            .map((member, jndex) => (
-                                <div key={`${index}-comment-${jndex}`}>
-                                    <strong>{member.firstName} {member.lastName} comment:</strong> {" "}
-                                    {member.reviews
-                                        .map((review, reviewIndex) => (
-                                            <span key={reviewIndex}>
-                                                {review.CooperationComment ||
-                                                    review.ConceptualContributionComment ||
-                                                    review.PracticalContributionComment ||
-                                                    review.WorkEthicComment || "empty"}
-                                            </span>
-                                        ))
-                                        .reduce((prev, curr) => [prev, "; ", curr], "")} {/* Initial value as empty string */}
+                            .filter(member => member.reviews && member.reviews.some(review =>
+                                review.CooperationComment ||
+                                review.ConceptualContributionComment ||
+                                review.PracticalContributionComment ||
+                                review.WorkEthicComment
+                            ))
+                            .map((member, memberIndex) => (
+                                <div key={`${memberIndex}-comment`}>
+                                    <strong>{member.firstName} {member.lastName} comments:</strong>
+                                    <ul style={{marginLeft: '20px', listStyleType: 'disc'}}>
+                                        {member.reviews.map((review, reviewIndex) => (
+                                            <React.Fragment key={reviewIndex}>
+                                                {review.CooperationComment && (
+                                                    <li>Cooperation: {review.CooperationComment}</li>
+                                                )}
+                                                {review.ConceptualContributionComment && (
+                                                    <li>Conceptual
+                                                        Contribution: {review.ConceptualContributionComment}</li>
+                                                )}
+                                                {review.PracticalContributionComment && (
+                                                    <li>Practical
+                                                        Contribution: {review.PracticalContributionComment}</li>
+                                                )}
+                                                {review.WorkEthicComment && (
+                                                    <li>Work Ethic: {review.WorkEthicComment}</li>
+                                                )}
+                                            </React.Fragment>
+                                        ))}
+                                    </ul>
                                 </div>
                             ))}
                     </div>
+
+
                     <br/>
                 </div>
             ))}
