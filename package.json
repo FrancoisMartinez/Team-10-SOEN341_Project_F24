@@ -17,7 +17,11 @@
     "test": "mocha"
   },
   "devDependencies": {
+    "@eslint/js": "^9.15.0",
     "chai": "^5.1.2",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react": "^7.37.2",
+    "globals": "^15.12.0",
     "mocha": "^10.7.3",
     "supertest": "^7.0.0"
   }
