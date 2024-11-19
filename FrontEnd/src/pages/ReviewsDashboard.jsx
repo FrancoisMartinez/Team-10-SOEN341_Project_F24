@@ -8,8 +8,6 @@ import ReviewDashboardSummary from "../components/ReviewDashboardSummary.jsx";
 import ReviewDashboardDetailed from "../components/ReviewDashboardDetailed.jsx";
 
 function ReviewsDashboard() {
-    const { state, dispatch } = useContext(GlobalContext);
-    const navigate = useNavigate();
     const [search, setSearch] = useState('');
     const [view, setView] = useState('Summary');
     const [students, setStudents] = useState([]);

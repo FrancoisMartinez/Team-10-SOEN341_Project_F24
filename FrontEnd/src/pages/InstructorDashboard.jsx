@@ -1,15 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GlobalContext } from "../GlobalStateProvider.jsx";
 import InstructorDashboardTeams from "../components/InstructorDashboardTeams.jsx";
-import Header from "../components/header.jsx";
+import Header from "../components/Header.jsx";
 import InstructorDashboardStudents from "../components/InstructorDashboardStudents.jsx";
 import styles from "../styles/InstructorDashboard.module.css";
 import axios from "axios";
 
 
 function InstructorDashboard() {
-    const { state, dispatch } = useContext(GlobalContext);
     const navigate = useNavigate();
     const [search, setSearch]  = useState('');
     const [view, setView] = useState('Student');

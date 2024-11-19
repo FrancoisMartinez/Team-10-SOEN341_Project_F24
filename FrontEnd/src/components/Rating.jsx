@@ -11,7 +11,6 @@ function Rating() {
     const dimensions = ['Cooperation', 'Conceptual Contribution', 'Practical Contribution', 'Work Ethic'];
     const [ratings, setRatings] = useState({});
     const [comments, setComments] = useState({});
-    const [studentEmail, setStudentEmail] = useState('');
 
     const navigate = useNavigate();
 

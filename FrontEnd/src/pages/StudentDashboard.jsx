@@ -12,8 +12,7 @@ import axios from "axios";
 
 function StudentDashboard() {
 
-    const { state, dispatch } = useContext(GlobalContext);
-    const navigate = useNavigate();
+    const { state } = useContext(GlobalContext);
     const [search, setSearch] = useState('');
     const [view, setView] = useState('All Teams');
     const [students, setStudents] = useState([]);
