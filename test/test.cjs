@@ -88,7 +88,6 @@ const sendEmail = async (recipientEmail) => {
 };
 
 
-
 describe('Login test', () => {
   it('should return login success', () =>{
       handleLogin("s1@g.c", "123", false);
