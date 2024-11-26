@@ -5,14 +5,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main"]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -21,30 +19,26 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Use Node.js 20
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20.18.0
         cache: 'npm'
-        
-    
-    - run: npm install
+
     - name: Install dependencies
       run: npm ci
 
     - name: List dependencies
       run: npm list
-      
-    - run: npm run build --if-present
 
-    # Uses NPM to run the `lint` script that I included in my package.json
-- task: Npm@1
-  inputs:
-    command: custom
-    customCommand: 'run lint'
-  displayName: Run ESLint
-  
+    - name: Build the project
+      run: npm run build --if-present
 
-    - run: npm test
+    - name: Run ESLint
+      run: npm run lint
+
+    - name: Run tests
+      run: npm test
