@@ -14,7 +14,9 @@
   },
   "type": "module",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint"
+
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
