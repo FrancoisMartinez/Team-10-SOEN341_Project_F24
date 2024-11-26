@@ -1,9 +1,8 @@
 import React, {createContext, useEffect, useReducer} from "react";
 import axios from "axios";
 
+//INITIAL STATE
 
-
-// Initial state
 const initialState = {
     user: null,
     // accessToken: localStorage.getItem('accessToken') || null,
@@ -14,7 +13,8 @@ const initialState = {
     team: null,
 }
 
-// Manage the user state
+
+//THIS PART WILL MANAGE THE USER STATE
 const reducer = (state, action) => {
     switch (action.type) {
         case 'LOGIN_REQUEST':
@@ -62,33 +62,12 @@ const reducer = (state, action) => {
 
 };
 
-
+//GLOBAL
 export const GlobalContext = createContext(undefined);
 
-// Provider component
 export const GlobalStateProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    //
-    // useEffect(() => {
-    //     const verifyToken = async () => {
-    //         const token = localStorage.getItem('accessToken');
-    //         if (token) {
-    //             try {
-    //                 // Pass the refresh token in the body of the request
-    //                 const refreshToken = localStorage.getItem('refreshToken'); // Ensure you store the refresh token
-    //                 const response = await axios.post('http://localhost:3000/refresh', { refreshToken });
-    //
-    //                 // Dispatch new access token
-    //                 dispatch({ type: 'REFRESH_TOKEN', payload: { accessToken: response.data.accessToken } });
-    //             } catch (error) {
-    //                 console.error('Token refresh failed:', error.response?.data || error.message);
-    //                 dispatch({ type: 'LOGOUT' });
-    //             }
-    //         }
-    //     };
-    //
-    //     verifyToken();
-    // }, []);
+   
 
 
     return (

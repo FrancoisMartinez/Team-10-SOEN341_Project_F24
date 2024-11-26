@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import styles from "../styles/StudentDashboard.module.css";
 
+//***************************************** */
+// DIMENSION RATING
+//***************************************** */
+
 
 const DimensionRating = ({ dimension, handleRatingChange, handleCommentChange }) => {
     const [rating, setRating] = useState(0);

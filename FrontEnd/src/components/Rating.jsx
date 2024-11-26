@@ -81,6 +81,11 @@ function Rating() {
 
     };
 
+
+//***************************************** */
+// HTML SECTION
+//***************************************** */
+
     return (
         <div className={styles.ratingContainer}>
             {dimensions.map((dimension, index) => (

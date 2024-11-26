@@ -2,6 +2,11 @@ import React, {useContext, useEffect, useState} from "react";
 import styles from "../styles/StudentDashboard.module.css";
 import {useNavigate} from "react-router-dom";
 import {GlobalContext} from "../GlobalStateProvider.jsx";
+//***************************************** */
+// STUDENT DASHBOARD
+//***************************************** */
+
+
 
 
 function InstructorDashboardStudents({ students, search }) {
