@@ -11,7 +11,7 @@ import Success from "../components/Success.jsx";
 function UpdateTeam() {
     const { state, dispatch } = useContext(GlobalContext);
     const [searchTerm, setSearchTerm] = useState('');
-    const [oldTeam, setOldTeam] = useState(state.team.members);
+    const [oldTeam] = useState(state.team.members);
     const [teamName, setTeamName] = useState(state.team.teamName);
     const [newTeam, setNewTeam] = useState(oldTeam);
     const [removedMembers, setRemovedMembers] = useState([]);

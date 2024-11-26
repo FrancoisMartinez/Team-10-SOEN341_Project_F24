@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
 import { useNavigate } from "react-router-dom";
-import Header from '../components/header.jsx';
+import Header from '../components/Header.jsx';
 import styles from '/src/styles/Home.module.css'
 
 

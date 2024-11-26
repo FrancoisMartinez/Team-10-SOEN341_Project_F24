@@ -1,6 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { GlobalContext } from "../GlobalStateProvider.jsx";
+import React, {  useState, useEffect } from 'react';
 import Header from "../components/Header.jsx";
 import styles from "../styles/ReviewsDashboard.module.css";
 import axios from "axios";
@@ -8,8 +6,6 @@ import ReviewDashboardSummary from "../components/ReviewDashboardSummary.jsx";
 import ReviewDashboardDetailed from "../components/ReviewDashboardDetailed.jsx";
 
 function ReviewsDashboard() {
-    const { state, dispatch } = useContext(GlobalContext);
-    const navigate = useNavigate();
     const [search, setSearch] = useState('');
     const [view, setView] = useState('Summary');
     const [students, setStudents] = useState([]);

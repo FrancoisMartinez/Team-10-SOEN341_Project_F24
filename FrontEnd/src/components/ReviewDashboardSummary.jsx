@@ -15,7 +15,6 @@ const sendEmail = async (recipientEmail, body) => {
         subject: 'You have a new message from your instructor',
         message: body,
       });
-
       if (response.data.success) {
         console.log('Email sent successfully!');
         console.log(recipientEmail);

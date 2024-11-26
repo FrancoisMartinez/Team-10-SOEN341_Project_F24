@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from "react";
-import { useNavigate } from 'react-router-dom';
 
 /*Change these imports to all teams and teamates in a students team */
 import InstructorDashboardTeams from "../components/StudentDashboardAllTeams.jsx";
@@ -12,8 +11,7 @@ import axios from "axios";
 
 function StudentDashboard() {
 
-    const { state, dispatch } = useContext(GlobalContext);
-    const navigate = useNavigate();
+    const { state } = useContext(GlobalContext);
     const [search, setSearch] = useState('');
     const [view, setView] = useState('All Teams');
     const [students, setStudents] = useState([]);
