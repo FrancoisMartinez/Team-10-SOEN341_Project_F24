@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { sendMail } = require('../email/mailer');
 
+//EMAIL BACK END
 router.post('/email', async (req, res) => {
   const { email, subject, message } = req.body;
   try {

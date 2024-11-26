@@ -95,6 +95,11 @@ function ReviewDashboardDetailed({ teams, originalTeams, search }) {
         return <FaSort color="gray" />;
     };
 
+//***************************************** */
+// HTML SECTION
+//***************************************** */
+
+
     return (
         <div>
             {filteredTeams.map((team, index) => {

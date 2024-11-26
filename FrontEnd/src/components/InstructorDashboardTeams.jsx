@@ -4,6 +4,11 @@ import { IoIosAddCircle } from "react-icons/io";
 import {useNavigate} from "react-router-dom";
 import {GlobalContext} from "../GlobalStateProvider.jsx";
 
+//***************************************** */
+// INSTRUCTOR DASHBOARD
+//***************************************** */
+
+
 
 function InstructorDashboardTeams({ teams, search }) {
     const { dispatch } = useContext(GlobalContext);
@@ -29,6 +34,10 @@ function InstructorDashboardTeams({ teams, search }) {
     };
 
 
+
+//***************************************** */
+// HTML SECTION
+//***************************************** */
 
 
     return (

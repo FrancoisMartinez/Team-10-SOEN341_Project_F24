@@ -73,6 +73,21 @@ const leaveReview = async (reviewerEmail, recipientEmail, reviewContent) => {
 };
 
 
+const sendEmail = async (recipientEmail) => {
+    try {
+        const response = await axios.post('http://localhost:3000/email', {
+            email: recipientEmail,
+            subject: 'Test',
+            message: 'Test',
+        });
+        expect(response.status).to.equal(200);
+
+    } catch (error) {
+        expect.fail(`Email sending failed with error: ${error.message}`);
+    }
+};
+
+
 
 describe('Login test', () => {
   it('should return login success', () =>{
@@ -150,3 +165,9 @@ describe('Review test', () => {
         handleDelete(email2);
     });
 });
+
+describe('Email test', () => {
+    it('should return email sent success', () =>{
+        handleLogin("test@test.com");
+    })
+})

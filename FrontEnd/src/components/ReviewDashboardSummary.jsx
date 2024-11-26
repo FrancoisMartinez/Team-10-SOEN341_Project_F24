@@ -3,6 +3,11 @@ import styles from "../styles/ReviewsDashboard.module.css";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa6";
 import axios from "axios";
 
+
+//***************************************** */
+// review dashboard
+//***************************************** */
+
 const sendEmail = async (recipientEmail, body) => {
     try {
       const response = await axios.post('http://localhost:3000/email', {
@@ -173,6 +178,7 @@ function ReviewDashboardSummary({ students = [], search = "" }) {
         }
     };
 
+    //HTML SECTION
     return (
         <div className={styles.studentBlock}>
             <table className={styles.studentTable}>
