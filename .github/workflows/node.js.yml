@@ -38,4 +38,13 @@ jobs:
       run: npm list
       
     - run: npm run build --if-present
+
+    # Uses NPM to run the `lint` script that I included in my package.json
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: 'run lint'
+  displayName: Run ESLint
+  
+
     - run: npm test
