@@ -11,7 +11,7 @@ import {GlobalContext} from "../GlobalStateProvider.jsx";
 
 
 function InstructorDashboardTeams({ teams, search }) {
-    const { state, dispatch } = useContext(GlobalContext);
+    const { dispatch } = useContext(GlobalContext);
     const [filteredTeams, setFilteredTeams] = useState(teams)
 
     const navigate = useNavigate();

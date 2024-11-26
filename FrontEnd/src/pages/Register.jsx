@@ -2,7 +2,6 @@ import React, {useContext, useEffect} from 'react';
 import styles from '/src/styles/Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import Header from '../components/header';
 import { GlobalContext } from "../GlobalStateProvider.jsx";
 import Navigation from "../components/Navigation.jsx";
 import axios from 'axios';
