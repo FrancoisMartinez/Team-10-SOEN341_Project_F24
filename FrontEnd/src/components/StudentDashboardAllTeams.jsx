@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/InstructorDashboard.module.css";
 
+//***************************************** */
+// INSTRUCTOR DASHBOARD
+//***************************************** */
+
 
 function InstructorDashboardTeams({ teams, search }) {
 

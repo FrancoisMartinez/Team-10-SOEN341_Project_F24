@@ -1,9 +1,8 @@
 import React, {createContext, useEffect, useReducer} from "react";
 import axios from "axios";
 
+//INITIAL STATE
 
-
-// Initial state
 const initialState = {
     user: null,
     // accessToken: localStorage.getItem('accessToken') || null,
@@ -14,7 +13,8 @@ const initialState = {
     team: null,
 }
 
-// Manage the user state
+
+//THIS PART WILL MANAGE THE USER STATE
 const reducer = (state, action) => {
     switch (action.type) {
         case 'LOGIN_REQUEST':
@@ -62,7 +62,7 @@ const reducer = (state, action) => {
 
 };
 
-
+//GLOBAL
 export const GlobalContext = createContext(undefined);
 
 export const GlobalStateProvider = ({ children }) => {

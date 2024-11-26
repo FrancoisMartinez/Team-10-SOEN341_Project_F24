@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+
+//MONGO SCHEMA FOR USER
 const userSchema = new mongoose.Schema({
 
     firstName: {

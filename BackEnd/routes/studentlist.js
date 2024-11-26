@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
-// setup const students to only retrieve students that have the instructor field = false
+// setup const students to only 
+//retrieve students that have the 
+//instructor field = false
 
 router.get('/students', async (req, res) => {
     try {
