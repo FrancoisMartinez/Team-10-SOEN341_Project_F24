@@ -1,0 +1,3 @@
+Meetings : 3h
+Wrote test for new features : 30min
+Did code review for the repo reorganization and eslint static analysis tool : 1h
