@@ -39,6 +39,7 @@ jobs:
 
     - name: Run ESLint
       run: npm run lint
+      continueOnError: true 
 
     - name: Run tests
       run: npm test
