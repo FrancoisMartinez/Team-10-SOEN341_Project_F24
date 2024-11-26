@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from "react";
-import { useNavigate } from 'react-router-dom';
 
 /*Change these imports to all teams and teamates in a students team */
 import InstructorDashboardTeams from "../components/StudentDashboardAllTeams.jsx";
