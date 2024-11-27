@@ -1,4 +1,4 @@
-- Team meeting: 1h
+- Team meeting: 2h
 - Refactor Code: 1h
 - Create clear Code Sections: 1h
 - Organized Issue section of GitHub : 20 minutes
