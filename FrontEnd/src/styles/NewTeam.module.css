@@ -89,6 +89,7 @@
     height: 256px;
     overflow-y: scroll;
     overflow-x: hidden;
+    padding: 8px;
 }
 
 
